@@ -6,28 +6,29 @@
     <title>Свадьба Ксении и Никиты</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #1a2f24;
-            --text: #f0f0f0;
-            --accent: #c9a87c;
-            --accent-light: #2f3e34;
+            --bg: #0b0b0b;
+            --text: #e0e0e0;
+            --accent: #c9a87c;      /* золотой */
+            --accent-light: #1a1a1a;
             --gold: #c9a87c;
             --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Raleway', sans-serif;
             background-color: var(--bg);
+            background-image: radial-gradient(circle at 30% 30%, rgba(201,168,124,0.05) 0%, transparent 50%);
             color: var(--text);
             line-height: 1.8;
-            font-weight: 300;
+            font-weight: 200;
             overflow-x: hidden;
         }
         h1, h2, h3 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 400;
             color: var(--accent);
         }
@@ -36,18 +37,17 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 5rem 0; position: relative; }
 
-        /* Hero с фоновым изображением */
+        /* Hero */
         .hero {
             text-align: center;
             padding: 6rem 0 4rem;
-            background: linear-gradient(180deg, rgba(26,47,36,0.8) 0%, rgba(26,47,36,0.9) 100%), 
-                        url('https://images.unsplash.com/photo-1606800052051-a8b4c7a5a3aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(180deg, rgba(11,11,11,0.7) 0%, rgba(11,11,11,0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1519741347686-c1e331ee7d8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            position: relative;
         }
         .hero .invitation-text {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-style: italic;
             max-width: 600px;
@@ -57,19 +57,18 @@
             animation: fadeUp 1s ease 0.2s forwards;
         }
         .hero h1 {
-            font-family: 'Caveat', cursive;
-            font-weight: 700;
-            font-size: 5rem;
-        }
-        body {
-            font-family: 'Jost', sans-serif;
-            font-weight: 300;
+            font-size: 4.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
         }
         .hero h1 span { font-style: italic; color: var(--gold); }
         .hero .date-big {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             color: var(--accent);
             margin: 1.5rem 0;
             opacity: 0;
@@ -84,9 +83,9 @@
             animation: fadeUp 1s ease 0.7s forwards;
         }
         .countdown-item {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.3);
+            border: 1px solid rgba(201,168,124,0.25);
             padding: 1.2rem 1.5rem;
             border-radius: 8px;
             text-align: center;
@@ -95,7 +94,7 @@
         }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: 600;
             color: var(--accent);
@@ -104,7 +103,7 @@
         .countdown-label {
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-top: 0.3rem;
             color: var(--text);
         }
@@ -128,9 +127,10 @@
         .col {
             flex: 1 1 280px;
             max-width: 350px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.02);
             padding: 2rem;
             border-radius: 12px;
+            border: 1px solid rgba(201,168,124,0.15);
         }
         .color-palette {
             display: flex;
@@ -145,7 +145,7 @@
             height: 60px;
             border-radius: 50%;
             margin: 0 auto 0.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         .color-item span { font-size: 0.75rem; font-weight: 300; }
         .col h3 { font-size: 2rem; margin-bottom: 0.8rem; }
@@ -160,7 +160,7 @@
             bottom: 0;
             width: 1px;
             background: var(--accent);
-            opacity: 0.3;
+            opacity: 0.2;
             transform: translateX(-50%);
         }
         .timeline-item {
@@ -177,7 +177,7 @@
         .timeline-time {
             flex: 1;
             text-align: right;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2rem;
             color: var(--accent);
             font-weight: 600;
@@ -194,13 +194,13 @@
             background: var(--accent);
             border-radius: 50%;
             z-index: 2;
-            box-shadow: 0 0 0 6px rgba(201,168,124,0.2);
+            box-shadow: 0 0 0 6px rgba(201,168,124,0.15);
         }
         .timeline-content {
             flex: 2;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.3);
+            border: 1px solid rgba(201,168,124,0.15);
             padding: 1.5rem;
             border-radius: 12px;
             margin-left: 2rem;
@@ -222,21 +222,22 @@
             display: inline-block;
             margin-top: 1.5rem;
             background: var(--accent);
-            color: #1a2f24;
+            color: #0b0b0b;
             padding: 0.8rem 2rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
             letter-spacing: 1px;
             transition: all 0.3s;
+            font-family: 'Raleway', sans-serif;
         }
         .location .btn:hover {
             background: #b4915a;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
         }
 
-        /* История с фото */
+        /* История */
         .story .story-content {
             display: flex;
             align-items: center;
@@ -250,6 +251,7 @@
             font-style: italic;
             line-height: 2;
             text-align: center;
+            font-weight: 200;
         }
         .story .story-images {
             flex: 1;
@@ -263,7 +265,7 @@
             height: 120px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid var(--accent);
+            border: 2px solid var(--accent);
             box-shadow: var(--shadow);
         }
 
@@ -275,9 +277,9 @@
             flex-wrap: wrap;
         }
         .wish-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.3);
+            border: 1px solid rgba(201,168,124,0.15);
             border-radius: 12px;
             padding: 2rem;
             text-align: center;
@@ -293,16 +295,16 @@
         .rsvp-form {
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.3);
+            border: 1px solid rgba(201,168,124,0.2);
             padding: 3rem;
             border-radius: 12px;
         }
         .form-group { margin-bottom: 2rem; }
         label {
             display: block;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             color: var(--accent);
             margin-bottom: 0.8rem;
@@ -313,7 +315,7 @@
             padding: 0.9rem 1rem;
             border: 1px solid var(--accent);
             border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Raleway', sans-serif;
             font-weight: 300;
             font-size: 0.95rem;
             background: transparent;
@@ -349,17 +351,17 @@
         }
         .radio-option input[type="radio"]:checked {
             background: var(--accent);
-            box-shadow: inset 0 0 0 4px #1a2f24;
+            box-shadow: inset 0 0 0 4px #0b0b0b;
         }
         .btn {
             display: block;
             width: 100%;
             background: var(--accent);
-            color: #1a2f24;
+            color: #0b0b0b;
             border: none;
             padding: 1rem;
             border-radius: 30px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Raleway', sans-serif;
             font-weight: 500;
             letter-spacing: 1px;
             cursor: pointer;
@@ -370,7 +372,7 @@
         .btn:hover {
             background: #b4915a;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
         /* Контакты */
@@ -395,8 +397,8 @@
             padding: 2rem;
             font-size: 0.9rem;
             color: var(--text);
-            border-top: 1px solid var(--accent);
-            opacity: 0.7;
+            border-top: 1px solid rgba(201,168,124,0.2);
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
@@ -498,7 +500,7 @@
                     <img src="https://images.unsplash.com/photo-1519741347686-c1e331ee7d8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="кольца">
                 </div>
                 <div class="story-text">
-                    <p>Это были студенческие годы. Мы со своей подругой учились в разных институтах и решили встретиться компаниями. Один парень целый вечер не отходил от меня, делал комплименты, постоянно шутил, а я постоянно смеялась. И мы не смогли устоять — я от его шуток, он — от моего обворожительного смеха.</p>
+                    <p>SOON</p>
                 </div>
             </div>
         </div>
@@ -510,12 +512,10 @@
             <h2>Несколько просьб</h2>
             <div class="cards">
                 <div class="wish-card">
-                    <div class="icon">💐</div>
                     <h3>Цветы</h3>
                     <p>Живые букеты прекрасны, но, увы, их век короток. Если вы хотите подарить нам цветы, мы будем безмерно тронуты подпиской в любимом цветочном магазине — она позволит нам вспоминать о вас и вашей любви снова и снова, на протяжении долгих месяцев.</p>
                 </div>
                 <div class="wish-card">
-                    <div class="icon">👶</div>
                     <h3>Дети</h3>
                     <p>Дети — наше общее счастье, и мы это знаем. Однако в этот день нам хочется, чтобы каждый взрослый гость мог полностью расслабиться, не отвлекаясь и не волнуясь. Поэтому мы просим вас подарить этот вечер только себе и прийти без малышей.</p>
                 </div>
@@ -580,12 +580,10 @@
             <h2>Контакты</h2>
             <div class="contact-cards">
                 <div class="contact-card">
-                    <div class="icon">🤵</div>
                     <h3>Никита</h3>
                     <p>8 (999) 123-45-67</p>
                 </div>
                 <div class="contact-card">
-                    <div class="icon">👰</div>
                     <h3>Ксения</h3>
                     <p>8 (999) 765-43-21</p>
                 </div>
@@ -595,6 +593,7 @@
 
     <footer>
         <p>С любовью, Ксения и Никита</p>
+        <p>05.09.2026</p>
     </footer>
 
     <script>
