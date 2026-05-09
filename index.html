@@ -632,46 +632,44 @@
 
         // ====== 3. ОБРАБОТКА ФОРМЫ RSVP (ОТПРАВКА В GOOGLE) ======
         function handleRSVP(event) {
-    event.preventDefault();
+            event.preventDefault();
 
-    var formData = {
-        name: document.getElementById('name').value,
-        attendance: document.getElementById('attendance').value,
-        transfer: document.getElementById('transfer').value,
-        drinks: document.getElementById('drinks').value,
-        allergies: document.getElementById('allergies').value,
-        message: document.getElementById('message').value
-    };
+            var formData = {
+                name: document.getElementById('name').value,
+                attendance: document.getElementById('attendance').value,
+                transfer: document.getElementById('transfer').value,
+                drinks: document.getElementById('drinks').value,
+                allergies: document.getElementById('allergies').value,
+                message: document.getElementById('message').value
+            };
 
-    var scriptURL = 'https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec';
+            var scriptURL = 'https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec';
 
-    var submitBtn = document.querySelector('#rsvp-form .btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправляю...';
+            var submitBtn = document.querySelector('#rsvp-form .btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправляю...';
 
-    fetch(scriptURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById('rsvp-form').style.display = 'none';
-            document.getElementById('rsvp-success').style.display = 'block';
-        } else {
-            alert('Упс! Что-то пошло не так. Попробуйте ещё раз или свяжитесь с нами лично.');
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('rsvp-form').style.display = 'none';
+                    document.getElementById('rsvp-success').style.display = 'block';
+            } else {
+                alert('Упс! Что-то пошло не так. Попробуйте ещё раз или свяжитесь с нами лично.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить';
+            }
+        })
+        .catch(error => {
+            alert('Ошибка сети. Проверьте соединение и попробуйте ещё раз.');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Отправить';
-        }
-    })
-    .catch(error => {
-        alert('Ошибка сети. Проверьте соединение и попробуйте ещё раз.');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Отправить';
-    });
+        });
 }
 </script>
 </body>
