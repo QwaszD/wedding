@@ -237,7 +237,7 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // ====== 3. ОТПРАВКА ФОРМЫ В TELEGRAM ======
+                // ====== 3. ОТПРАВКА ФОРМЫ В TELEGRAM ======
         function handleRSVP(event) {
             event.preventDefault();
 
@@ -256,9 +256,9 @@
 ⚠️ *Аллергии:* ${allergies || 'Нет'}
 💬 *Послание:* ${message || '---'}`;
 
-            const botToken = '8646174606:AAGWHC73jYi9BTneV5-v-rDb7bLzMo7f6tQ'; // ← замените на свой токен бота
-            const chatId = '-5196891167';       // ID вашей группы
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const botToken = '8646174606:AAGwHC73jYi9BTneV5-v-rDb7bLzMo7f6tQ';
+            const chatId = '-5196891167';
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`; // ← именно такие кавычки: ` `
 
             const submitBtn = document.querySelector('#rsvp-form .btn');
             submitBtn.disabled = true;
@@ -290,7 +290,7 @@
                 submitBtn.textContent = 'Отправить';
             });
 
-            return false; // предотвращаем обычную отправку формы
+            return false;
         }
     </script>
 </body>
