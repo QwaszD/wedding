@@ -630,57 +630,51 @@
 
         timelineItems.forEach(item => observer.observe(item));
 
-        // ====== 3. ОБРАБОТКА ФОРМЫ RSVP (ЗАГЛУШКА) ======
+        // ====== 3. ОБРАБОТКА ФОРМЫ RSVP (ОТПРАВКА В GOOGLE) ======
         function handleRSVP(event) {
             event.preventDefault();
-            document.getElementById('rsvp-form').style.display = 'none';
-            document.getElementById('rsvp-success').style.display = 'block';
-            // В будущем сюда можно добавить реальную отправку данных на сервер
-        }
-    </script>
-        function handleRSVP(event) {
-        event.preventDefault();
-    
-        // Собираем данные из формы
-        var formData = {
-            name: document.getElementById('name').value,
-            attendance: document.getElementById('attendance').value,
-            transfer: document.getElementById('transfer').value,
-            drinks: document.getElementById('drinks').value,
-            allergies: document.getElementById('allergies').value,
-            message: document.getElementById('message').value
-        };
-    
-        // URL вашего веб-приложения (замените на свой!)
-        var scriptURL = 'https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec';
-    
-        // Показываем, что идёт отправка (можно заменить на спиннер, но пока просто кнопку приглушим)
-        var submitBtn = document.querySelector('#rsvp-form .btn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Отправляю...';
-    
-        // Асинхронно отправляем данные
-        fetch(scriptURL, {
-            method: 'POST',
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Успех — прячем форму, показываем благодарность
-                document.getElementById('rsvp-form').style.display = 'none';
-                document.getElementById('rsvp-success').style.display = 'block';
-            } else {
-                alert('Упс! Что-то пошло не так. Попробуйте ещё раз или свяжитесь с нами лично.');
+
+            // Собираем данные из формы
+            var formData = {
+                name: document.getElementById('name').value,
+                attendance: document.getElementById('attendance').value,
+                transfer: document.getElementById('transfer').value,
+                drinks: document.getElementById('drinks').value,
+                allergies: document.getElementById('allergies').value,
+                message: document.getElementById('message').value
+            };
+
+            // URL твоего веб-приложения (замени на свой, если изменился)
+            var scriptURL = 'https://script.google.com/macros/s/1kFcybqyZ5y77VU-rfQoxPp6FORRPSudcNLq49T6jOMBNnUTQ0b8XswARmNs3Zp1z0MSIID/exe';
+
+            // Показываем, что идёт отправка
+            var submitBtn = document.querySelector('#rsvp-form .btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправляю...';
+
+            // Асинхронно отправляем данные
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Успех — прячем форму, показываем благодарность
+                    document.getElementById('rsvp-form').style.display = 'none';
+                    document.getElementById('rsvp-success').style.display = 'block';
+                } else {
+                    alert('Упс! Что-то пошло не так. Попробуйте ещё раз или свяжитесь с нами лично.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отправить';
+                }
+            })
+            .catch(error => {
+                alert('Ошибка сети. Проверьте соединение и попробуйте ещё раз.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Отправить';
-            }
-        })
-        .catch(error => {
-            alert('Ошибка сети. Проверьте соединение и попробуйте ещё раз.');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить';
-        });
-    }
+            });
+        }
+    </script>
 </body>
 </html>
