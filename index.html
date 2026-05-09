@@ -237,7 +237,7 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-                //3.ОТПРАВКА ФОРМЫ В TГ
+                       // ====== 3. ОТПРАВКА ФОРМЫ В TELEGRAM ======
         function handleRSVP(event) {
             event.preventDefault();
 
@@ -258,7 +258,7 @@
 
             const botToken = '8646174606:AAGwHC73jYi9BTneV5-v-rDb7bLzMo7f6tQ';
             const chatId = '-5196891167';
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`; 
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`; // ← именно такие кавычки
 
             const submitBtn = document.querySelector('#rsvp-form .btn');
             submitBtn.disabled = true;
