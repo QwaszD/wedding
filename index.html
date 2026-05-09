@@ -209,7 +209,7 @@
     </footer>
 
     <script>
-        // ====== 1. ТАЙМЕР ======
+        //1.ТАЙМЕР 
         const weddingDate = new Date(2026, 9, 05, 15, 0); // 5 сентября 2026, 15:00
         function updateCountdown() {
             const now = new Date();
@@ -229,7 +229,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // ====== 2. АНИМАЦИЯ ТАЙМЛАЙНА ======
+        //2.АНИМАЦИЯ ТАЙМЛАЙНА
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -237,7 +237,7 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-                // ====== 3. ОТПРАВКА ФОРМЫ В TELEGRAM ======
+                //3.ОТПРАВКА ФОРМЫ В TГ
         function handleRSVP(event) {
             event.preventDefault();
 
@@ -258,7 +258,7 @@
 
             const botToken = '8646174606:AAGwHC73jYi9BTneV5-v-rDb7bLzMo7f6tQ';
             const chatId = '-5196891167';
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`; // ← именно такие кавычки: ` `
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`; 
 
             const submitBtn = document.querySelector('#rsvp-form .btn');
             submitBtn.disabled = true;
