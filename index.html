@@ -552,8 +552,26 @@
                     <select id="transfer" name="transfer">
                         <option value="" selected>Спасибо, доберусь сам(а)</option>
                         <option value="city">Да, из города</option>
-                        <option value="airport">Да, от аэропорта</option>
                     </select>
+                </div>
+
+                <!-- 🍷 Особые пожелания по напиткам -->
+                <div class="form-group">
+                    <label for="drinks">Что вы предпочитаете?</label>
+                    <select id="drinks" name="drinks">
+                        <option value="" selected>Неважно, всему рады</option>
+                        <option value="sparkling">Игристое</option>
+                        <option value="white">Белое вино</option>
+                        <option value="red">Красное вино</option>
+                        <option value="strong">Что-нибудь крепкое</option>
+                        <option value="non-alcoholic">Безалкогольное</option>
+                    </select>
+                </div>
+
+                <!-- 🥜 Аллергии / пищевые ограничения -->
+                <div class="form-group">
+                    <label for="allergies">Аллергии или ограничения в еде</label>
+                    <textarea id="allergies" name="allergies" rows="2" placeholder="Например: не ем глютен, орехи, веган..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -568,10 +586,6 @@
             </div>
         </div>
     </section>
-
-    <footer>
-        <p>С любовью, Ксения и Никита</p>
-    </footer>
 
     <!-- ========== СКРИПТ ТАЙМЕРА, АНИМАЦИЙ И ФОРМЫ ========== -->
     <script>
