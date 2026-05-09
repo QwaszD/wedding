@@ -631,45 +631,32 @@
         timelineItems.forEach(item => observer.observe(item));
 
         // ====== 3. ОБРАБОТКА ФОРМЫ RSVP (ОТПРАВКА В GOOGLE) ======
-        function handleRSVP(event) {
-            event.preventDefault();
+       function handleRSVP(event) {
+    event.preventDefault();
 
-            var formData = {
-                name: document.getElementById('name').value,
-                attendance: document.getElementById('attendance').value,
-                transfer: document.getElementById('transfer').value,
-                drinks: document.getElementById('drinks').value,
-                allergies: document.getElementById('allergies').value,
-                message: document.getElementById('message').value
-            };
+    // 1. Собираем данные из формы
+    const params = new URLSearchParams({
+        name: document.getElementById('name').value,
+        attendance: document.getElementById('attendance').value,
+        transfer: document.getElementById('transfer').value,
+        drinks: document.getElementById('drinks').value,
+        allergies: document.getElementById('allergies').value,
+        message: document.getElementById('message').value
+    });
 
-            var scriptURL = 'https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec';
+    // 2. Формируем ссылку на Google Script с ответами гостя
+    const baseURL = 'https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec';
+    const finalURL = baseURL + '?' + params.toString();
 
-            var submitBtn = document.querySelector('#rsvp-form .btn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Отправляю...';
+    // 3. Показываем «Отправляю...» и перенаправляем
+    var submitBtn = document.querySelector('#rsvp-form .btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляю...';
 
-            fetch(scriptURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('rsvp-form').style.display = 'none';
-                    document.getElementById('rsvp-success').style.display = 'block';
-            } else {
-                alert('Упс! Что-то пошло не так. Попробуйте ещё раз или свяжитесь с нами лично.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Отправить';
-            }
-        })
-        .catch(error => {
-            alert('Ошибка сети. Проверьте соединение и попробуйте ещё раз.');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить';
-        });
+    // Небольшая задержка, чтобы гость увидел сообщение, и переходим
+    setTimeout(function() {
+        window.location.href = finalURL;
+    }, 500);
 }
 </script>
 </body>
