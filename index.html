@@ -6,8 +6,8 @@
     <title>Свадьба Ксении и Никиты</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Prata + Raleway -->
-    <link href="https://fonts.googleapis.com/css2?family=Prata&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <!-- Great Vibes + Raleway -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0b0b0b;
@@ -28,8 +28,9 @@
             font-weight: 200;
             overflow-x: hidden;
         }
+        /* Все заголовки и акцентные элементы теперь Great Vibes */
         h1, h2, h3 {
-            font-family: 'Prata', serif;
+            font-family: 'Great Vibes', cursive;
             font-weight: 400;
             color: var(--accent);
         }
@@ -48,7 +49,7 @@
             background-position: center;
         }
         .hero .invitation-text {
-            font-family: 'Prata', serif;
+            font-family: 'Great Vibes', cursive;
             font-size: 1.6rem;
             max-width: 600px;
             margin: 0 auto 2rem;
@@ -57,6 +58,7 @@
             animation: fadeUp 1s ease 0.2s forwards;
         }
         .hero h1 {
+            font-family: 'Great Vibes', cursive;
             font-size: 4.8rem;
             font-weight: 400;
             margin-bottom: 0.5rem;
@@ -66,7 +68,7 @@
         }
         .hero h1 span { color: var(--gold); }
         .hero .date-big {
-            font-family: 'Prata', serif;
+            font-family: 'Great Vibes', cursive;
             font-size: 2.8rem;
             letter-spacing: 8px;
             color: var(--accent);
@@ -94,13 +96,14 @@
         }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number {
-            font-family: 'Prata', serif;
+            font-family: 'Great Vibes', cursive;
             font-size: 2.5rem;
-            font-weight: 600;
+            font-weight: 400;
             color: var(--accent);
             line-height: 1;
         }
         .countdown-label {
+            font-family: 'Raleway', sans-serif;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -124,7 +127,7 @@
         .color-item { text-align: center; width: 70px; }
         .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .color-item span { font-size: 0.75rem; font-weight: 300; }
-        .col h3 { font-size: 2rem; margin-bottom: 0.8rem; }
+        .col h3 { font-family: 'Great Vibes', cursive; font-size: 2rem; margin-bottom: 0.8rem; }
 
         /* Программа */
         .timeline { position: relative; }
@@ -133,13 +136,13 @@
         .timeline-item.visible { opacity: 1; transform: translateY(0); }
         .timeline-item:nth-child(odd) { flex-direction: row; }
         .timeline-item:nth-child(even) { flex-direction: row-reverse; }
-        .timeline-time { flex: 1; text-align: right; font-family: 'Prata', serif; font-size: 2rem; color: var(--accent); font-weight: 600; padding-right: 2rem; }
+        .timeline-time { flex: 1; text-align: right; font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--accent); font-weight: 400; padding-right: 2rem; }
         .timeline-item:nth-child(even) .timeline-time { text-align: left; padding-left: 2rem; padding-right: 0; }
         .timeline-dot { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; z-index: 2; box-shadow: 0 0 0 6px rgba(201,168,124,0.15); }
         .timeline-content { flex: 2; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(201,168,124,0.15); padding: 1.5rem; border-radius: 12px; margin-left: 2rem; }
         .timeline-item:nth-child(even) .timeline-content { margin-left: 0; margin-right: 2rem; }
-        .timeline-content h3 { font-size: 1.6rem; margin-bottom: 0.3rem; }
-        .timeline-content p { font-size: 0.95rem; }
+        .timeline-content h3 { font-family: 'Great Vibes', cursive; font-size: 1.8rem; margin-bottom: 0.3rem; }
+        .timeline-content p { font-family: 'Raleway', sans-serif; font-size: 0.95rem; }
 
         /* Локация */
         .location { text-align: center; background: var(--accent-light); padding: 4rem 0; }
@@ -157,14 +160,14 @@
         .wish-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(201,168,124,0.15); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card .icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
-        .wish-card h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .wish-card h3 { font-family: 'Great Vibes', cursive; font-size: 1.8rem; margin-bottom: 0.8rem; }
         .wish-card p { font-size: 0.95rem; color: var(--text); }
 
         /* Форма */
         .rsvp-form { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(201,168,124,0.2); padding: 3rem; border-radius: 12px; }
         .form-group { margin-bottom: 2rem; }
-        label { display: block; font-family: 'Prata', serif; font-size: 1.4rem; color: var(--accent); margin-bottom: 0.8rem; }
-        label span { color: var(--gold); font-size: 1rem; }
+        label { display: block; font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--accent); margin-bottom: 0.8rem; }
+        label span { color: var(--gold); font-size: 1rem; font-family: 'Raleway', sans-serif; }
         input[type="text"], textarea, select { width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--accent); border-radius: 6px; font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 0.95rem; background: transparent; color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
         input[type="text"]:focus, textarea:focus, select:focus { border-color: #fff; box-shadow: 0 0 0 3px rgba(201,168,124,0.2); }
         textarea { resize: vertical; }
@@ -180,7 +183,7 @@
         .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
         .contact-card { text-align: center; }
         .contact-card .icon { font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; }
-        .contact-card h3 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+        .contact-card h3 { font-family: 'Great Vibes', cursive; font-size: 1.8rem; margin-bottom: 0.3rem; }
         .contact-card p { font-size: 1rem; font-weight: 300; }
 
         footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--text); border-top: 1px solid rgba(201,168,124,0.2); opacity: 0.6; }
@@ -251,7 +254,6 @@
                 <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Праздничный банкет</h3><p>Основная часть торжества.</p></div></div>
                 <div class="timeline-item"><div class="timeline-time">23:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Торт и дискотека</h3><p>Вкусный торт и танцы до утра.</p></div></div>
             </div>
-            </div>
         </div>
     </section>
 
@@ -318,9 +320,9 @@
                         <label class="radio-option"><input type="radio" name="attendance" value="later"> Сообщу позже</label>
                     </div>
                 </div>
-                    <div class="form-group">
+                <div class="form-group">
                     <label>Нужен ли трансфер?</label>
-                        <div class="radio-group">
+                    <div class="radio-group">
                         <label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label>
                         <label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label>
                     </div>
