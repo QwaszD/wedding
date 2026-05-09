@@ -277,19 +277,57 @@
 
         // ====== 3. ОТПРАВКА ФОРМЫ (надёжный редирект) ======
        function handleRSVP(event) {
-    // Проверяем, что все обязательные поля заполнены
-    var form = document.getElementById('rsvp-form');
-    if (!form.checkValidity()) {
-        // Если что-то не заполнено — браузер сам подсветит поля
-        return false;
-    }
-    
-    // Показываем благодарность и скрываем форму
-    document.getElementById('rsvp-form').style.display = 'none';
-    document.getElementById('rsvp-success').style.display = 'block';
-    
-    // Форма отправится в скрытый iframe, страница не перезагрузится
-    return true;
+    event.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const attendance = document.getElementById('attendance').value;
+    const transfer = document.getElementById('transfer').value;
+    const drinks = document.getElementById('drinks').value;
+    const allergies = document.getElementById('allergies').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    const text = `💌 *Новая заявка!* 💌
+👤 *Имя:* ${name}
+📅 *Приду/Не приду:* ${attendance === 'yes' ? '✅ Приду' : '❌ Не приду'}
+🚗 *Трансфер:* ${transfer || 'Не указан'}
+🍷 *Напитки:* ${drinks || 'Не указано'}
+⚠️ *Аллергии:* ${allergies || 'Нет'}
+💬 *Послание:* ${message || '---'}`;
+
+    const botToken = 'ВАШ_ТОКЕН_СЮДА'; // ← замени на свой токен
+    const chatId = '-5196891167';       // ← твой ID группы
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    const submitBtn = document.querySelector('#rsvp-form .btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляю...';
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: text,
+            parse_mode: 'Markdown'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            // Успех — прячем форму, показываем благодарность
+            document.getElementById('rsvp-form').style.display = 'none';
+            document.getElementById('rsvp-success').style.display = 'block';
+        } else {
+            alert('Не удалось отправить. Попробуйте ещё раз или свяжитесь с нами лично.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить';
+        }
+    })
+    .catch(() => {
+        alert('Ошибка сети. Проверьте соединение.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить';
+    });
 }
     </script>
 </body>
