@@ -231,14 +231,11 @@
             <p style="text-align:center; max-width:500px; margin:0 auto 2rem; opacity:0.8;">
                 Пожалуйста, дайте нам знать, сможете ли вы разделить этот день с нами.
             </p>
-            <form id="rsvp-form" class="rsvp-form" onsubmit="handleRSVP(event)">
-                <div class="form-group"><label for="name">Имя <span>*</span></label><input type="text" id="name" name="name" placeholder="Ваше имя и фамилия" required></div>
-                <div class="form-group"><label for="attendance">Я приду / Я не приду <span>*</span></label><select id="attendance" name="attendance" required><option value="" disabled selected>Выберите вариант...</option><option value="yes">❤️ С радостью приду!</option><option value="no">💔 К сожалению, не смогу</option></select></div>
-                <div class="form-group"><label for="transfer">Нужен ли трансфер?</label><select id="transfer" name="transfer"><option value="" selected>Спасибо, доберусь сам(а)</option><option value="city">Да, из города</option></select></div>
-                <div class="form-group"><label for="drinks">Что вы предпочитаете?</label><select id="drinks" name="drinks"><option value="" selected>Неважно, всему рады</option><option value="sparkling">Игристое</option><option value="white">Белое вино</option><option value="red">Красное вино</option><option value="strong">Что-нибудь крепкое</option><option value="non-alcoholic">Безалкогольное</option></select></div>
-                <div class="form-group"><label for="allergies">Аллергии или ограничения в еде</label><textarea id="allergies" name="allergies" rows="2" placeholder="Например: не ем глютен, орехи, веган..."></textarea></div>
-                <div class="form-group"><label for="message">Пару строк для нас (по желанию)</label><textarea id="message" name="message" rows="3" placeholder="Ваши тёплые слова или пожелания..."></textarea></div>
-                <button type="submit" class="btn">Отправить</button>
+            <form id="rsvp-form" class="rsvp-form" 
+                 action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" 
+                 method="POST" 
+                 target="hidden-iframe" 
+                 onsubmit="return handleRSVP(event)">
             </form>
             <div id="rsvp-success" style="display:none; text-align:center; margin-top:2rem; color:var(--accent); font-style:italic;">Спасибо! Ваш ответ отправлен 🌿</div>
         </div>
