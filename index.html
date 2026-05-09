@@ -6,7 +6,8 @@
     <title>Свадьба Ксении и Никиты</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <!-- Prata + Raleway -->
+    <link href="https://fonts.googleapis.com/css2?family=Prata&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0b0b0b;
@@ -28,7 +29,7 @@
             overflow-x: hidden;
         }
         h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Prata', serif;
             font-weight: 400;
             color: var(--accent);
         }
@@ -47,9 +48,8 @@
             background-position: center;
         }
         .hero .invitation-text {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Prata', serif;
             font-size: 1.6rem;
-            font-style: italic;
             max-width: 600px;
             margin: 0 auto 2rem;
             color: var(--accent);
@@ -64,9 +64,9 @@
             opacity: 0;
             animation: fadeUp 1s ease forwards;
         }
-        .hero h1 span { font-style: italic; color: var(--gold); }
+        .hero h1 span { color: var(--gold); }
         .hero .date-big {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Prata', serif;
             font-size: 2.8rem;
             letter-spacing: 8px;
             color: var(--accent);
@@ -94,7 +94,7 @@
         }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Prata', serif;
             font-size: 2.5rem;
             font-weight: 600;
             color: var(--accent);
@@ -113,312 +113,84 @@
         }
 
         /* Дресс-код */
-        .dress-code {
-            background: var(--accent-light);
-            text-align: center;
-        }
-        .two-cols {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+        .dress-code { background: var(--accent-light); text-align: center; }
+        .two-cols { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
         .col {
-            flex: 1 1 280px;
-            max-width: 350px;
-            background: rgba(255,255,255,0.02);
-            padding: 2rem;
-            border-radius: 12px;
+            flex: 1 1 280px; max-width: 350px;
+            background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 12px;
             border: 1px solid rgba(201,168,124,0.15);
         }
-        .color-palette {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
+        .color-palette { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
         .color-item { text-align: center; width: 70px; }
-        .color-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin: 0 auto 0.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
+        .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .color-item span { font-size: 0.75rem; font-weight: 300; }
         .col h3 { font-size: 2rem; margin-bottom: 0.8rem; }
 
         /* Программа */
         .timeline { position: relative; }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: var(--accent);
-            opacity: 0.2;
-            transform: translateX(-50%);
-        }
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--accent); opacity: 0.2; transform: translateX(-50%); }
+        .timeline-item { display: flex; align-items: center; margin-bottom: 3rem; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
         .timeline-item.visible { opacity: 1; transform: translateY(0); }
         .timeline-item:nth-child(odd) { flex-direction: row; }
         .timeline-item:nth-child(even) { flex-direction: row-reverse; }
-        .timeline-time {
-            flex: 1;
-            text-align: right;
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--accent);
-            font-weight: 600;
-            padding-right: 2rem;
-        }
-        .timeline-item:nth-child(even) .timeline-time {
-            text-align: left;
-            padding-left: 2rem;
-            padding-right: 0;
-        }
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            z-index: 2;
-            box-shadow: 0 0 0 6px rgba(201,168,124,0.15);
-        }
-        .timeline-content {
-            flex: 2;
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.15);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-left: 2rem;
-        }
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 0;
-            margin-right: 2rem;
-        }
+        .timeline-time { flex: 1; text-align: right; font-family: 'Prata', serif; font-size: 2rem; color: var(--accent); font-weight: 600; padding-right: 2rem; }
+        .timeline-item:nth-child(even) .timeline-time { text-align: left; padding-left: 2rem; padding-right: 0; }
+        .timeline-dot { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; z-index: 2; box-shadow: 0 0 0 6px rgba(201,168,124,0.15); }
+        .timeline-content { flex: 2; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(201,168,124,0.15); padding: 1.5rem; border-radius: 12px; margin-left: 2rem; }
+        .timeline-item:nth-child(even) .timeline-content { margin-left: 0; margin-right: 2rem; }
         .timeline-content h3 { font-size: 1.6rem; margin-bottom: 0.3rem; }
         .timeline-content p { font-size: 0.95rem; }
 
         /* Локация */
-        .location {
-            text-align: center;
-            background: var(--accent-light);
-            padding: 4rem 0;
-        }
-        .location .btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            background: var(--accent);
-            color: #0b0b0b;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            font-family: 'Raleway', sans-serif;
-        }
-        .location .btn:hover {
-            background: #b4915a;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
-        }
+        .location { text-align: center; background: var(--accent-light); padding: 4rem 0; }
+        .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #0b0b0b; padding: 0.8rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Raleway', sans-serif; }
+        .location .btn:hover { background: #b4915a; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.7); }
 
         /* История */
-        .story .story-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .story .story-text {
-            flex: 2;
-            min-width: 250px;
-            font-style: italic;
-            line-height: 2;
-            text-align: center;
-            font-weight: 200;
-        }
-        .story .story-images {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            align-items: center;
-        }
-        .story .story-images img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-            box-shadow: var(--shadow);
-        }
+        .story .story-content { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .story .story-text { flex: 2; min-width: 250px; font-style: italic; line-height: 2; text-align: center; font-weight: 200; }
+        .story .story-images { flex: 1; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+        .story .story-images img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 2px solid var(--accent); box-shadow: var(--shadow); }
 
         /* Просьбы */
-        .wishes .cards {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .wish-card {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.15);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            flex: 1 1 250px;
-            transition: transform 0.3s;
-        }
+        .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .wish-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(201,168,124,0.15); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card .icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
         .wish-card h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
         .wish-card p { font-size: 0.95rem; color: var(--text); }
 
         /* Форма */
-        .rsvp-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.2);
-            padding: 3rem;
-            border-radius: 12px;
-        }
+        .rsvp-form { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(201,168,124,0.2); padding: 3rem; border-radius: 12px; }
         .form-group { margin-bottom: 2rem; }
-        label {
-            display: block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--accent);
-            margin-bottom: 0.8rem;
-        }
+        label { display: block; font-family: 'Prata', serif; font-size: 1.4rem; color: var(--accent); margin-bottom: 0.8rem; }
         label span { color: var(--gold); font-size: 1rem; }
-        input[type="text"], textarea, select {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            border: 1px solid var(--accent);
-            border-radius: 6px;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 300;
-            font-size: 0.95rem;
-            background: transparent;
-            color: var(--text);
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        input[type="text"]:focus, textarea:focus, select:focus {
-            border-color: #fff;
-            box-shadow: 0 0 0 3px rgba(201,168,124,0.2);
-        }
+        input[type="text"], textarea, select { width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--accent); border-radius: 6px; font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 0.95rem; background: transparent; color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+        input[type="text"]:focus, textarea:focus, select:focus { border-color: #fff; box-shadow: 0 0 0 3px rgba(201,168,124,0.2); }
         textarea { resize: vertical; }
-        .radio-group, .select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        .radio-option {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 300;
-        }
-        .radio-option input[type="radio"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            margin-right: 10px;
-            position: relative;
-            cursor: pointer;
-        }
-        .radio-option input[type="radio"]:checked {
-            background: var(--accent);
-            box-shadow: inset 0 0 0 4px #0b0b0b;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            background: var(--accent);
-            color: #0b0b0b;
-            border: none;
-            padding: 1rem;
-            border-radius: 30px;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-        .btn:hover {
-            background: #b4915a;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-        }
+        .radio-group, .select-group { display: flex; flex-direction: column; gap: 0.8rem; }
+        .radio-option { display: flex; align-items: center; cursor: pointer; font-weight: 300; }
+        .radio-option input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%; margin-right: 10px; position: relative; cursor: pointer; }
+        .radio-option input[type="radio"]:checked { background: var(--accent); box-shadow: inset 0 0 0 4px #0b0b0b; }
+        .btn { display: block; width: 100%; background: var(--accent); color: #0b0b0b; border: none; padding: 1rem; border-radius: 30px; font-family: 'Raleway', sans-serif; font-weight: 500; letter-spacing: 1px; cursor: pointer; font-size: 1rem; transition: all 0.3s; margin-top: 1rem; }
+        .btn:hover { background: #b4915a; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
 
         /* Контакты */
-        .contacts {
-            text-align: center;
-            background: var(--accent-light);
-        }
-        .contact-cards {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+        .contacts { text-align: center; background: var(--accent-light); }
+        .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
         .contact-card { text-align: center; }
         .contact-card .icon { font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; }
         .contact-card h3 { font-size: 1.6rem; margin-bottom: 0.3rem; }
         .contact-card p { font-size: 1rem; font-weight: 300; }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            color: var(--text);
-            border-top: 1px solid rgba(201,168,124,0.2);
-            opacity: 0.6;
-        }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--text); border-top: 1px solid rgba(201,168,124,0.2); opacity: 0.6; }
 
         @media (max-width: 768px) {
             .timeline::before { left: 20px; }
-            .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .timeline-time {
-                text-align: left;
-                padding-left: 3rem;
-                margin-bottom: 0.5rem;
-                font-size: 1.5rem;
-            }
+            .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
+            .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; }
             .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; }
-            .timeline-content {
-                margin-left: 3rem !important;
-                margin-right: 0 !important;
-                width: calc(100% - 40px);
-            }
+            .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); }
             .timeline-dot { display: none; }
             .two-cols { flex-direction: column; align-items: center; }
             .story .story-content { flex-direction: column; }
@@ -500,7 +272,7 @@
                     <img src="https://images.unsplash.com/photo-1519741347686-c1e331ee7d8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="кольца">
                 </div>
                 <div class="story-text">
-                    <p>SOON</p>
+                    <p>Это были студенческие годы. Мы со своей подругой учились в разных институтах и решили встретиться компаниями. Один парень целый вечер не отходил от меня, делал комплименты, постоянно шутил, а я постоянно смеялась. И мы не смогли устоять — я от его шуток, он — от моего обворожительного смеха.</p>
                 </div>
             </div>
         </div>
@@ -512,10 +284,12 @@
             <h2>Несколько просьб</h2>
             <div class="cards">
                 <div class="wish-card">
+                    <div class="icon">💐</div>
                     <h3>Цветы</h3>
                     <p>Живые букеты прекрасны, но, увы, их век короток. Если вы хотите подарить нам цветы, мы будем безмерно тронуты подпиской в любимом цветочном магазине — она позволит нам вспоминать о вас и вашей любви снова и снова, на протяжении долгих месяцев.</p>
                 </div>
                 <div class="wish-card">
+                    <div class="icon">👶</div>
                     <h3>Дети</h3>
                     <p>Дети — наше общее счастье, и мы это знаем. Однако в этот день нам хочется, чтобы каждый взрослый гость мог полностью расслабиться, не отвлекаясь и не волнуясь. Поэтому мы просим вас подарить этот вечер только себе и прийти без малышей.</p>
                 </div>
@@ -580,10 +354,12 @@
             <h2>Контакты</h2>
             <div class="contact-cards">
                 <div class="contact-card">
+                    <div class="icon">🤵</div>
                     <h3>Никита</h3>
                     <p>8 (999) 123-45-67</p>
                 </div>
                 <div class="contact-card">
+                    <div class="icon">👰</div>
                     <h3>Ксения</h3>
                     <p>8 (999) 765-43-21</p>
                 </div>
@@ -593,7 +369,6 @@
 
     <footer>
         <p>С любовью, Ксения и Никита</p>
-        <p>05.09.2026</p>
     </footer>
 
     <script>
