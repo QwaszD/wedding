@@ -7,14 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --bg: #faf8f5;   /* фон всей страницы */
-            --text: #4a4a4a;   /* основной цвет текста */
-            --accent: #b4836b;   /* акцентный цвет (заголовки, кнопки, выделение даты) */
-            --accent-light: #e9d9d0;   /* светлый акцент для фона блоков */
-            --gold: #c9a87c;   /* золотистый для изящных деталей */
+            --bg: #faf8f5;
+            --text: #4a4a4a;
+            --accent: #b4836b;
+            --accent-light: #e9d9d0;
+            --gold: #c9a87c;
             --white: #ffffff;
             --shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
@@ -40,7 +39,7 @@
         .hero { text-align: center; padding: 6rem 0 4rem; background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%); }
         .hero h1 { font-size: 4.5rem; font-weight: 400; margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 1s ease forwards; }
         .hero h1 span { font-style: italic; color: var(--gold); }
-        .hero .subtitle { font-size: 1.3rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
+        .hero .subtitle { font-size: 1.3rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text); margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
         .countdown { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
         .countdown-item { background: var(--white); padding: 1.2rem 1.5rem; border-radius: 8px; box-shadow: var(--shadow); text-align: center; min-width: 80px; transition: transform 0.3s; }
         .countdown-item:hover { transform: translateY(-5px); }
@@ -53,37 +52,11 @@
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ДРЕСС-КОД */
-        .dress-code {
-            background: var(--white);
-            text-align: center;
-        }
-        .color-palette {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        .color-item {
-            text-align: center;
-            width: 100px;
-        }
-        .color-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 0.8rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        .color-item span {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            font-size: 0.85rem;
-            color: var(--text);
-        }
+        .dress-code { background: var(--white); text-align: center; }
+        .color-palette { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+        .color-item { text-align: center; width: 100px; }
+        .color-circle { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 0.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .color-item span { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.85rem; }
 
         .timeline { position: relative; }
         .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--accent-light); transform: translateX(-50%); }
@@ -153,32 +126,17 @@
         </div>
     </section>
 
-    <!-- ======== ДРЕСС-КОД (НОВЫЙ БЛОК) ======== -->
+    <!-- ======== ДРЕСС-КОД ======== -->
     <section class="dress-code">
         <div class="container">
             <h2>Дресс-код</h2>
             <p style="max-width:550px; margin:0 auto 1.5rem; opacity:0.85;">Мы будем очень признательны, если вы поддержите цветовую гамму нашего вечера. Никаких строгих правил — просто вдохновение!</p>
             <div class="color-palette">
-                <div class="color-item">
-                    <div class="color-circle" style="background: linear-gradient(135deg, #fcd5ce, #f8ad9d);"></div>
-                    <span>Персиковый</span>
-                </div>
-                <div class="color-item">
-                    <div class="color-circle" style="background: linear-gradient(135deg, #f3d5dc, #ddb2c1);"></div>
-                    <span>Пыльно-розовый</span>
-                </div>
-                <div class="color-item">
-                    <div class="color-circle" style="background: linear-gradient(135deg, #c9dce9, #a3c4d9);"></div>
-                    <span>Небесно-голубой</span>
-                </div>
-                <div class="color-item">
-                    <div class="color-circle" style="background: linear-gradient(135deg, #f7f0df, #dfd0b0);"></div>
-                    <span>Шампань</span>
-                </div>
-                <div class="color-item">
-                    <div class="color-circle" style="background: linear-gradient(135deg, #ebd6a5, #c9a87c);"></div>
-                    <span>Золотой</span>
-                </div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fcd5ce, #f8ad9d);"></div><span>Персиковый</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f3d5dc, #ddb2c1);"></div><span>Пыльно-розовый</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c9dce9, #a3c4d9);"></div><span>Небесно-голубой</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f7f0df, #dfd0b0);"></div><span>Шампань</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #ebd6a5, #c9a87c);"></div><span>Золотой</span></div>
             </div>
             <p style="margin-top:2.5rem; font-style:italic; font-size:0.95rem;">Мы верим, что вы будете прекрасны в любом образе!</p>
         </div>
@@ -231,19 +189,23 @@
             <p style="text-align:center; max-width:500px; margin:0 auto 2rem; opacity:0.8;">
                 Пожалуйста, дайте нам знать, сможете ли вы разделить этот день с нами.
             </p>
-            <form id="rsvp-form" class="rsvp-form" 
-                 action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" 
-                 method="POST" 
-                 target="hidden-iframe" 
-                 onsubmit="return handleRSVP(event)">
+            <form id="rsvp-form" class="rsvp-form" onsubmit="return handleRSVP(event);">
+                <div class="form-group"><label for="name">Имя <span>*</span></label><input type="text" id="name" name="name" placeholder="Ваше имя и фамилия" required></div>
+                <div class="form-group"><label for="attendance">Я приду / Я не приду <span>*</span></label><select id="attendance" name="attendance" required><option value="" disabled selected>Выберите вариант...</option><option value="yes">❤️ С радостью приду!</option><option value="no">💔 К сожалению, не смогу</option></select></div>
+                <div class="form-group"><label for="transfer">Нужен ли трансфер?</label><select id="transfer" name="transfer"><option value="" selected>Спасибо, доберусь сам(а)</option><option value="city">Да, из города</option></select></div>
+                <div class="form-group"><label for="drinks">Что вы предпочитаете?</label><select id="drinks" name="drinks"><option value="" selected>Неважно, всему рады</option><option value="sparkling">Игристое</option><option value="white">Белое вино</option><option value="red">Красное вино</option><option value="strong">Что-нибудь крепкое</option><option value="non-alcoholic">Безалкогольное</option></select></div>
+                <div class="form-group"><label for="allergies">Аллергии или ограничения в еде</label><textarea id="allergies" name="allergies" rows="2" placeholder="Например: не ем глютен, орехи, веган..."></textarea></div>
+                <div class="form-group"><label for="message">Пару строк для нас (по желанию)</label><textarea id="message" name="message" rows="3" placeholder="Ваши тёплые слова или пожелания..."></textarea></div>
+                <button type="submit" class="btn">Отправить</button>
             </form>
-            <div id="rsvp-success" style="display:none; text-align:center; margin-top:2rem; color:var(--accent); font-style:italic;">Спасибо! Ваш ответ отправлен 🌿</div>
+            <div id="rsvp-success" style="display:none; text-align:center; margin-top:2rem; color:var(--accent); font-style:italic;">
+                Спасибо! Ваш ответ отправлен 🌿
+            </div>
         </div>
     </section>
 
     <footer>
         <p>С любовью, Ксения и Никита</p>
-        <p>05.09.2026<p>
     </footer>
 
     <script>
@@ -275,18 +237,18 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // ====== 3. ОТПРАВКА ФОРМЫ (надёжный редирект) ======
-       function handleRSVP(event) {
-    event.preventDefault();
+        // ====== 3. ОТПРАВКА ФОРМЫ В TELEGRAM ======
+        function handleRSVP(event) {
+            event.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const attendance = document.getElementById('attendance').value;
-    const transfer = document.getElementById('transfer').value;
-    const drinks = document.getElementById('drinks').value;
-    const allergies = document.getElementById('allergies').value.trim();
-    const message = document.getElementById('message').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const attendance = document.getElementById('attendance').value;
+            const transfer = document.getElementById('transfer').value;
+            const drinks = document.getElementById('drinks').value;
+            const allergies = document.getElementById('allergies').value.trim();
+            const message = document.getElementById('message').value.trim();
 
-    const text = `💌 *Новая заявка!* 💌
+            const text = `💌 *Новая заявка!* 💌
 👤 *Имя:* ${name}
 📅 *Приду/Не приду:* ${attendance === 'yes' ? '✅ Приду' : '❌ Не приду'}
 🚗 *Трансфер:* ${transfer || 'Не указан'}
@@ -294,41 +256,42 @@
 ⚠️ *Аллергии:* ${allergies || 'Нет'}
 💬 *Послание:* ${message || '---'}`;
 
-    const botToken = 'ВАШ_ТОКЕН_СЮДА'; // ← замени на свой токен
-    const chatId = '-5196891167';       // ← твой ID группы
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const botToken = 'ВАШ_ТОКЕН_СЮДА'; // ← замените на свой токен бота
+            const chatId = '-5196891167';       // ID вашей группы
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-    const submitBtn = document.querySelector('#rsvp-form .btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправляю...';
+            const submitBtn = document.querySelector('#rsvp-form .btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправляю...';
 
-    fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: text,
-            parse_mode: 'Markdown'
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            // Успех — прячем форму, показываем благодарность
-            document.getElementById('rsvp-form').style.display = 'none';
-            document.getElementById('rsvp-success').style.display = 'block';
-        } else {
-            alert('Не удалось отправить. Попробуйте ещё раз или свяжитесь с нами лично.');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить';
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    document.getElementById('rsvp-form').style.display = 'none';
+                    document.getElementById('rsvp-success').style.display = 'block';
+                } else {
+                    alert('Не удалось отправить. Попробуйте ещё раз или свяжитесь с нами лично.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отправить';
+                }
+            })
+            .catch(() => {
+                alert('Ошибка сети. Проверьте соединение.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить';
+            });
+
+            return false; // предотвращаем обычную отправку формы
         }
-    })
-    .catch(() => {
-        alert('Ошибка сети. Проверьте соединение.');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Отправить';
-    });
-}
-</script>
+    </script>
 </body>
 </html>
