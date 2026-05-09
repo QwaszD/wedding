@@ -359,6 +359,70 @@
             color: var(--white);
         }
 
+        /* ========== ФОРМА RSVP ========== */
+        .rsvp-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        label {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+        }
+        label span {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--accent-light);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 0.95rem;
+            background: var(--bg);
+            color: var(--text);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(180,131,107,0.1);
+        }
+        textarea {
+            resize: vertical;
+        }
+        .rsvp-form .btn {
+            display: block;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .rsvp-form .btn:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -376,7 +440,7 @@
             <h1>Ксения <span>&</span> Никита</h1>
             <p class="subtitle">Приглашаем вас разделить с нами радостный день</p>
 
-            <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (дата задаётся в JS внизу) -->
+            <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА -->
             <div class="countdown" id="countdown">
                 <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
@@ -442,7 +506,7 @@
         </div>
     </section>
 
-    <!-- ======== НЕСКОЛЬКО ПРОЕЗДОВ (Пожелания) ======== -->
+    <!-- ======== НЕСКОЛЬКО ПРОСЬБ ======== -->
     <section class="wishes">
         <div class="container">
             <h2>Несколько просьб</h2>
@@ -461,13 +525,57 @@
         </div>
     </section>
 
+    <!-- ======== ФОРМА ПОДТВЕРЖДЕНИЯ (RSVP) ======== -->
+    <section class="rsvp">
+        <div class="container">
+            <h2>Вы с нами?</h2>
+            <p style="text-align:center; max-width:500px; margin:0 auto 2rem; opacity:0.8;">
+                Пожалуйста, дайте нам знать, сможете ли вы разделить этот день с нами.
+            </p>
+            <form id="rsvp-form" class="rsvp-form" onsubmit="handleRSVP(event)">
+                <div class="form-group">
+                    <label for="name">Имя <span>*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Ваше имя и фамилия" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="attendance">Я приду / Я не приду <span>*</span></label>
+                    <select id="attendance" name="attendance" required>
+                        <option value="" disabled selected>Выберите вариант...</option>
+                        <option value="yes">❤️ С радостью приду!</option>
+                        <option value="no">💔 К сожалению, не смогу</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transfer">Нужен ли трансфер?</label>
+                    <select id="transfer" name="transfer">
+                        <option value="" selected>Спасибо, доберусь сам(а)</option>
+                        <option value="city">Да, из города</option>
+                        <option value="airport">Да, от аэропорта</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Пару строк для нас (по желанию)</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Ваши тёплые слова или пожелания..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Отправить</button>
+            </form>
+            <div id="rsvp-success" style="display:none; text-align:center; margin-top:2rem; color:var(--accent); font-style:italic;">
+                Спасибо! Ваш ответ отправлен 🌿
+            </div>
+        </div>
+    </section>
+
     <footer>
         <p>С любовью, Ксения и Никита</p>
     </footer>
 
-    <!-- ========== СКРИПТ ТАЙМЕРА И АНИМАЦИЙ ========== -->
+    <!-- ========== СКРИПТ ТАЙМЕРА, АНИМАЦИЙ И ФОРМЫ ========== -->
     <script>
-        // ====== 1. УСТАНОВИ ДАТУ СВАДЬБЫ ЗДЕСЬ (год, месяц (0-январь), день, час, минута) ======
+        // ====== 1. УСТАНОВИ ДАТУ СВАДЬБЫ ЗДЕСЬ ======
         const weddingDate = new Date(2026, 9, 05, 15, 0); // 05 сентября 2026, 15:00
 
         function updateCountdown() {
@@ -487,16 +595,16 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = days < 10 ? '0' + days : days;
-            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // ====== 2. ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ТАЙМЛАЙНА ПРИ СКРОЛЛЕ ======
+        // ====== 2. ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ТАЙМЛАЙНА ======
         const timelineItems = document.querySelectorAll('.timeline-item');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -507,6 +615,14 @@
         }, { threshold: 0.3 });
 
         timelineItems.forEach(item => observer.observe(item));
+
+        // ====== 3. ОБРАБОТКА ФОРМЫ RSVP (ЗАГЛУШКА) ======
+        function handleRSVP(event) {
+            event.preventDefault();
+            document.getElementById('rsvp-form').style.display = 'none';
+            document.getElementById('rsvp-success').style.display = 'block';
+            // В будущем сюда можно добавить реальную отправку данных на сервер
+        }
     </script>
 </body>
 </html>
