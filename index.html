@@ -190,8 +190,8 @@
                 Пожалуйста, дайте нам знать, сможете ли вы разделить этот день с нами.
             </p>
             <form id="rsvp-form" class="rsvp-form" 
-                  action="https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" 
-                  method="POST">
+      action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" 
+      method="POST">
                 <div class="form-group"><label for="name">Имя <span>*</span></label><input type="text" id="name" name="name" placeholder="Ваше имя и фамилия" required></div>
                 <div class="form-group"><label for="attendance">Я приду / Я не приду <span>*</span></label><select id="attendance" name="attendance" required><option value="" disabled selected>Выберите вариант...</option><option value="yes">❤️ С радостью приду!</option><option value="no">💔 К сожалению, не смогу</option></select></div>
                 <div class="form-group"><label for="transfer">Нужен ли трансфер?</label><select id="transfer" name="transfer"><option value="" selected>Спасибо, доберусь сам(а)</option><option value="city">Да, из города</option></select></div>
@@ -238,62 +238,6 @@
             });
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
-
-                       // ====== 3. ОТПРАВКА ФОРМЫ В TELEGRAM ======
-function handleRSVP(event) {
-    event.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const attendance = document.getElementById('attendance').value;
-    const transfer = document.getElementById('transfer').value;
-    const drinks = document.getElementById('drinks').value;
-    const allergies = document.getElementById('allergies').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    const text = `💌 *Новая заявка!* 💌
-👤 *Имя:* ${name}
-📅 *Приду/Не приду:* ${attendance === 'yes' ? '✅ Приду' : '❌ Не приду'}
-🚗 *Трансфер:* ${transfer || 'Не указан'}
-🍷 *Напитки:* ${drinks || 'Не указано'}
-⚠️ *Аллергии:* ${allergies || 'Нет'}
-💬 *Послание:* ${message || '---'}`;
-
-    const botToken = '8646174606:AAGWHC73jYi9BTneV5-v-rDb7bLzMo7f6tQ';
-    const chatId = '-5196891167';
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-    const submitBtn = document.querySelector('#rsvp-form .btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправляю...';
-
-    fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: text,
-            parse_mode: 'Markdown'
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            document.getElementById('rsvp-form').style.display = 'none';
-            document.getElementById('rsvp-success').style.display = 'block';
-        } else {
-            alert('Не удалось отправить. Попробуйте ещё раз или свяжитесь с нами лично.');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Отправить';
-        }
-    })
-    .catch(() => {
-        alert('Ошибка сети. Проверьте соединение.');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Отправить';
-    });
-
-    return false;
-}
     </script>
 </body>
 </html>
