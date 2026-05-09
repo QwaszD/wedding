@@ -8,21 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* Тёмная элегантная гамма */
         :root {
             --bg: #1a2f24;
             --text: #f0f0f0;
-            --accent: #c9a87c;       /* золотой */
+            --accent: #c9a87c;
             --accent-light: #2f3e34;
             --gold: #c9a87c;
             --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg);
-            background-image: radial-gradient(circle at 20% 20%, rgba(201,168,124,0.05) 0%, transparent 50%);
             color: var(--text);
             line-height: 1.8;
             font-weight: 300;
@@ -38,11 +36,15 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 5rem 0; position: relative; }
 
-        /* Hero */
+        /* Hero с фоновым изображением */
         .hero {
             text-align: center;
             padding: 6rem 0 4rem;
-            background: linear-gradient(180deg, rgba(26,47,36,0.9) 0%, var(--bg) 100%);
+            background: linear-gradient(180deg, rgba(26,47,36,0.8) 0%, rgba(26,47,36,0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1606800052051-a8b4c7a5a3aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
         .hero .invitation-text {
             font-family: 'Cormorant Garamond', serif;
@@ -109,7 +111,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Новый блок дресс-кода */
+        /* Дресс-код */
         .dress-code {
             background: var(--accent-light);
             text-align: center;
@@ -146,29 +148,7 @@
         .color-item span { font-size: 0.75rem; font-weight: 300; }
         .col h3 { font-size: 2rem; margin-bottom: 0.8rem; }
 
-        /* Просьбы */
-        .wishes .cards {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .wish-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(201,168,124,0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            flex: 1 1 250px;
-            transition: transform 0.3s;
-        }
-        .wish-card:hover { transform: translateY(-8px); }
-        .wish-card .icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
-        .wish-card h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
-        .wish-card p { font-size: 0.95rem; color: var(--text); }
-
-        /* Таймлайн */
+        /* Программа */
         .timeline { position: relative; }
         .timeline::before {
             content: '';
@@ -254,17 +234,60 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* История */
-        .story p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
+        /* История с фото */
+        .story .story-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .story .story-text {
+            flex: 2;
+            min-width: 250px;
             font-style: italic;
             line-height: 2;
+            text-align: center;
+        }
+        .story .story-images {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        .story .story-images img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            box-shadow: var(--shadow);
         }
 
-        /* Форма RSVP */
+        /* Просьбы */
+        .wishes .cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .wish-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(201,168,124,0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            flex: 1 1 250px;
+            transition: transform 0.3s;
+        }
+        .wish-card:hover { transform: translateY(-8px); }
+        .wish-card .icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+        .wish-card h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .wish-card p { font-size: 0.95rem; color: var(--text); }
+
+        /* Форма */
         .rsvp-form {
             max-width: 600px;
             margin: 0 auto;
@@ -394,6 +417,7 @@
             }
             .timeline-dot { display: none; }
             .two-cols { flex-direction: column; align-items: center; }
+            .story .story-content { flex-direction: column; }
         }
     </style>
 </head>
@@ -462,11 +486,19 @@
         </div>
     </section>
 
-    <!-- ИСТОРИЯ -->
+    <!-- ИСТОРИЯ ЛЮБВИ -->
     <section class="story">
         <div class="container">
             <h2>Наша история</h2>
-            <p>Это были студенческие годы. Мы со своей подругой учились в разных институтах и решили встретиться компаниями. Один парень целый вечер не отходил от меня, делал комплименты, постоянно шутил, а я постоянно смеялась. И мы не смогли устоять — я от его шуток, он — от моего обворожительного смеха.</p>
+            <div class="story-content">
+                <div class="story-images">
+                    <img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="свечи">
+                    <img src="https://images.unsplash.com/photo-1519741347686-c1e331ee7d8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="кольца">
+                </div>
+                <div class="story-text">
+                    <p>Это были студенческие годы. Мы со своей подругой учились в разных институтах и решили встретиться компаниями. Один парень целый вечер не отходил от меня, делал комплименты, постоянно шутил, а я постоянно смеялась. И мы не смогли устоять — я от его шуток, он — от моего обворожительного смеха.</p>
+                </div>
+            </div>
         </div>
     </section>
 
