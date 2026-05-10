@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадьба Ксении и Никиты 05.09.2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <!-- Подключаем Lora для основного текста -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <style>
+        /* Локальный шрифт для заголовков */
         @font-face {
             font-family: 'Alaya Roza';
             src: url('AlayaRozaDemo.woff2') format('woff2');
@@ -15,7 +17,7 @@
         :root {
             --bg: #f8f5f0;
             --text: #4a4a4a;
-            --accent: #738678;    /* насыщенный золотой */
+            --accent: #738678;    
             --accent-light: #e8e0d5;
             --gold: #738678;
             --white: #ffffff;
@@ -25,12 +27,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Lora', sans-serif;
+            font-family: 'Lora', serif;  /* Основной шрифт изменён на Lora */
             background-color: var(--bg);
             background-image: radial-gradient(circle at 30% 30%, rgba(184,134,11,0.08) 0%, transparent 60%);
             color: var(--text);
             line-height: 1.8;
-            font-weight: 300;
+            font-weight: 400;  /* Lora отлично смотрится с весом 400 */
             overflow-x: hidden;
         }
 
@@ -86,7 +88,7 @@
         .countdown-item { background: var(--white); box-shadow: var(--shadow); padding: 1.2rem 1.5rem; border-radius: 8px; text-align: center; min-width: 80px; transition: transform 0.3s; }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number { font-family: 'Alaya Roza', cursive; font-size: 2.5rem; font-weight: 400; color: var(--accent); line-height: 1; }
-        .countdown-label { font-family: 'Lora', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: var(--text); }
+        .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: var(--text); }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -100,7 +102,7 @@
         .color-palette { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
         .color-item { text-align: center; width: 70px; }
         .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-        .color-item span { font-size: 0.75rem; font-weight: 300; color: var(--text); }
+        .color-item span { font-size: 0.75rem; font-weight: 400; color: var(--text); }
         .col h3 { font-family: 'Alaya Roza', cursive; font-size: 2rem; margin-bottom: 0.8rem; }
 
         /* Программа */
@@ -116,16 +118,17 @@
         .timeline-content { flex: 2; background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: 12px; margin-left: 2rem; }
         .timeline-item:nth-child(even) .timeline-content { margin-left: 0; margin-right: 2rem; }
         .timeline-content h3 { font-family: 'Alaya Roza', cursive; font-size: 1.8rem; margin-bottom: 0.3rem; }
-        .timeline-content p { font-family: 'Lora', sans-serif; font-size: 0.95rem; }
+        .timeline-content p { font-family: 'Lora', serif; font-size: 0.95rem; }
 
         /* Локация */
         .location { text-align: center; background: var(--accent-light); padding: 4rem 0; }
-        .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #fff; padding: 0.8rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Lora', sans-serif; }
+        .location p { font-family: 'Lora', serif; }
+        .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #fff; padding: 0.8rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Lora', serif; }
         .location .btn:hover { background: #a67c00; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* История */
         .story .story-content { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .story .story-text { flex: 2; min-width: 250px; font-style: italic; line-height: 2; text-align: center; font-weight: 300; }
+        .story .story-text { flex: 2; min-width: 250px; font-family: 'Lora', serif; font-style: italic; line-height: 2; text-align: center; font-weight: 400; }
         .story .story-images { flex: 1; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
         .story .story-images img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid var(--accent); box-shadow: var(--shadow); }
 
@@ -134,21 +137,21 @@
         .wish-card { background: var(--white); box-shadow: var(--shadow); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { font-family: 'Alaya Roza', cursive; font-size: 1.8rem; margin-bottom: 0.8rem; }
-        .wish-card p { font-size: 0.95rem; color: var(--text); }
+        .wish-card p { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--text); }
 
         /* Форма */
         .rsvp-form { max-width: 600px; margin: 0 auto; background: var(--white); box-shadow: var(--shadow); padding: 3rem; border-radius: 12px; }
         .form-group { margin-bottom: 2rem; }
         label { display: block; font-family: 'Alaya Roza', cursive; font-size: 1.8rem; color: var(--accent); margin-bottom: 0.8rem; }
-        label span { color: var(--gold); font-size: 1rem; font-family: 'Lora', sans-serif; }
-        input[type="text"], textarea, select { width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--accent-light); border-radius: 6px; font-family: 'Lora', sans-serif; font-weight: 300; font-size: 0.95rem; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+        label span { color: var(--gold); font-size: 1rem; font-family: 'Lora', serif; }
+        input[type="text"], textarea, select { width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--accent-light); border-radius: 6px; font-family: 'Lora', serif; font-weight: 400; font-size: 0.95rem; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
         input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184,134,11,0.2); }
         textarea { resize: vertical; }
         .radio-group, .select-group { display: flex; flex-direction: column; gap: 0.8rem; }
-        .radio-option { display: flex; align-items: center; cursor: pointer; font-weight: 300; }
+        .radio-option { display: flex; align-items: center; cursor: pointer; font-family: 'Lora', serif; font-weight: 400; }
         .radio-option input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%; margin-right: 10px; position: relative; cursor: pointer; }
         .radio-option input[type="radio"]:checked { background: var(--accent); box-shadow: inset 0 0 0 4px var(--white); }
-        .btn { display: block; width: 100%; background: var(--accent); color: #fff; border: none; padding: 1rem; border-radius: 30px; font-family: 'Lora', sans-serif; font-weight: 500; letter-spacing: 1px; cursor: pointer; font-size: 1rem; transition: all 0.3s; margin-top: 1rem; }
+        .btn { display: block; width: 100%; background: var(--accent); color: #fff; border: none; padding: 1rem; border-radius: 30px; font-family: 'Lora', serif; font-weight: 500; letter-spacing: 1px; cursor: pointer; font-size: 1rem; transition: all 0.3s; margin-top: 1rem; }
         .btn:hover { background: #a67c00; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
         /* Контакты */
@@ -156,9 +159,9 @@
         .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
         .contact-card { text-align: center; }
         .contact-card h3 { font-family: 'Alaya Roza', cursive; font-size: 1.8rem; margin-bottom: 0.3rem; }
-        .contact-card p { font-size: 1rem; font-weight: 300; }
+        .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; }
 
-        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--text); border-top: 1px solid var(--accent-light); background: var(--white); }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--text); border-top: 1px solid var(--accent-light); background: var(--white); font-family: 'Lora', serif; }
 
         @media (max-width: 768px) {
             .timeline::before { left: 20px; }
