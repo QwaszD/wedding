@@ -9,22 +9,24 @@
     <!-- Great Vibes + Raleway -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
     <style>
-        :root {
-            @font-face {
-                font-family: 'Kosolapa Script';
-                src: url('KosolapaScript-Regular.woff2') format('woff2');
-                font-weight: normal;
-                font-style: normal;
+        @font-face {
+            font-family: 'Kosolapa Script';
+            src: url('KosolapaScript-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
         }
-            --bg: #f8f5f0;           /* слоновая кость */
-            --text: #4a4a4a;         /* тёмно-серый текст */
-            --accent: #c9a87c;       /* золотой */
-            --accent-light: #e8e0d5; /* светлый акцент для блоков */
+        :root {
+            --bg: #f8f5f0;
+            --text: #4a4a4a;
+            --accent: #c9a87c;
+            --accent-light: #e8e0d5;
             --gold: #c9a87c;
             --white: #ffffff;
             --shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Raleway', sans-serif;
             background-color: var(--bg);
@@ -33,12 +35,6 @@
             line-height: 1.8;
             font-weight: 300;
             overflow-x: hidden;
-        }
-        /* Все заголовки и акцентные элементы — Great Vibes */
-        h1, h2, h3 {
-            font-family: , cursive;
-            font-weight: 400;
-            color: var(--accent);
         }
         h2 { font-size: 2.8rem; margin-bottom: 1.5rem; text-align: center; position: relative; }
         h2::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
