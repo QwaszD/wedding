@@ -188,38 +188,21 @@
             font-weight: 600;
         }
 
-        /* Полноэкранный слайдер образов */
-        .fullscreen-slider {
-            height: 100vh;
+        /* Полноэкранные секции образов (вертикальный скролл) */
+        .fullscreen-slide {
             width: 100%;
+            height: 100vh;
             position: relative;
             overflow: hidden;
-            background: #000; /* фон на случай, если изображение не загрузится */
+            background: #000; /* fallback */
         }
-        .slides {
-            display: flex;
-            height: 100%;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .slides::-webkit-scrollbar { display: none; }
-        .slide {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
-            position: relative;
-            height: 100%;
-        }
-        .slide img {
+        .fullscreen-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        .slide .caption {
+        .fullscreen-slide .caption {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -232,46 +215,6 @@
             font-style: italic;
             text-align: center;
         }
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            font-size: 1.4rem;
-            color: var(--accent);
-            cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .slider-btn:hover { background: var(--accent); color: #fff; }
-        .slider-btn.prev { left: 1rem; }
-        .slider-btn.next { right: 1rem; }
-        .dots {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .dot.active { background: var(--accent); }
 
         /* Программа */
         .timeline { position: relative; }
@@ -517,8 +460,7 @@
             .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
-            .slide .caption { font-size: 1.5rem; padding: 2rem 1rem 1.5rem; }
-            .slider-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+            .fullscreen-slide .caption { font-size: 1.5rem; padding: 2rem 1rem 1.5rem; }
             .timeline::before { left: 20px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
@@ -548,8 +490,7 @@
             .countdown-item { padding: 0.7rem 0.8rem; }
             .countdown-number { font-size: 1.5rem; }
             .countdown-label { font-size: 0.7rem; }
-            .slide .caption { font-size: 1.2rem; }
-            .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
+            .fullscreen-slide .caption { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -597,33 +538,26 @@
         </div>
     </section>
 
-    <!-- ПОЛНОЭКРАННЫЙ СЛАЙДЕР ОБРАЗОВ -->
-    <section class="fullscreen-slider">
-        <div class="slides" id="slider">
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Небесный шифон">
-                <div class="caption">Небесный шифон</div>
-            </div>
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Персиковая нежность">
-                <div class="caption">Персиковая нежность</div>
-            </div>
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Шампань и золото">
-                <div class="caption">Шампань и золото</div>
-            </div>
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Пыльно-розовый">
-                <div class="caption">Пыльно-розовый</div>
-            </div>
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Светлый лён">
-                <div class="caption">Светлый лён</div>
-            </div>
-        </div>
-        <button class="slider-btn prev" onclick="prevSlide()">❮</button>
-        <button class="slider-btn next" onclick="nextSlide()">❯</button>
-        <div class="dots" id="dots"></div>
+    <!-- ПОЛНОЭКРАННЫЕ ОБРАЗЫ (ВЕРТИКАЛЬНАЯ ПРОКРУТКА) -->
+    <section class="fullscreen-slide">
+        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Небесный шифон">
+        <div class="caption">Небесный шифон</div>
+    </section>
+    <section class="fullscreen-slide">
+        <img src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Персиковая нежность">
+        <div class="caption">Персиковая нежность</div>
+    </section>
+    <section class="fullscreen-slide">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Шампань и золото">
+        <div class="caption">Шампань и золото</div>
+    </section>
+    <section class="fullscreen-slide">
+        <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Пыльно-розовый">
+        <div class="caption">Пыльно-розовый</div>
+    </section>
+    <section class="fullscreen-slide">
+        <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Светлый лён">
+        <div class="caption">Светлый лён</div>
     </section>
 
     <!-- ПРОГРАММА ДНЯ -->
@@ -654,8 +588,8 @@
             <h2>Наша история</h2>
             <div class="story-content">
                 <div class="story-images">
-                    <img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="свечи">
-                    <img src="https://images.unsplash.com/photo-1519741347686-c1e331ee7d8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="кольца">
+                    <img src="https://photocentra.ru/images/main119/1191683_main.jpg" alt="море">
+                    <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363de0e73a85e7cc692842.jpg" alt="кольца">
                 </div>
                 <div class="story-text">
                     <p>Скоро напишу...</p>
@@ -782,51 +716,6 @@
             });
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
-
-        // Слайдер
-        const slider = document.getElementById('slider');
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dots');
-        let currentIndex = 0;
-
-        function updateSlider() {
-            slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-        }
-
-        // Точки
-        slides.forEach((_, i) => {
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => {
-                currentIndex = i;
-                updateSlider();
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        // Синхронизация при ручной прокрутке
-        slider.addEventListener('scroll', () => {
-            const index = Math.round(slider.scrollLeft / slider.clientWidth);
-            if (index !== currentIndex) {
-                currentIndex = index;
-                document.querySelectorAll('.dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === currentIndex);
-                });
-            }
-        });
     </script>
 </body>
 </html>
