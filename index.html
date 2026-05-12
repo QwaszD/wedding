@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадьба Ксении и Никиты 05.09.2026</title>
-    <!-- Основной шрифт Lora + Playfair Display для заголовков -->
+    <!-- Основные читаемые шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <style>
+        /* Локальный шрифт ТОЛЬКО для имён */
+        @font-face {
+            font-family: 'Alaya Roza';
+            src: url('AlayaRozaDemo.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
         :root {
             --bg: #f8f5f0;
             --text: #4a4a4a;
             --accent: #738678;
             --accent-light: #e8e0d5;
-            --gold: #738678;
             --white: #ffffff;
             --shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
@@ -29,17 +36,15 @@
             overflow-x: hidden;
         }
 
-        /* Все заголовки теперь Playfair Display – читаемый и элегантный */
-        h1, h2, h3 {
+        /* Заголовки всех секций – Playfair Display */
+        h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
-            color: #2c3a2f;
-        }
-        h2 {
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             margin-bottom: 1.5rem;
             text-align: center;
             position: relative;
+            color: #2c3a2f;
         }
         h2::after {
             content: '';
@@ -49,23 +54,23 @@
             background: var(--accent);
             margin: 0.5rem auto 0;
         }
+
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-        section { padding: 5rem 0; position: relative; }
+        section { padding: 4.5rem 0; position: relative; }
 
         /* Hero */
         .hero {
             text-align: center;
-            padding: 6rem 0 4rem;
+            padding: 5rem 0 3.5rem;
             background: linear-gradient(180deg, rgba(248,245,240,0.8) 0%, var(--bg) 100%),
                 url('https://images.unsplash.com/photo-1519741347686-c1e331ee7d8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
         }
-        /* Пригласительный текст – теперь Playfair Display */
         .hero .invitation-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             max-width: 600px;
             margin: 0 auto 2rem;
             color: #3a3a3a;
@@ -74,10 +79,12 @@
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
         }
+
+        /* ТОЛЬКО ИМЕНА – ALAYA ROZA */
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 600;
+            font-family: 'Alaya Roza', cursive;
+            font-size: 5rem;
+            font-weight: 400;
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
             color: #2c3a2f;
@@ -85,47 +92,55 @@
             animation: fadeUp 1s ease forwards;
         }
         .hero h1 span {
-            color: var(--gold);
-            font-weight: 400;
+            font-family: 'Playfair Display', serif; /* разделитель – не Alaya Roza */
+            color: var(--accent);
+            font-size: 3rem;
+            vertical-align: middle;
+            margin: 0 0.3rem;
         }
+
         .hero .date-big {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            letter-spacing: 6px;
+            font-size: 2.6rem;
+            letter-spacing: 5px;
             color: var(--accent);
             margin: 1.5rem 0;
             font-weight: 600;
             opacity: 0;
             animation: fadeUp 1s ease 0.5s forwards;
         }
+
+        /* Таймер – адаптивный */
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.2rem;
             margin: 2rem 0;
             opacity: 0;
             animation: fadeUp 1s ease 0.7s forwards;
+            flex-wrap: wrap; /* перенос на мобильных */
         }
         .countdown-item {
             background: var(--white);
             box-shadow: var(--shadow);
-            padding: 1.2rem 1.5rem;
-            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
             text-align: center;
-            min-width: 80px;
+            min-width: 70px;
             transition: transform 0.3s;
+            flex: 0 1 auto;
         }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number {
             font-family: 'Lora', serif;
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 600;
             color: var(--accent);
             line-height: 1;
         }
         .countdown-label {
             font-family: 'Lora', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-top: 0.3rem;
@@ -138,20 +153,17 @@
         }
 
         /* Дресс-код */
-        .dress-code {
-            background: var(--accent-light);
-            text-align: center;
-        }
+        .dress-code { background: var(--accent-light); text-align: center; }
         .two-cols {
             display: flex;
             justify-content: center;
-            gap: 3rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
             margin-top: 2rem;
         }
         .col {
-            flex: 1 1 280px;
-            max-width: 350px;
+            flex: 1 1 260px;
+            max-width: 320px;
             background: var(--white);
             padding: 2rem;
             border-radius: 12px;
@@ -164,10 +176,7 @@
             flex-wrap: wrap;
             margin-top: 1rem;
         }
-        .color-item {
-            text-align: center;
-            width: 70px;
-        }
+        .color-item { text-align: center; width: 70px; }
         .color-circle {
             width: 60px;
             height: 60px;
@@ -175,11 +184,7 @@
             margin: 0 auto 0.5rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-        .color-item span {
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: var(--text);
-        }
+        .color-item span { font-size: 0.75rem; font-weight: 400; color: var(--text); }
         .col h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
@@ -187,28 +192,42 @@
             font-weight: 600;
         }
 
-        /* Галерея образов (новая секция) */
-        .look-gallery {
+        /* Горизонтальная прокручиваемая галерея образов */
+        .look-carousel {
             margin-top: 3rem;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 1rem 0 1.5rem;
             display: flex;
-            justify-content: center;
             gap: 1.5rem;
-            flex-wrap: wrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+        .look-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+        .look-carousel::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
         }
         .look-card {
+            display: inline-block;
             background: var(--white);
             border-radius: 12px;
             box-shadow: var(--shadow);
-            overflow: hidden;
-            width: 220px;
+            width: 200px;
+            flex-shrink: 0;
             text-align: center;
             transition: transform 0.3s;
+            white-space: normal;
         }
         .look-card:hover { transform: translateY(-5px); }
         .look-card img {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
+            border-radius: 12px 12px 0 0;
             display: block;
         }
         .look-card .caption {
@@ -235,7 +254,7 @@
         .timeline-item {
             display: flex;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s ease;
@@ -283,17 +302,10 @@
             margin-bottom: 0.3rem;
             font-weight: 600;
         }
-        .timeline-content p {
-            font-family: 'Lora', serif;
-            font-size: 0.95rem;
-        }
+        .timeline-content p { font-family: 'Lora', serif; font-size: 0.95rem; }
 
         /* Локация */
-        .location {
-            text-align: center;
-            background: var(--accent-light);
-            padding: 4rem 0;
-        }
+        .location { text-align: center; background: var(--accent-light); padding: 4rem 0; }
         .location p { font-family: 'Lora', serif; }
         .location .btn {
             display: inline-block;
@@ -308,11 +320,7 @@
             transition: all 0.3s;
             font-family: 'Lora', serif;
         }
-        .location .btn:hover {
-            background: #5f6b5e;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        .location .btn:hover { background: #5f6b5e; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* История */
         .story .story-content {
@@ -348,12 +356,7 @@
         }
 
         /* Просьбы */
-        .wishes .cards {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
+        .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
         .wish-card {
             background: var(--white);
             box-shadow: var(--shadow);
@@ -370,13 +373,9 @@
             margin-bottom: 0.8rem;
             font-weight: 600;
         }
-        .wish-card p {
-            font-family: 'Lora', serif;
-            font-size: 0.95rem;
-            color: var(--text);
-        }
+        .wish-card p { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--text); }
 
-        /* Форма – все заголовки полей Playfair Display, читаемо */
+        /* Форма */
         .rsvp-form {
             max-width: 600px;
             margin: 0 auto;
@@ -384,22 +383,19 @@
             box-shadow: var(--shadow);
             padding: 3rem;
             border-radius: 12px;
+            text-align: left;
         }
         .form-group { margin-bottom: 2rem; }
         label {
             display: block;
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: #2c3a2f;
             margin-bottom: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-        label span {
-            color: var(--gold);
-            font-size: 1rem;
-            font-family: 'Lora', serif;
-        }
+        label span { color: var(--accent); font-size: 1rem; font-family: 'Lora', serif; }
         input[type="text"], textarea, select {
             width: 100%;
             padding: 0.9rem 1rem;
@@ -418,18 +414,13 @@
             box-shadow: 0 0 0 3px rgba(115,134,120,0.2);
         }
         textarea { resize: vertical; }
-        .radio-group, .select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
+        .radio-group { display: flex; flex-direction: column; gap: 0.8rem; }
         .radio-option {
             display: flex;
             align-items: center;
             cursor: pointer;
-            font-weight: 400;
-            font-size: 1rem;
             font-family: 'Lora', serif;
+            font-size: 1rem;
             color: var(--text);
         }
         .radio-option input[type="radio"] {
@@ -462,24 +453,11 @@
             transition: all 0.3s;
             margin-top: 1rem;
         }
-        .btn:hover {
-            background: #5f6b5e;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
+        .btn:hover { background: #5f6b5e; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
         /* Контакты */
-        .contacts {
-            text-align: center;
-            background: var(--accent-light);
-        }
-        .contact-cards {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+        .contacts { text-align: center; background: var(--accent-light); }
+        .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
         .contact-card { text-align: center; }
         .contact-card h3 {
             font-family: 'Playfair Display', serif;
@@ -487,11 +465,7 @@
             margin-bottom: 0.3rem;
             font-weight: 600;
         }
-        .contact-card p {
-            font-family: 'Lora', serif;
-            font-size: 1rem;
-            font-weight: 400;
-        }
+        .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; }
 
         footer {
             text-align: center;
@@ -503,7 +477,12 @@
             font-family: 'Lora', serif;
         }
 
+        /* Мобильная адаптация */
         @media (max-width: 768px) {
+            .hero h1 { font-size: 3.8rem; }
+            .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
+            .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
+            .countdown-number { font-size: 1.8rem; }
             .timeline::before { left: 20px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
@@ -524,7 +503,15 @@
             .timeline-dot { display: none; }
             .two-cols { flex-direction: column; align-items: center; }
             .story .story-content { flex-direction: column; }
-            .look-gallery { flex-direction: column; align-items: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 3.2rem; }
+            .hero .invitation-text { font-size: 1.1rem; }
+            .countdown { gap: 0.8rem; }
+            .countdown-item { padding: 0.7rem 0.8rem; }
+            .countdown-number { font-size: 1.5rem; }
+            .countdown-label { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -548,7 +535,7 @@
         </div>
     </section>
 
-    <!-- ДРЕСС-КОД -->
+    <!-- ДРЕСС-КОД (с прокручиваемой галереей) -->
     <section class="dress-code">
         <div class="container">
             <h2>Дресс-код</h2>
@@ -570,8 +557,8 @@
                 </div>
             </div>
 
-            <!-- ФОТОПРИМЕРЫ ОБРАЗОВ -->
-            <div class="look-gallery">
+            <!-- ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА ФОТО -->
+            <div class="look-carousel">
                 <div class="look-card">
                     <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Небесное платье">
                     <div class="caption">Небесный шифон</div>
@@ -587,6 +574,10 @@
                 <div class="look-card">
                     <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Пыльно-розовый костюм">
                     <div class="caption">Пыльно-розовый</div>
+                </div>
+                <div class="look-card">
+                    <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Светлый лён">
+                    <div class="caption">Светлый лён</div>
                 </div>
             </div>
         </div>
@@ -647,7 +638,7 @@
         </div>
     </section>
 
-    <!-- ФОРМА RSVP -->
+    <!-- ФОРМА -->
     <section class="rsvp">
         <div class="container">
             <h2>Вы с нами?</h2>
@@ -721,8 +712,8 @@
     </footer>
 
     <script>
-        // Таймер до 5 сентября 2026, 15:00 (месяц теперь 8 = сентябрь)
-        const weddingDate = new Date(2026, 8, 5, 15, 0);
+        // Таймер до 5 сентября 2026, 15:00
+        const weddingDate = new Date(2026, 8, 5, 15, 0); // месяц 8 = сентябрь
         function updateCountdown() {
             const now = new Date();
             const diff = weddingDate - now;
