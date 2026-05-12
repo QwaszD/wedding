@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадьба Ксении и Никиты 05.09.2026</title>
-    <!-- Основные читаемые шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <style>
-        /* Локальный шрифт ТОЛЬКО для имён */
+        /* Локальный шрифт только для имён */
         @font-face {
             font-family: 'Alaya Roza';
             src: url('AlayaRozaDemo.woff2') format('woff2');
@@ -36,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Заголовки всех секций – Playfair Display */
         h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
@@ -80,7 +78,6 @@
             animation: fadeUp 1s ease 0.2s forwards;
         }
 
-        /* ТОЛЬКО ИМЕНА – ALAYA ROZA */
         .hero h1 {
             font-family: 'Alaya Roza', cursive;
             font-size: 5rem;
@@ -92,7 +89,7 @@
             animation: fadeUp 1s ease forwards;
         }
         .hero h1 span {
-            font-family: 'Playfair Display', serif; /* разделитель – не Alaya Roza */
+            font-family: 'Playfair Display', serif;
             color: var(--accent);
             font-size: 3rem;
             vertical-align: middle;
@@ -110,7 +107,6 @@
             animation: fadeUp 1s ease 0.5s forwards;
         }
 
-        /* Таймер – адаптивный */
         .countdown {
             display: flex;
             justify-content: center;
@@ -118,7 +114,7 @@
             margin: 2rem 0;
             opacity: 0;
             animation: fadeUp 1s ease 0.7s forwards;
-            flex-wrap: wrap; /* перенос на мобильных */
+            flex-wrap: wrap;
         }
         .countdown-item {
             background: var(--white);
@@ -192,51 +188,87 @@
             font-weight: 600;
         }
 
-        /* Горизонтальная прокручиваемая галерея образов */
-        .look-carousel {
-            margin-top: 3rem;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 1rem 0 1.5rem;
+        /* Слайдер образов */
+        .look-slider {
+            margin: 3rem auto 0;
+            max-width: 600px;
+            position: relative;
+        }
+        .slides {
             display: flex;
-            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) transparent;
-        }
-        .look-carousel::-webkit-scrollbar {
-            height: 6px;
-        }
-        .look-carousel::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
-        }
-        .look-card {
-            display: inline-block;
-            background: var(--white);
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: var(--shadow);
-            width: 200px;
-            flex-shrink: 0;
-            text-align: center;
-            transition: transform 0.3s;
-            white-space: normal;
+            /* скрываем полосу прокрутки */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        .look-card:hover { transform: translateY(-5px); }
-        .look-card img {
+        .slides::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            position: relative;
+            background: var(--white);
+        }
+        .slide img {
             width: 100%;
-            height: 250px;
+            height: 70vh;           /* почти весь экран */
             object-fit: cover;
-            border-radius: 12px 12px 0 0;
             display: block;
         }
-        .look-card .caption {
-            padding: 0.8rem;
-            font-family: 'Lora', serif;
-            font-size: 0.9rem;
-            color: var(--text);
+        .slide .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.5));
+            color: #fff;
+            padding: 2rem 1rem 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
             font-style: italic;
+            text-align: center;
         }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 1.2rem;
+            color: var(--accent);
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .slider-btn:hover { background: var(--accent); color: #fff; }
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active { background: var(--accent); }
 
         /* Программа */
         .timeline { position: relative; }
@@ -477,12 +509,13 @@
             font-family: 'Lora', serif;
         }
 
-        /* Мобильная адаптация */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3.8rem; }
             .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
+            .slide img { height: 60vh; }
+            .slides { border-radius: 12px; }
             .timeline::before { left: 20px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
@@ -512,6 +545,8 @@
             .countdown-item { padding: 0.7rem 0.8rem; }
             .countdown-number { font-size: 1.5rem; }
             .countdown-label { font-size: 0.7rem; }
+            .slide img { height: 50vh; }
+            .slider-btn { width: 32px; height: 32px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -535,7 +570,7 @@
         </div>
     </section>
 
-    <!-- ДРЕСС-КОД (с прокручиваемой галереей) -->
+    <!-- ДРЕСС-КОД + СЛАЙДЕР ОБРАЗОВ -->
     <section class="dress-code">
         <div class="container">
             <h2>Дресс-код</h2>
@@ -557,28 +592,33 @@
                 </div>
             </div>
 
-            <!-- ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА ФОТО -->
-            <div class="look-carousel">
-                <div class="look-card">
-                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Небесное платье">
-                    <div class="caption">Небесный шифон</div>
+            <!-- Слайдер образов -->
+            <div class="look-slider">
+                <div class="slides" id="slider">
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Небесный шифон">
+                        <div class="caption">Небесный шифон</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Персиковая нежность">
+                        <div class="caption">Персиковая нежность</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Шампань и золото">
+                        <div class="caption">Шампань и золото</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Пыльно-розовый">
+                        <div class="caption">Пыльно-розовый</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Светлый лён">
+                        <div class="caption">Светлый лён</div>
+                    </div>
                 </div>
-                <div class="look-card">
-                    <img src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Персиковый образ">
-                    <div class="caption">Персиковая нежность</div>
-                </div>
-                <div class="look-card">
-                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Золотой акцент">
-                    <div class="caption">Шампань и золото</div>
-                </div>
-                <div class="look-card">
-                    <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Пыльно-розовый костюм">
-                    <div class="caption">Пыльно-розовый</div>
-                </div>
-                <div class="look-card">
-                    <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Светлый лён">
-                    <div class="caption">Светлый лён</div>
-                </div>
+                <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+                <button class="slider-btn next" onclick="nextSlide()">❯</button>
+                <div class="dots" id="dots"></div>
             </div>
         </div>
     </section>
@@ -712,8 +752,8 @@
     </footer>
 
     <script>
-        // Таймер до 5 сентября 2026, 15:00
-        const weddingDate = new Date(2026, 8, 5, 15, 0); // месяц 8 = сентябрь
+        // Таймер
+        const weddingDate = new Date(2026, 8, 5, 15, 0); // сентябрь = 8
         function updateCountdown() {
             const now = new Date();
             const diff = weddingDate - now;
@@ -739,6 +779,51 @@
             });
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
+
+        // Слайдер
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dots');
+        let currentIndex = 0;
+
+        function updateSlider() {
+            slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        // Создаём точки
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSlider();
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        // Синхронизация точек при ручной прокрутке
+        slider.addEventListener('scroll', () => {
+            const index = Math.round(slider.scrollLeft / slider.clientWidth);
+            if (index !== currentIndex) {
+                currentIndex = index;
+                document.querySelectorAll('.dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+        });
     </script>
 </body>
 </html>
