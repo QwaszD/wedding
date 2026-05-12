@@ -188,21 +188,21 @@
             font-weight: 600;
         }
 
-        /* Слайдер образов */
-        .look-slider {
-            margin: 3rem auto 0;
-            max-width: 600px;
+        /* Полноэкранный слайдер образов */
+        .fullscreen-slider {
+            height: 100vh;
+            width: 100%;
             position: relative;
+            overflow: hidden;
+            background: #000; /* фон на случай, если изображение не загрузится */
         }
         .slides {
             display: flex;
+            height: 100%;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            /* скрываем полосу прокрутки */
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -211,11 +211,11 @@
             flex: 0 0 100%;
             scroll-snap-align: start;
             position: relative;
-            background: var(--white);
+            height: 100%;
         }
         .slide img {
             width: 100%;
-            height: 70vh;           /* почти весь экран */
+            height: 100%;
             object-fit: cover;
             display: block;
         }
@@ -224,11 +224,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.5));
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
             color: #fff;
-            padding: 2rem 1rem 1.5rem;
+            padding: 2.5rem 1.5rem 2rem;
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 2rem;
             font-style: italic;
             text-align: center;
         }
@@ -236,34 +236,37 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: var(--white);
+            background: rgba(255,255,255,0.9);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1.4rem;
             color: var(--accent);
             cursor: pointer;
-            z-index: 2;
+            z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: 0.2s;
         }
         .slider-btn:hover { background: var(--accent); color: #fff; }
-        .slider-btn.prev { left: 10px; }
-        .slider-btn.next { right: 10px; }
+        .slider-btn.prev { left: 1rem; }
+        .slider-btn.next { right: 1rem; }
         .dots {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
             gap: 0.5rem;
-            margin-top: 1rem;
+            z-index: 10;
         }
         .dot {
             width: 10px;
             height: 10px;
-            background: #ccc;
+            background: rgba(255,255,255,0.5);
             border-radius: 50%;
             cursor: pointer;
             transition: 0.3s;
@@ -514,8 +517,8 @@
             .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
-            .slide img { height: 60vh; }
-            .slides { border-radius: 12px; }
+            .slide .caption { font-size: 1.5rem; padding: 2rem 1rem 1.5rem; }
+            .slider-btn { width: 40px; height: 40px; font-size: 1.2rem; }
             .timeline::before { left: 20px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
@@ -545,8 +548,8 @@
             .countdown-item { padding: 0.7rem 0.8rem; }
             .countdown-number { font-size: 1.5rem; }
             .countdown-label { font-size: 0.7rem; }
-            .slide img { height: 50vh; }
-            .slider-btn { width: 32px; height: 32px; font-size: 1rem; }
+            .slide .caption { font-size: 1.2rem; }
+            .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -570,7 +573,7 @@
         </div>
     </section>
 
-    <!-- ДРЕСС-КОД + СЛАЙДЕР ОБРАЗОВ -->
+    <!-- ДРЕСС-КОД -->
     <section class="dress-code">
         <div class="container">
             <h2>Дресс-код</h2>
@@ -591,36 +594,36 @@
                     <p style="opacity:0.8;">Мы хотим, чтобы каждый чувствовал себя комфортно и свободно. Никакой строгости, только радость и тепло в кругу близких.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Слайдер образов -->
-            <div class="look-slider">
-                <div class="slides" id="slider">
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Небесный шифон">
-                        <div class="caption">Небесный шифон</div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Персиковая нежность">
-                        <div class="caption">Персиковая нежность</div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Шампань и золото">
-                        <div class="caption">Шампань и золото</div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Пыльно-розовый">
-                        <div class="caption">Пыльно-розовый</div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Светлый лён">
-                        <div class="caption">Светлый лён</div>
-                    </div>
-                </div>
-                <button class="slider-btn prev" onclick="prevSlide()">❮</button>
-                <button class="slider-btn next" onclick="nextSlide()">❯</button>
-                <div class="dots" id="dots"></div>
+    <!-- ПОЛНОЭКРАННЫЙ СЛАЙДЕР ОБРАЗОВ -->
+    <section class="fullscreen-slider">
+        <div class="slides" id="slider">
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Небесный шифон">
+                <div class="caption">Небесный шифон</div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1604004555489-723a93d6ce74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Персиковая нежность">
+                <div class="caption">Персиковая нежность</div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Шампань и золото">
+                <div class="caption">Шампань и золото</div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Пыльно-розовый">
+                <div class="caption">Пыльно-розовый</div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1583391733956-f0b3c856e774?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Светлый лён">
+                <div class="caption">Светлый лён</div>
             </div>
         </div>
+        <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+        <button class="slider-btn next" onclick="nextSlide()">❯</button>
+        <div class="dots" id="dots"></div>
     </section>
 
     <!-- ПРОГРАММА ДНЯ -->
@@ -803,7 +806,7 @@
             updateSlider();
         }
 
-        // Создаём точки
+        // Точки
         slides.forEach((_, i) => {
             const dot = document.createElement('span');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -814,7 +817,7 @@
             dotsContainer.appendChild(dot);
         });
 
-        // Синхронизация точек при ручной прокрутке
+        // Синхронизация при ручной прокрутке
         slider.addEventListener('scroll', () => {
             const index = Math.round(slider.scrollLeft / slider.clientWidth);
             if (index !== currentIndex) {
