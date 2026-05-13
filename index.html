@@ -223,9 +223,9 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;       /* теперь обрезки не будет */
             display: block;
-             border: none;
+            background: #f8f5f0;       /* поля станут такого же цвета, как фон сайта */
         }
         .slide .caption {
             position: absolute;
