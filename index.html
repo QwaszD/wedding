@@ -96,15 +96,57 @@
             margin: 0 0.3rem;
         }
 
-        .hero .date-big {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
-            letter-spacing: 5px;
-            color: var(--accent);
-            margin: 1.5rem 0;
-            font-weight: 600;
+        /* Календарик */
+        .calendar-mini {
+            display: inline-block;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            padding: 1.5rem 1.2rem;
+            margin-top: 1.5rem;
             opacity: 0;
             animation: fadeUp 1s ease 0.5s forwards;
+        }
+        .calendar-mini .month-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .calendar-mini table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        .calendar-mini th {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #999;
+            padding: 0.3rem 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .calendar-mini td {
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.5rem;
+            text-align: center;
+            color: var(--text);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            transition: all 0.2s;
+        }
+        .calendar-mini td.heart-day {
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 0 0 4px rgba(115,134,120,0.2);
+        }
+        .calendar-mini td.heart-day::after {
+            content: ' ♡';
+            font-size: 0.7rem;
         }
 
         .countdown {
@@ -277,15 +319,8 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 12px;                       /* чуть шире для двойной линии */
-            background: transparent;
-            background-image: 
-        /* верхняя волна */
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='30' viewBox='0 0 12 30'%3E%3Cpath d='M6 0 Q9 7.5 6 15 Q3 22.5 6 30' fill='none' stroke='%23738678' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
-        /* нижняя волна (смещена по фазе) */
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='30' viewBox='0 0 12 30'%3E%3Cpath d='M6 0 Q3 7.5 6 15 Q9 22.5 6 30' fill='none' stroke='%23738678' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
-        /* точки между волнами */
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='30' viewBox='0 0 12 30'%3E%3Ccircle cx='6' cy='7.5' r='2' fill='%23738678'/%3E%3Ccircle cx='6' cy='22.5' r='2' fill='%23738678'/%3E%3C/svg%3E");
+            width: 6px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='20' viewBox='0 0 6 20'%3E%3Cpath d='M3 0 Q6 5 3 10 Q0 15 3 20' fill='none' stroke='%23738678' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
             background-repeat: repeat-y;
             background-position: center;
             transform: translateX(-50%);
@@ -525,7 +560,7 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 3.8rem; }
-            .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
+            .calendar-mini { padding: 1rem 0.8rem; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
             .look-slider-frame { height: 55vh; max-height: 450px; }
@@ -539,18 +574,9 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .timeline-time {
-                text-align: left;
-                padding-left: 3rem;
-                margin-bottom: 0.5rem;
-                font-size: 1.5rem;
-            }
+            .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; }
             .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; }
-            .timeline-content {
-                margin-left: 3rem !important;
-                margin-right: 0 !important;
-                width: calc(100% - 40px);
-            }
+            .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); }
             .timeline-dot { display: none; }
             .two-cols { flex-direction: column; align-items: center; }
             .story .story-content { flex-direction: column; }
@@ -577,7 +603,24 @@
                 Мы верим и надеемся, что этот день станет красивым началом долгой и счастливой жизни.
             </p>
             <h1>Ксения <span>&</span> Никита</h1>
-            <div class="date-big">05 · 09 · 2026</div>
+
+            <!-- Календарик -->
+            <div class="calendar-mini">
+                <div class="month-year">Сентябрь 2026</div>
+                <table>
+                    <thead>
+                        <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                        <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                        <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+                        <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+                        <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="countdown" id="countdown">
                 <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
@@ -611,7 +654,7 @@
         </div>
     </section>
 
-    <!-- СЛАЙДЕР ОБРАЗОВ (простой, ширина 600px) -->
+    <!-- СЛАЙДЕР ОБРАЗОВ -->
     <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
@@ -796,7 +839,7 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // Простой слайдер образов (без бесконечности)
+        // Слайдер
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
@@ -819,7 +862,6 @@
             updateSlider();
         }
 
-        // Создаём точки
         slides.forEach((_, i) => {
             const dot = document.createElement('span');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -830,7 +872,6 @@
             dotsContainer.appendChild(dot);
         });
 
-        // Синхронизация при ручной прокрутке
         slider.addEventListener('scroll', () => {
             const index = Math.round(slider.scrollLeft / slider.clientWidth);
             if (index !== currentIndex) {
