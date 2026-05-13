@@ -188,9 +188,11 @@
             font-weight: 600;
         }
 
-        /* Слайдер образов в красивой рамке */
+        /* Слайдер – ширина по первому изображению */
         .look-slider-wrapper {
-            max-width: 560px;
+            display: inline-block;
+            width: auto;
+            max-width: 100%;
             margin: 3rem auto 0;
             padding: 0 1.5rem;
         }
@@ -200,31 +202,35 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             position: relative;
             background: transparent;
-            height: 70vh;
-            max-height: 600px;
+            width: auto;
+            height: auto;
         }
         .slides {
             display: flex;
-            height: 100%;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            width: auto;
+            height: auto;
         }
         .slides::-webkit-scrollbar { display: none; }
         .slide {
-            flex: 0 0 100%;
+            flex: 0 0 auto;
             scroll-snap-align: start;
             position: relative;
-            height: 100%;
+            height: auto;
+            width: auto;
         }
         .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
             display: block;
+            width: auto;
+            max-width: 90vw;        /* не шире экрана */
+            height: auto;
+            max-height: 70vh;       /* не выше 70% экрана */
+            object-fit: contain;
             background: #f8f5f0;
             border: none;
         }
@@ -282,7 +288,7 @@
             background-repeat: repeat-y;
             background-position: center;
             transform: translateX(-50%);
-            opacity: 0.8;          /* лёгкая прозрачность для изящности */
+            opacity: 0.8;
         }
         .timeline-item {
             display: flex;
@@ -337,7 +343,7 @@
         }
         .timeline-content p { font-family: 'Lora', serif; font-size: 0.95rem; }
 
-        /* Локация (теперь в самом низу) */
+        /* Локация */
         .location {
             text-align: center;
             background: var(--accent-light);
@@ -521,10 +527,13 @@
             .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
-            .look-slider-frame { height: 55vh; max-height: 450px; }
+            .slide img {
+                max-height: 60vh;
+                max-width: 95vw;
+            }
             .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
             .timeline::before {
-                left: 20px;               /* смещаем волнистую линию влево */
+                left: 20px;
                 transform: translateX(0);
                 background-position: left center;
             }
@@ -556,7 +565,9 @@
             .countdown-item { padding: 0.7rem 0.8rem; }
             .countdown-number { font-size: 1.5rem; }
             .countdown-label { font-size: 0.7rem; }
-            .look-slider-frame { height: 50vh; max-height: 350px; }
+            .slide img {
+                max-height: 50vh;
+            }
         }
     </style>
 </head>
@@ -604,8 +615,8 @@
         </div>
     </section>
 
-    <!-- СЛАЙДЕР ОБРАЗОВ (уже на 30%, бесконечный) -->
-    <section style="background: var(--accent-light); padding: 0;">
+    <!-- СЛАЙДЕР ОБРАЗОВ (ширина по первой картинке) -->
+    <section style="background: var(--accent-light); padding: 0; text-align: center;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
                 <div class="slides" id="slides-container">
@@ -642,7 +653,7 @@
             <div class="story-content">
                 <div class="story-images">
                     <img src="https://photocentra.ru/images/main119/1191683_main.jpg" alt="море">
-                    <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363де0e73a85e7cc692842.jpg" alt="кольца">
+                    <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363de0e73a85e7cc692842.jpg" alt="кольца">
                 </div>
                 <div class="story-text">
                     <p>Скоро напишу...</p>
@@ -789,7 +800,7 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // === Бесконечный слайдер ===
+        // === Бесконечный слайдер (ширина по первому изображению) ===
         const slidesContainer = document.getElementById('slides-container');
         const originalSlides = document.querySelectorAll('#slides-container > .slide');
         const totalOriginals = originalSlides.length;
@@ -804,10 +815,11 @@
 
         const allSlides = document.querySelectorAll('#slides-container > .slide');
 
-        const slideWidth = () => slidesContainer.clientWidth;
+        const slideWidth = () => allSlides[1].clientWidth; // ширина реального первого слайда (индекс 1)
+        // Инициализация: скроллим ко второму слайду (индекс 1), который является реальным первым
         slidesContainer.scrollLeft = slideWidth();
 
-        // Создаём точки
+        // Создаём точки (только под оригинальные слайды)
         for (let i = 0; i < totalOriginals; i++) {
             const dot = document.createElement('span');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -825,6 +837,7 @@
 
         function goToRealIndex(realIndex) {
             currentRealIndex = realIndex;
+            // Скроллим к слайду с учётом клона в начале (индекс realIndex+1)
             slidesContainer.scrollTo({
                 left: slideWidth() * (realIndex + 1),
                 behavior: 'smooth'
@@ -842,16 +855,19 @@
             goToRealIndex(currentRealIndex);
         }
 
+        // Бесконечный переход после завершения скролла
         slidesContainer.addEventListener('scrollend', () => {
             const scrollPos = slidesContainer.scrollLeft;
             const width = slideWidth();
             const index = Math.round(scrollPos / width);
 
             if (index === 0) {
+                // На клоне первого, прыгаем на реальный последний
                 slidesContainer.scrollLeft = width * totalOriginals;
                 currentRealIndex = totalOriginals - 1;
                 updateDots(currentRealIndex);
             } else if (index === totalOriginals + 1) {
+                // На клоне последнего, прыгаем на реальный первый
                 slidesContainer.scrollLeft = width;
                 currentRealIndex = 0;
                 updateDots(currentRealIndex);
