@@ -277,8 +277,15 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 6px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='20' viewBox='0 0 6 20'%3E%3Cpath d='M3 0 Q6 5 3 10 Q0 15 3 20' fill='none' stroke='%23738678' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            width: 12px;                       /* чуть шире для двойной линии */
+            background: transparent;
+            background-image: 
+        /* верхняя волна */
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='30' viewBox='0 0 12 30'%3E%3Cpath d='M6 0 Q9 7.5 6 15 Q3 22.5 6 30' fill='none' stroke='%23738678' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
+        /* нижняя волна (смещена по фазе) */
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='30' viewBox='0 0 12 30'%3E%3Cpath d='M6 0 Q3 7.5 6 15 Q9 22.5 6 30' fill='none' stroke='%23738678' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
+        /* точки между волнами */
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='30' viewBox='0 0 12 30'%3E%3Ccircle cx='6' cy='7.5' r='2' fill='%23738678'/%3E%3Ccircle cx='6' cy='22.5' r='2' fill='%23738678'/%3E%3C/svg%3E");
             background-repeat: repeat-y;
             background-position: center;
             transform: translateX(-50%);
