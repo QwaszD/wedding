@@ -190,7 +190,7 @@
 
         /* Слайдер образов в красивой рамке */
         .look-slider-wrapper {
-            max-width: 800px;
+            max-width: 560px;
             margin: 3rem auto 0;
             padding: 0 1.5rem;
         }
@@ -223,22 +223,10 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain;       /* теперь обрезки не будет */
+            object-fit: contain;
             display: block;
-            background: #f8f5f0;       /* поля станут такого же цвета, как фон сайта */
-        }
-        .slide .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            color: #fff;
-            padding: 2rem 1.5rem 1.5rem;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-style: italic;
-            text-align: center;
+            background: #f8f5f0;
+            border: none;
         }
         .slider-btn {
             position: absolute;
@@ -289,10 +277,12 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 1px;
-            background: var(--accent);
-            opacity: 0.3;
+            width: 6px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='20' viewBox='0 0 6 20'%3E%3Cpath d='M3 0 Q6 5 3 10 Q0 15 3 20' fill='none' stroke='%23738678' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: repeat-y;
+            background-position: center;
             transform: translateX(-50%);
+            opacity: 0.8;          /* лёгкая прозрачность для изящности */
         }
         .timeline-item {
             display: flex;
@@ -532,9 +522,12 @@
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
             .look-slider-frame { height: 55vh; max-height: 450px; }
-            .slide .caption { font-size: 1.4rem; padding: 1.5rem 1rem; }
             .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
-            .timeline::before { left: 20px; }
+            .timeline::before {
+                left: 20px;               /* смещаем волнистую линию влево */
+                transform: translateX(0);
+                background-position: left center;
+            }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
                 align-items: flex-start;
@@ -564,7 +557,6 @@
             .countdown-number { font-size: 1.5rem; }
             .countdown-label { font-size: 0.7rem; }
             .look-slider-frame { height: 50vh; max-height: 350px; }
-            .slide .caption { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -612,26 +604,16 @@
         </div>
     </section>
 
-    <!-- СЛАЙДЕР ОБРАЗОВ (В РАМКЕ) -->
+    <!-- СЛАЙДЕР ОБРАЗОВ (уже на 30%, бесконечный) -->
     <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
-                <div class="slides">
-                    <div class="slide">
-                        <img src="https://i.pinimg.com/originals/c6/ec/f8/c6ecf865b6cf44a21c26ba57bde0d035.jpg?nii=t" alt="Небесный шифон">
-                                            </div>
-                    <div class="slide">
-                        <img src="https://i.pinimg.com/474x/88/38/19/8838197f839916a0e58b131cb2812982.jpg?nii=t" alt="Персиковая нежность">
-                    </div>
-                    <div class="slide">
-                        <img src="https://i.pinimg.com/originals/ba/d2/fa/bad2fab7be828dff4e1b2372fcfa99e6.jpg" alt="Шампань и золото">
-                    </div>
-                    <div class="slide">
-                        <img src="https://i.pinimg.com/736x/2d/f4/91/2df4915c1087096e40ea19ad14c91c53.jpg" alt="Пыльно-розовый">
-                    </div>
-                    <div class="slide">
-                        <img src="https://avatars.mds.yandex.net/i?id=d5af1673b4314dd03c882e1fc493fa4e_l-7716469-images-thumbs&n=13" alt="Светлый лён">
-                    </div>
+                <div class="slides" id="slides-container">
+                    <div class="slide"><img src="https://i.pinimg.com/originals/c6/ec/f8/c6ecf865b6cf44a21c26ba57bde0d035.jpg?nii=t" alt="Небесный шифон"></div>
+                    <div class="slide"><img src="https://i.pinimg.com/474x/88/38/19/8838197f839916a0e58b131cb2812982.jpg?nii=t" alt="Персиковая нежность"></div>
+                    <div class="slide"><img src="https://i.pinimg.com/originals/ba/d2/fa/bad2fab7be828dff4e1b2372fcfa99e6.jpg" alt="Шампань и золото"></div>
+                    <div class="slide"><img src="https://i.pinimg.com/736x/2d/f4/91/2df4915c1087096e40ea19ad14c91c53.jpg" alt="Пыльно-розовый"></div>
+                    <div class="slide"><img src="https://avatars.mds.yandex.net/i?id=d5af1673b4314dd03c882e1fc493fa4e_l-7716469-images-thumbs&n=13" alt="Светлый лён"></div>
                 </div>
                 <button class="slider-btn prev" onclick="prevSlide()">❮</button>
                 <button class="slider-btn next" onclick="nextSlide()">❯</button>
@@ -660,7 +642,7 @@
             <div class="story-content">
                 <div class="story-images">
                     <img src="https://photocentra.ru/images/main119/1191683_main.jpg" alt="море">
-                    <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363de0e73a85e7cc692842.jpg" alt="кольца">
+                    <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363де0e73a85e7cc692842.jpg" alt="кольца">
                 </div>
                 <div class="story-text">
                     <p>Скоро напишу...</p>
@@ -754,31 +736,24 @@
         </div>
     </section>
 
-   <!-- ЛОКАЦИЯ С КАРТОЙ -->
-<section class="location">
-    <div class="container">
-        <h2>Локация</h2>
-        <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
-
-        <!-- Интерактивная карта Яндекс -->
-        <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
-            <iframe 
-                src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5"
-                width="100%" 
-                height="350" 
-                frameborder="0" 
-                allowfullscreen="true" 
-                style="border-radius: 20px; display: block;">
-            </iframe>
+    <!-- ЛОКАЦИЯ С КАРТОЙ -->
+    <section class="location">
+        <div class="container">
+            <h2>Локация</h2>
+            <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
+            <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+                <iframe 
+                    src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5"
+                    width="100%" height="350" frameborder="0" allowfullscreen="true" 
+                    style="border-radius: 20px; display: block;">
+                </iframe>
+            </div>
+            <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" 
+               target="_blank" class="btn">
+               Открыть в Яндекс.Картах →
+            </a>
         </div>
-
-        <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" 
-           target="_blank" 
-           class="btn">
-           Открыть в Яндекс.Картах →
-        </a>
-    </div>
-</section>
+    </section>
 
     <footer>
         <p>С любовью, Ксения и Никита</p>
@@ -814,48 +789,75 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // Слайдер образов
-        const slider = document.querySelector('#look-slider .slides');
-        const slides = document.querySelectorAll('#look-slider .slide');
+        // === Бесконечный слайдер ===
+        const slidesContainer = document.getElementById('slides-container');
+        const originalSlides = document.querySelectorAll('#slides-container > .slide');
+        const totalOriginals = originalSlides.length;
         const dotsContainer = document.getElementById('dots');
-        let currentIndex = 0;
+        let currentRealIndex = 0;
 
-        function updateSlider() {
-            slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
-            document.querySelectorAll('#look-slider .dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-        }
+        // Клонируем первый и последний слайды
+        const firstClone = originalSlides[0].cloneNode(true);
+        const lastClone = originalSlides[totalOriginals - 1].cloneNode(true);
+        slidesContainer.appendChild(firstClone);   // в конец
+        slidesContainer.insertBefore(lastClone, slidesContainer.firstChild); // в начало
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-        }
+        const allSlides = document.querySelectorAll('#slides-container > .slide');
 
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-        }
+        const slideWidth = () => slidesContainer.clientWidth;
+        slidesContainer.scrollLeft = slideWidth();
 
         // Создаём точки
-        slides.forEach((_, i) => {
+        for (let i = 0; i < totalOriginals; i++) {
             const dot = document.createElement('span');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
             dot.addEventListener('click', () => {
-                currentIndex = i;
-                updateSlider();
+                goToRealIndex(i);
             });
             dotsContainer.appendChild(dot);
-        });
+        }
 
-        // Синхронизация при ручной прокрутке
-        slider.addEventListener('scroll', () => {
-            const index = Math.round(slider.scrollLeft / slider.clientWidth);
-            if (index !== currentIndex) {
-                currentIndex = index;
-                document.querySelectorAll('#look-slider .dot').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === currentIndex);
-                });
+        function updateDots(realIndex) {
+            document.querySelectorAll('#dots .dot').forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === realIndex);
+            });
+        }
+
+        function goToRealIndex(realIndex) {
+            currentRealIndex = realIndex;
+            slidesContainer.scrollTo({
+                left: slideWidth() * (realIndex + 1),
+                behavior: 'smooth'
+            });
+            updateDots(realIndex);
+        }
+
+        function nextSlide() {
+            currentRealIndex = (currentRealIndex + 1) % totalOriginals;
+            goToRealIndex(currentRealIndex);
+        }
+
+        function prevSlide() {
+            currentRealIndex = (currentRealIndex - 1 + totalOriginals) % totalOriginals;
+            goToRealIndex(currentRealIndex);
+        }
+
+        slidesContainer.addEventListener('scrollend', () => {
+            const scrollPos = slidesContainer.scrollLeft;
+            const width = slideWidth();
+            const index = Math.round(scrollPos / width);
+
+            if (index === 0) {
+                slidesContainer.scrollLeft = width * totalOriginals;
+                currentRealIndex = totalOriginals - 1;
+                updateDots(currentRealIndex);
+            } else if (index === totalOriginals + 1) {
+                slidesContainer.scrollLeft = width;
+                currentRealIndex = 0;
+                updateDots(currentRealIndex);
+            } else {
+                currentRealIndex = index - 1;
+                updateDots(currentRealIndex);
             }
         });
     </script>
