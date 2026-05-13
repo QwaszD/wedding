@@ -188,11 +188,9 @@
             font-weight: 600;
         }
 
-        /* Слайдер – ширина по первому изображению */
+        /* Слайдер образов – простой, без бесконечности, ширина 600px */
         .look-slider-wrapper {
-            display: inline-block;
-            width: auto;
-            max-width: 100%;
+            max-width: 600px;
             margin: 3rem auto 0;
             padding: 0 1.5rem;
         }
@@ -202,35 +200,31 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             position: relative;
             background: transparent;
-            width: auto;
-            height: auto;
+            height: 70vh;
+            max-height: 600px;
         }
         .slides {
             display: flex;
+            height: 100%;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            width: auto;
-            height: auto;
         }
         .slides::-webkit-scrollbar { display: none; }
         .slide {
-            flex: 0 0 auto;
+            flex: 0 0 100%;
             scroll-snap-align: start;
             position: relative;
-            height: auto;
-            width: auto;
+            height: 100%;
         }
         .slide img {
-            display: block;
-            width: auto;
-            max-width: 90vw;        /* не шире экрана */
-            height: auto;
-            max-height: 70vh;       /* не выше 70% экрана */
+            width: 100%;
+            height: 100%;
             object-fit: contain;
+            display: block;
             background: #f8f5f0;
             border: none;
         }
@@ -527,10 +521,7 @@
             .hero .date-big { font-size: 2rem; letter-spacing: 3px; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
-            .slide img {
-                max-height: 60vh;
-                max-width: 95vw;
-            }
+            .look-slider-frame { height: 55vh; max-height: 450px; }
             .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
             .timeline::before {
                 left: 20px;
@@ -565,9 +556,7 @@
             .countdown-item { padding: 0.7rem 0.8rem; }
             .countdown-number { font-size: 1.5rem; }
             .countdown-label { font-size: 0.7rem; }
-            .slide img {
-                max-height: 50vh;
-            }
+            .look-slider-frame { height: 50vh; max-height: 350px; }
         }
     </style>
 </head>
@@ -615,8 +604,8 @@
         </div>
     </section>
 
-    <!-- СЛАЙДЕР ОБРАЗОВ (ширина по первой картинке) -->
-    <section style="background: var(--accent-light); padding: 0; text-align: center;">
+    <!-- СЛАЙДЕР ОБРАЗОВ (простой, ширина 600px) -->
+    <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
                 <div class="slides" id="slides-container">
@@ -800,80 +789,48 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // === Бесконечный слайдер (ширина по первому изображению) ===
-        const slidesContainer = document.getElementById('slides-container');
-        const originalSlides = document.querySelectorAll('#slides-container > .slide');
-        const totalOriginals = originalSlides.length;
+        // Простой слайдер образов (без бесконечности)
+        const slider = document.querySelector('#look-slider .slides');
+        const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
-        let currentRealIndex = 0;
+        let currentIndex = 0;
 
-        // Клонируем первый и последний слайды
-        const firstClone = originalSlides[0].cloneNode(true);
-        const lastClone = originalSlides[totalOriginals - 1].cloneNode(true);
-        slidesContainer.appendChild(firstClone);   // в конец
-        slidesContainer.insertBefore(lastClone, slidesContainer.firstChild); // в начало
-
-        const allSlides = document.querySelectorAll('#slides-container > .slide');
-
-        const slideWidth = () => allSlides[1].clientWidth; // ширина реального первого слайда (индекс 1)
-        // Инициализация: скроллим ко второму слайду (индекс 1), который является реальным первым
-        slidesContainer.scrollLeft = slideWidth();
-
-        // Создаём точки (только под оригинальные слайды)
-        for (let i = 0; i < totalOriginals; i++) {
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => {
-                goToRealIndex(i);
+        function updateSlider() {
+            slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
+            document.querySelectorAll('#look-slider .dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
             });
-            dotsContainer.appendChild(dot);
-        }
-
-        function updateDots(realIndex) {
-            document.querySelectorAll('#dots .dot').forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === realIndex);
-            });
-        }
-
-        function goToRealIndex(realIndex) {
-            currentRealIndex = realIndex;
-            // Скроллим к слайду с учётом клона в начале (индекс realIndex+1)
-            slidesContainer.scrollTo({
-                left: slideWidth() * (realIndex + 1),
-                behavior: 'smooth'
-            });
-            updateDots(realIndex);
         }
 
         function nextSlide() {
-            currentRealIndex = (currentRealIndex + 1) % totalOriginals;
-            goToRealIndex(currentRealIndex);
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
         }
 
         function prevSlide() {
-            currentRealIndex = (currentRealIndex - 1 + totalOriginals) % totalOriginals;
-            goToRealIndex(currentRealIndex);
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
         }
 
-        // Бесконечный переход после завершения скролла
-        slidesContainer.addEventListener('scrollend', () => {
-            const scrollPos = slidesContainer.scrollLeft;
-            const width = slideWidth();
-            const index = Math.round(scrollPos / width);
+        // Создаём точки
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSlider();
+            });
+            dotsContainer.appendChild(dot);
+        });
 
-            if (index === 0) {
-                // На клоне первого, прыгаем на реальный последний
-                slidesContainer.scrollLeft = width * totalOriginals;
-                currentRealIndex = totalOriginals - 1;
-                updateDots(currentRealIndex);
-            } else if (index === totalOriginals + 1) {
-                // На клоне последнего, прыгаем на реальный первый
-                slidesContainer.scrollLeft = width;
-                currentRealIndex = 0;
-                updateDots(currentRealIndex);
-            } else {
-                currentRealIndex = index - 1;
-                updateDots(currentRealIndex);
+        // Синхронизация при ручной прокрутке
+        slider.addEventListener('scroll', () => {
+            const index = Math.round(slider.scrollLeft / slider.clientWidth);
+            if (index !== currentIndex) {
+                currentIndex = index;
+                document.querySelectorAll('#look-slider .dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
             }
         });
     </script>
