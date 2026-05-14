@@ -96,14 +96,19 @@
             margin: 0 0.3rem;
         }
 
-        /* Календарик */
+        /* Календарик – ширина как у таймера */
+        .calendar-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
         .calendar-mini {
-            display: inline-block;
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.08);
             padding: 1.5rem 1.2rem;
-            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 360px;    /* примерно ширина таймера в ряд */
             opacity: 0;
             animation: fadeUp 1s ease 0.5s forwards;
         }
@@ -113,6 +118,7 @@
             font-weight: 600;
             color: var(--accent);
             margin-bottom: 0.8rem;
+            text-align: center;
         }
         .calendar-mini table {
             border-collapse: collapse;
@@ -130,12 +136,13 @@
         .calendar-mini td {
             font-family: 'Lora', serif;
             font-size: 0.9rem;
-            padding: 0.3rem 0.5rem;
+            padding: 0;
             text-align: center;
             color: var(--text);
-            border-radius: 50%;
             width: 2rem;
             height: 2rem;
+            line-height: 2rem;
+            border-radius: 50%;
             transition: all 0.2s;
         }
         .calendar-mini td.heart-day {
@@ -319,12 +326,10 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 6px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='20' viewBox='0 0 6 20'%3E%3Cpath d='M3 0 Q6 5 3 10 Q0 15 3 20' fill='none' stroke='%23738678' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: repeat-y;
-            background-position: center;
+            width: 1px;
+            background: var(--accent);
             transform: translateX(-50%);
-            opacity: 0.8;
+            opacity: 0.5;
         }
         .timeline-item {
             display: flex;
@@ -560,7 +565,7 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 3.8rem; }
-            .calendar-mini { padding: 1rem 0.8rem; }
+            .calendar-mini { max-width: 320px; }
             .countdown-item { padding: 0.8rem 1rem; min-width: 60px; }
             .countdown-number { font-size: 1.8rem; }
             .look-slider-frame { height: 55vh; max-height: 450px; }
@@ -568,15 +573,23 @@
             .timeline::before {
                 left: 20px;
                 transform: translateX(0);
-                background-position: left center;
             }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; }
+            .timeline-time {
+                text-align: left;
+                padding-left: 3rem;
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+            }
             .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; }
-            .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); }
+            .timeline-content {
+                margin-left: 3rem !important;
+                margin-right: 0 !important;
+                width: calc(100% - 40px);
+            }
             .timeline-dot { display: none; }
             .two-cols { flex-direction: column; align-items: center; }
             .story .story-content { flex-direction: column; }
@@ -604,21 +617,23 @@
             </p>
             <h1>Ксения <span>&</span> Никита</h1>
 
-            <!-- Календарик -->
-            <div class="calendar-mini">
-                <div class="month-year">Сентябрь 2026</div>
-                <table>
-                    <thead>
-                        <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
-                        <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
-                        <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-                        <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-                        <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
-                    </tbody>
-                </table>
+            <!-- Календарик по ширине таймера -->
+            <div class="calendar-wrapper">
+                <div class="calendar-mini">
+                    <div class="month-year">Сентябрь 2026</div>
+                    <table>
+                        <thead>
+                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                            <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                            <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+                            <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+                            <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="countdown" id="countdown">
@@ -672,7 +687,7 @@
         </div>
     </section>
 
-    <!-- ПРОГРАММА ДНЯ -->
+    <!-- ПРОГРАММА ДНЯ (прямая линия) -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
