@@ -25,7 +25,6 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* НОВОЕ: тёмное звёздное небо */
         body {
             font-family: 'Lora', serif;
             background: radial-gradient(ellipse at center, #0a0f2a 0%, #03050b 100%);
@@ -36,9 +35,8 @@
             position: relative;
         }
 
-        /* НОВОЕ: мерцающие звёзды (золотистые) */
-        body::before {
-            content: '';
+        /* Контейнер для звёзд (генерируются JS) */
+        .stars-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -46,55 +44,21 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
-            box-shadow: 
-                10px 20px 2px 1px rgba(255,215,0,0.8),
-                80px 120px 1px 1px rgba(255,215,0,0.9),
-                150px 40px 2px 1px rgba(255,200,0,0.6),
-                250px 300px 1px 1px rgba(255,220,0,0.8),
-                400px 80px 2px 1px rgba(255,215,0,0.7),
-                550px 200px 1px 1px rgba(255,200,0,0.9),
-                700px 50px 2px 1px rgba(255,215,0,0.6),
-                850px 350px 1px 1px rgba(255,220,0,0.8),
-                100px 500px 2px 1px rgba(255,200,0,0.7),
-                300px 600px 1px 1px rgba(255,215,0,0.9),
-                500px 700px 2px 1px rgba(255,220,0,0.6),
-                750px 800px 1px 1px rgba(255,215,0,0.8),
-                950px 200px 2px 1px rgba(255,200,0,0.7),
-                1100px 450px 1px 1px rgba(255,215,0,0.9),
-                1300px 600px 2px 1px rgba(255,220,0,0.6),
-                50px 900px 1px 1px rgba(255,215,0,0.8),
-                400px 1000px 2px 1px rgba(255,200,0,0.7),
-                800px 950px 1px 1px rgba(255,215,0,0.9),
-                1200px 850px 2px 1px rgba(255,220,0,0.6),
-                1600px 300px 1px 1px rgba(255,215,0,0.8),
-                20px 60px 0px 0px rgba(255,230,100,0.6),
-                90px 200px 0px 0px rgba(255,230,100,0.5),
-                210px 150px 0px 0px rgba(255,230,100,0.7),
-                330px 400px 0px 0px rgba(255,230,100,0.4),
-                470px 50px 0px 0px rgba(255,230,100,0.6),
-                600px 250px 0px 0px rgba(255,230,100,0.5),
-                730px 550px 0px 0px rgba(255,230,100,0.7),
-                880px 120px 0px 0px rgba(255,230,100,0.4),
-                1020px 700px 0px 0px rgba(255,230,100,0.6),
-                1150px 300px 0px 0px rgba(255,230,100,0.5),
-                1280px 800px 0px 0px rgba(255,230,100,0.7),
-                1420px 150px 0px 0px rgba(255,230,100,0.4),
-                1550px 500px 0px 0px rgba(255,230,100,0.6),
-                1700px 900px 0px 0px rgba(255,230,100,0.5),
-                60px 1100px 0px 0px rgba(255,230,100,0.7),
-                350px 1200px 0px 0px rgba(255,230,100,0.4),
-                650px 1050px 0px 0px rgba(255,230,100,0.6),
-                900px 1300px 0px 0px rgba(255,230,100,0.5),
-                1450px 1100px 0px 0px rgba(255,230,100,0.7);
-            animation: twinkle 4s infinite alternate;
+            overflow: hidden;
         }
-
+        .star {
+            position: absolute;
+            background-color: #ffd700;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle infinite alternate;
+        }
         @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* НОВОЕ: падающие звёзды (тонкие, короткие, из разных мест) */
+        /* Падающие звёзды (метеоры) */
         .shooting-stars {
             position: fixed;
             top: 0;
@@ -716,6 +680,9 @@
 </head>
 <body>
 
+    <!-- Контейнер для мерцающих звёзд (заполняется JS) -->
+    <div class="stars-container" id="starsContainer"></div>
+
     <!-- Падающие звёзды -->
     <div class="shooting-stars">
         <div class="meteor"></div>
@@ -728,7 +695,7 @@
         <div class="meteor"></div>
     </div>
 
-    <!-- HERO (оригинальная структура) -->
+    <!-- ВСЁ ОСТАЛЬНОЕ - ОРИГИНАЛЬНАЯ СТРУКТУРА -->
     <section class="hero">
         <div class="container">
             <p class="invitation-text">
@@ -736,8 +703,6 @@
                 Мы верим и надеемся, что этот день станет красивым началом долгой и счастливой жизни.
             </p>
             <h1>Ксения and Никита</h1>
-
-            <!-- Календарик -->
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
@@ -746,7 +711,7 @@
                             <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                            <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
                             <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
                             <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
                             <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
@@ -755,7 +720,6 @@
                     </table>
                 </div>
             </div>
-
             <div class="countdown" id="countdown">
                 <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
@@ -765,7 +729,6 @@
         </div>
     </section>
 
-    <!-- ДРЕСС-КОД -->
     <section class="dress-code">
         <div class="container">
             <h2>Дресс-код</h2>
@@ -789,7 +752,6 @@
         </div>
     </section>
 
-    <!-- СЛАЙДЕР ОБРАЗОВ -->
     <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
@@ -809,7 +771,6 @@
         </div>
     </section>
 
-    <!-- ПРОГРАММА ДНЯ -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
@@ -822,7 +783,6 @@
         </div>
     </section>
 
-    <!-- ИСТОРИЯ ЛЮБВИ -->
     <section class="story">
         <div class="container">
             <h2>Наша история</h2>
@@ -838,7 +798,6 @@
         </div>
     </section>
 
-    <!-- НЕСКОЛЬКО ПРОСЬБ -->
     <section class="wishes">
         <div class="container">
             <h2>Несколько просьб</h2>
@@ -855,7 +814,6 @@
         </div>
     </section>
 
-    <!-- ФОРМА -->
     <section class="rsvp">
         <div class="container">
             <h2>Вы с нами?</h2>
@@ -906,7 +864,6 @@
         </div>
     </section>
 
-    <!-- КОНТАКТЫ -->
     <section class="contacts">
         <div class="container">
             <h2>Контакты</h2>
@@ -923,7 +880,6 @@
         </div>
     </section>
 
-    <!-- ЛОКАЦИЯ С КАРТОЙ -->
     <section class="location">
         <div class="container">
             <h2>Локация</h2>
@@ -1018,6 +974,26 @@
                 });
             }
         });
+
+        // Генерация мерцающих звёзд
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            const starCount = 250; // количество звёзд
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 1; // размер от 1px до 4px
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                const duration = Math.random() * 3 + 1; // длительность мерцания от 1 до 4 секунд
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(star);
+            }
+        }
+        generateStars();
     </script>
 </body>
 </html>
