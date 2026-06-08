@@ -34,6 +34,108 @@
             position: relative;
         }
 
+        /* ПРЕЛОАДЕР (конверт) */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #0a0f2a 0%, #03050b 100%);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* Конверт */
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #fdf8f0;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,200,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .envelope:hover {
+            transform: scale(1.02);
+        }
+        /* Линии конверта */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.02) 50%);
+            pointer-events: none;
+            border-radius: 12px;
+        }
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: #fdf8f0;
+            border-bottom: 2px solid #e8d8c0;
+            border-radius: 12px 12px 0 0;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        }
+        /* Круглая печать (кнопка) */
+        .stamp {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: #d4b58c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25), inset 0 1px 2px rgba(255,255,200,0.8);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 10;
+        }
+        .stamp:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .stamp img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Анимация появления */
+        .preloader {
+            animation: fadeInPreloader 0.8s ease;
+        }
+        @keyframes fadeInPreloader {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ОСНОВНОЙ КОНТЕНТ (изначально виден, но перекрыт прелоадером) */
+        .main-content {
+            opacity: 1;
+            transition: opacity 0.2s;
+        }
+
+        /* Далее все ваши стили для звёзд, метеоров, блоков (они уже есть) */
         .stars-container {
             position: fixed;
             top: 0;
@@ -664,195 +766,209 @@
 </head>
 <body>
 
-    <div class="stars-container" id="starsContainer"></div>
-
-    <div class="shooting-stars">
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
+    <!-- ПРЕЛОАДЕР: конверт с печатью -->
+    <div class="preloader" id="preloader">
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="stamp" id="stampButton">
+                <img src="logo_wedding.png" alt="Логотип">>
+            </div>
+        </div>
     </div>
 
-    <section class="hero">
-        <div class="container">
-            <p class="invitation-text">
-                Будто все складывалось именно так, как должно было сложиться.<br>
-                А мы лишь раз за разом выбирали друг друга.
-            </p>
-            <h1>Ксения and Никита</h1>
-            <div class="calendar-wrapper">
-                <div class="calendar-mini">
-                    <div class="month-year">Сентябрь 2026</div>
-                    <table>
-                        <thead>
-                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
-                            <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
-                            <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-                            <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-                            <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="countdown" id="countdown">
-                <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
-                <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
-                <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">минут</div></div>
-                <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">секунд</div></div>
-            </div>
-        </div>
-    </section>
+    <!-- ОСНОВНОЙ КОНТЕНТ (изначально виден под прелоадером) -->
+    <div class="main-content">
+        <div class="stars-container" id="starsContainer"></div>
 
-    <section class="dress-code">
-        <div class="container">
-            <h2>Дресс-код</h2>
-            <div class="two-cols">
-                <div class="col">
-                    <h3>Цвета вечера</h3>
-                    <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
-                    <div class="color-palette">
-                        <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8e5da, #c8dac9);">
-                        <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c9e0e8, #b6cfdb);">
-                        <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fcf5e0, #faeec8);">
-                        <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f7e0e0, #f0cfcf);">
-                        <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);">
-                        <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2d5c8, #d4c4b3);">
+        <div class="shooting-stars">
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+            <div class="meteor"></div>
+        </div>
+
+        <section class="hero">
+            <div class="container">
+                <p class="invitation-text">
+                    Будто все складывалось именно так, как должно было сложиться.<br>
+                    А мы лишь раз за разом выбирали друг друга.
+                </p>
+                <h1>Ксения and Никита</h1>
+                <div class="calendar-wrapper">
+                    <div class="calendar-mini">
+                        <div class="month-year">Сентябрь 2026</div>
+                        <table>
+                            <thead>
+                                <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                                <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                                <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+                                <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+                                <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="col">
-                    <h3>Атмосфера вечера</h3>
-                    <p style="opacity:0.8;">Мы хотим, чтобы каждый чувствовал себя комфортно и свободно. Никакой строгости, только радость и тепло в кругу близких.</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">минут</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">секунд</div></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section style="background: var(--accent-light); padding: 0;">
-        <div class="look-slider-wrapper">
-            <div class="look-slider-frame" id="look-slider">
-                <div class="slides" id="slides-container">
-                    <div class="slide"><img src="https://i.pinimg.com/736x/45/35/4e/45354ec0e4e27679df8a299acfe72dbb.jpg"></div>
-                    <div class="slide"><img src="https://i.pinimg.com/736x/50/d9/f5/50d9f55274744952c548d6e276231db3.jpg"></div>
-                    <div class="slide"><img src="https://i.pinimg.com/736x/d7/9e/6c/d79e6c729bc6f4e72ee4f5564cbb3c27.jpg"></div>
-                    <div class="slide"><img src="https://i.pinimg.com/originals/ba/d2/fa/bad2fab7be828dff4e1b2372fcfa99e6.jpg"></div>
-                    <div class="slide"><img src="https://i.pinimg.com/736x/2d/f4/91/2df4915c1087096e40ea19ad14c91c53.jpg"></div>
-                    <div class="slide"><img src="https://avatars.mds.yandex.net/i?id=d5af1673b4314dd03c882e1fc493fa4e_l-7716469-images-thumbs&n=13"></div>
-                    <div class="slide"><img src="https://i.pinimg.com/736x/7a/60/10/7a6010eb117dd96219120809f8b5b44e.jpg"></div>
-                </div>
-                <button class="slider-btn prev" onclick="prevSlide()">❮</button>
-                <button class="slider-btn next" onclick="nextSlide()">❯</button>
-                <div class="dots" id="dots"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="program">
-        <div class="container">
-            <h2>Программа дня</h2>
-            <div class="timeline">
-                <div class="timeline-item"><div class="timeline-time">15:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Сбор гостей, welcome</h3><p>Время пролетит незаметно за игристым.</p></div></div>
-                <div class="timeline-item"><div class="timeline-time">16:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Церемония</h3><p>Вы станете свидетелями создания нашей семьи.</p></div></div>
-                <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Праздничный банкет</h3><p>Основная часть торжества.</p></div></div>
-                <div class="timeline-item"><div class="timeline-time">23:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Торт и дискотека</h3><p>Вкусный торт и танцы до утра.</p></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="story">
-        <div class="container">
-            <h2>Наша история</h2>
-            <div class="story-content">
-                <div class="story-images">
-                    <img src="https://photocentra.ru/images/main119/1191683_main.jpg" alt="море">
-                    <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363de0e73a85e7cc692842.jpg" alt="кольца">
-                </div>
-                <div class="story-text">
-                    <p>Скоро напишу...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="wishes">
-        <div class="container">
-            <h2>Несколько просьб</h2>
-            <div class="cards">
-                <div class="wish-card">
-                    <h3>Цветы</h3>
-                    <p>Живые букеты прекрасны, но, увы, их век короток. Если вы хотите подарить нам цветы, мы будем безмерно тронуты подпиской в любимом цветочном магазине — она позволит нам вспоминать о вас и вашей любви снова и снова, на протяжении долгих месяцев.</p>
-                </div>
-                <div class="wish-card">
-                    <h3>Дети</h3>
-                    <p>Дети — наше общее счастье, и мы это знаем. Однако в этот день нам хочется, чтобы каждый взрослый гость мог полностью расслабиться, не отвлекаясь и не волнуясь. Поэтому мы просим вас подарить этот вечер только себе и прийти без малышей.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="rsvp">
-        <div class="container">
-            <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
-            <form id="rsvp-form" class="rsvp-form"
-                  action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec"
-                  method="POST">
-                <div class="form-group">
-                    <label>ФИО <span>*</span></label>
-                    <input type="text" name="name" placeholder="Напишите ваши ФИО" required>
-                </div>
-                <div class="form-group">
-                    <label>Сможете ли присутствовать?</label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label>
-                        <label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label>
+        <section class="dress-code">
+            <div class="container">
+                <h2>Дресс-код</h2>
+                <div class="two-cols">
+                    <div class="col">
+                        <h3>Цвета вечера</h3>
+                        <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
+                        <div class="color-palette">
+                            <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8e5da, #c8dac9);"></div><span>Светло-зелёный</span></div>
+                            <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c9e0e8, #b6cfdb);"></div><span>Голубой</span></div>
+                            <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fcf5e0, #faeec8);"></div><span>Светло-жёлтый</span></div>
+                            <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f7e0e0, #f0cfcf);"></div><span>Светло-розовый</span></div>
+                            <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);"></div><span>Сиреневый</span></div>
+                            <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2d5c8, #d4c4b3);"></div><span>Светло-коричневый</span></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3>Атмосфера вечера</h3>
+                        <p style="opacity:0.8;">Мы хотим, чтобы каждый чувствовал себя комфортно и свободно. Никакой строгости, только радость и тепло в кругу близких.</p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Нужен ли трансфер?</label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label>
-                        <label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label>
+            </div>
+        </section>
+
+        <section style="background: var(--accent-light); padding: 0;">
+            <div class="look-slider-wrapper">
+                <div class="look-slider-frame" id="look-slider">
+                    <div class="slides" id="slides-container">
+                        <div class="slide"><img src="https://i.pinimg.com/736x/45/35/4e/45354ec0e4e27679df8a299acfe72dbb.jpg"></div>
+                        <div class="slide"><img src="https://i.pinimg.com/736x/50/d9/f5/50d9f55274744952c548d6e276231db3.jpg"></div>
+                        <div class="slide"><img src="https://i.pinimg.com/736x/d7/9e/6c/d79e6c729bc6f4e72ee4f5564cbb3c27.jpg"></div>
+                        <div class="slide"><img src="https://i.pinimg.com/originals/ba/d2/fa/bad2fab7be828dff4e1b2372fcfa99e6.jpg"></div>
+                        <div class="slide"><img src="https://i.pinimg.com/736x/2d/f4/91/2df4915c1087096e40ea19ad14c91c53.jpg"></div>
+                        <div class="slide"><img src="https://avatars.mds.yandex.net/i?id=d5af1673b4314dd03c882e1fc493fa4e_l-7716469-images-thumbs&n=13"></div>
+                        <div class="slide"><img src="https://i.pinimg.com/736x/7a/60/10/7a6010eb117dd96219120809f8b5b44e.jpg"></div>
+                    </div>
+                    <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+                    <button class="slider-btn next" onclick="nextSlide()">❯</button>
+                    <div class="dots" id="dots"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="program">
+            <div class="container">
+                <h2>Программа дня</h2>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-time">15:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Сбор гостей, welcome</h3><p>Время пролетит незаметно за игристым.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-time">16:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Церемония</h3><p>Вы станете свидетелями создания нашей семьи.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Праздничный банкет</h3><p>Основная часть торжества.</p></div></div>
+                    <div class="timeline-item"><div class="timeline-time">23:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Торт и дискотека</h3><p>Вкусный торт и танцы до утра.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="story">
+            <div class="container">
+                <h2>Наша история</h2>
+                <div class="story-content">
+                    <div class="story-images">
+                        <img src="https://photocentra.ru/images/main119/1191683_main.jpg" alt="море">
+                        <img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363de0e73a85e7cc692842.jpg" alt="кольца">
+                    </div>
+                    <div class="story-text">
+                        <p>Скоро напишу...</p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Пару строк для нас (по желанию)</label>
-                    <textarea name="message" rows="3" placeholder="Ваши тёплые слова..."></textarea>
-                </div>
-                <button type="submit" class="btn">Отправить</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="location">
-        <div class="container">
-            <h2>Локация</h2>
-            <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
-            <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
-                <iframe 
-                    src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5"
-                    width="100%" height="350" frameborder="0" allowfullscreen="true" 
-                    style="border-radius: 20px; display: block;">
-                </iframe>
             </div>
-            <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" 
-               target="_blank" class="btn">
-               Открыть в Яндекс.Картах →
-            </a>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>С любовью, Ксения и Никита</p>
-        <p>05.09.2026</p>
-    </footer>
+        <section class="wishes">
+            <div class="container">
+                <h2>Несколько просьб</h2>
+                <div class="cards">
+                    <div class="wish-card">
+                        <h3>Цветы</h3>
+                        <p>Живые букеты прекрасны, но, увы, их век короток. Если вы хотите подарить нам цветы, мы будем безмерно тронуты подпиской в любимом цветочном магазине — она позволит нам вспоминать о вас и вашей любви снова и снова, на протяжении долгих месяцев.</p>
+                    </div>
+                    <div class="wish-card">
+                        <h3>Дети</h3>
+                        <p>Дети — наше общее счастье, и мы это знаем. Однако в этот день нам хочется, чтобы каждый взрослый гость мог полностью расслабиться, не отвлекаясь и не волнуясь. Поэтому мы просим вас подарить этот вечер только себе и прийти без малышей.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rsvp">
+            <div class="container">
+                <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
+                <form id="rsvp-form" class="rsvp-form"
+                      action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec"
+                      method="POST">
+                    <div class="form-group">
+                        <label>ФИО <span>*</span></label>
+                        <input type="text" name="name" placeholder="Напишите ваши ФИО" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Сможете ли присутствовать?</label>
+                        <div class="radio-group">
+                            <label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label>
+                            <label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Нужен ли трансфер?</label>
+                        <div class="radio-group">
+                            <label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label>
+                            <label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Пару строк для нас (по желанию)</label>
+                        <textarea name="message" rows="3" placeholder="Ваши тёплые слова..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="location">
+            <div class="container">
+                <h2>Локация</h2>
+                <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
+                <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+                    <iframe 
+                        src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5"
+                        width="100%" height="350" frameborder="0" allowfullscreen="true" 
+                        style="border-radius: 20px; display: block;">
+                    </iframe>
+                </div>
+                <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" 
+                   target="_blank" class="btn">
+                   Открыть в Яндекс.Картах →
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>С любовью, Ксения и Никита</p>
+            <p>05.09.2026</p>
+        </footer>
+    </div>
 
     <script>
+        // Таймер
         const weddingDate = new Date(2026, 8, 5, 15, 0);
         function updateCountdown() {
             const now = new Date();
@@ -872,6 +988,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // Анимация таймлайна
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -879,6 +996,7 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
+        // Слайдер
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
@@ -920,6 +1038,7 @@
             }
         });
 
+        // Генерация звёзд
         function generateStars() {
             const container = document.getElementById('starsContainer');
             const starCount = 80;
@@ -939,6 +1058,7 @@
         }
         generateStars();
 
+        // Обработка формы
         const form = document.getElementById('rsvp-form');
         if (form) {
             form.addEventListener('submit', async function(e) {
@@ -957,6 +1077,17 @@
                 }
             });
         }
+
+        // ЛОГИКА ПРЕЛОАДЕРА: по клику на печать скрываем конверт
+        const preloader = document.getElementById('preloader');
+        const stamp = document.getElementById('stampButton');
+        stamp.addEventListener('click', function() {
+            preloader.classList.add('hide');
+            // Небольшая задержка, чтобы удалить из дерева после анимации (необязательно)
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 600);
+        });
     </script>
 </body>
 </html>
