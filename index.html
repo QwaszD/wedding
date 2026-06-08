@@ -25,7 +25,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* НОВОЕ: тёмное звёздное небо вместо старого фона */
+        /* НОВОЕ: тёмное звёздное небо */
         body {
             font-family: 'Lora', serif;
             background: radial-gradient(ellipse at center, #0a0f2a 0%, #03050b 100%);
@@ -36,7 +36,7 @@
             position: relative;
         }
 
-        /* НОВОЕ: слой с мерцающими звёздами (множество золотых точек) */
+        /* НОВОЕ: мерцающие звёзды (золотистые) */
         body::before {
             content: '';
             position: fixed;
@@ -67,7 +67,6 @@
                 800px 950px 1px 1px rgba(255,215,0,0.9),
                 1200px 850px 2px 1px rgba(255,220,0,0.6),
                 1600px 300px 1px 1px rgba(255,215,0,0.8),
-                /* мелкие искры */
                 20px 60px 0px 0px rgba(255,230,100,0.6),
                 90px 200px 0px 0px rgba(255,230,100,0.5),
                 210px 150px 0px 0px rgba(255,230,100,0.7),
@@ -95,106 +94,44 @@
             100% { opacity: 1; }
         }
 
-     /* НОВОЕ: падающие звёзды (метеоры) – разные стартовые позиции и углы */
-.shooting-stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-}
-.meteor {
-    position: absolute;
-    width: 180px;
-    height: 1px;                /* тоньше */
-    background: linear-gradient(90deg, #ffd700, rgba(255, 215, 0, 0));
-    border-radius: 50%;
-    filter: blur(1px);
-    opacity: 0;
-}
-@keyframes shootGold {
-    0% {
-        opacity: 0;
-    }
-    5% {
-        opacity: 1;
-        box-shadow: 0 0 6px 1px #ffd700;
-    }
-    15% {
-        opacity: 1;
-        box-shadow: 0 0 10px 2px #ffaa00;
-    }
-    25% {
-        opacity: 0;
-    }
-    100% {
-        transform: translate(2000px, 2000px);
-        opacity: 0;
-    }
-}
+        /* НОВОЕ: падающие звёзды (тонкие, короткие, из разных мест) */
+        .shooting-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .meteor {
+            position: absolute;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 0));
+            border-radius: 50%;
+            filter: blur(0.5px);
+            opacity: 0;
+        }
+        @keyframes shootGold {
+            0% { opacity: 0; }
+            5% { opacity: 0.9; box-shadow: 0 0 4px 1px rgba(255, 215, 0, 0.6); }
+            15% { opacity: 0.9; box-shadow: 0 0 8px 1px rgba(255, 170, 0, 0.5); }
+            25% { opacity: 0; }
+            100% { transform: translate(1500px, 1500px); opacity: 0; }
+        }
+        /* Индивидуальные параметры для каждой звезды */
+        .meteor:nth-child(1) { top: -10px; left: 5%; transform: rotate(35deg); animation: shootGold 7s linear infinite; animation-delay: 0s; }
+        .meteor:nth-child(2) { top: -20px; left: 20%; transform: rotate(50deg); animation: shootGold 9s linear infinite; animation-delay: 2s; }
+        .meteor:nth-child(3) { top: -5px; left: 40%; transform: rotate(42deg); animation: shootGold 6.5s linear infinite; animation-delay: 4s; }
+        .meteor:nth-child(4) { top: -30px; left: 60%; transform: rotate(38deg); animation: shootGold 8s linear infinite; animation-delay: 1s; }
+        .meteor:nth-child(5) { top: -15px; left: 75%; transform: rotate(55deg); animation: shootGold 7.5s linear infinite; animation-delay: 5.5s; }
+        .meteor:nth-child(6) { top: -25px; left: 85%; transform: rotate(45deg); animation: shootGold 10s linear infinite; animation-delay: 3s; }
+        .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
+        .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-/* Каждый метеор – свои координаты, угол и скорость */
-.meteor:nth-child(1) {
-    top: -10px;
-    left: 5%;
-    transform: rotate(35deg);
-    animation: shootGold 7s linear infinite;
-    animation-delay: 0s;
-}
-.meteor:nth-child(2) {
-    top: -20px;
-    left: 20%;
-    transform: rotate(50deg);
-    animation: shootGold 9s linear infinite;
-    animation-delay: 2s;
-}
-.meteor:nth-child(3) {
-    top: -5px;
-    left: 40%;
-    transform: rotate(42deg);
-    animation: shootGold 6.5s linear infinite;
-    animation-delay: 4s;
-}
-.meteor:nth-child(4) {
-    top: -30px;
-    left: 60%;
-    transform: rotate(38deg);
-    animation: shootGold 8s linear infinite;
-    animation-delay: 1s;
-}
-.meteor:nth-child(5) {
-    top: -15px;
-    left: 75%;
-    transform: rotate(55deg);
-    animation: shootGold 7.5s linear infinite;
-    animation-delay: 5.5s;
-}
-.meteor:nth-child(6) {
-    top: -25px;
-    left: 85%;
-    transform: rotate(45deg);
-    animation: shootGold 10s linear infinite;
-    animation-delay: 3s;
-}
-.meteor:nth-child(7) {
-    top: -8px;
-    left: 10%;
-    transform: rotate(48deg);
-    animation: shootGold 6s linear infinite;
-    animation-delay: 7s;
-}
-.meteor:nth-child(8) {
-    top: -18px;
-    left: 50%;
-    transform: rotate(40deg);
-    animation: shootGold 8.5s linear infinite;
-    animation-delay: 1.5s;
-}
-
-        /* НОВОЕ: все блоки со светлым фоном делаем полупрозрачными, чтобы звёзды просвечивали */
+        /* Полупрозрачные блоки, чтобы фон просвечивал */
         .calendar-mini,
         .countdown-item,
         .col,
@@ -203,7 +140,8 @@
         .rsvp-form,
         footer,
         .contact-card,
-        .story .story-text {
+        .story .story-text,
+        .look-slider-frame {
             background-color: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(2px);
         }
@@ -212,23 +150,11 @@
         .contacts {
             background-color: rgba(232, 224, 213, 0.92);
         }
-        /* Для слайдера оставляем прозрачный фон, но сама рамка слайдера остаётся белой */
-        .look-slider-frame {
-            background: rgba(255, 255, 255, 0.92);
-        }
-        /* Убираем лишний фон у секции слайдера */
         section[style*="background: var(--accent-light)"] {
             background: transparent !important;
         }
-        /* Герой остаётся без изменений (у него свой фон) – он перекроет звёзды */
-        .hero {
-            background: linear-gradient(180deg, rgba(248,245,240,0.8) 0%, var(--bg) 100%),
-                        url('https://i.postimg.cc/FzbQSRjx/3d0264beb35eb8a6eb066c87a0ea3f58.jpg');
-            background-size: cover;
-            background-position: center;
-        }
 
-        /* Остальные стили остаются полностью как в вашем оригинале */
+        /* Ваши оригинальные стили (без изменений) */
         h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
@@ -250,6 +176,15 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 4.5rem 0; position: relative; z-index: 2; }
 
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 5rem 0 3.5rem;
+            background: linear-gradient(180deg, rgba(248,245,240,0.8) 0%, var(--bg) 100%),
+                        url('https://i.postimg.cc/FzbQSRjx/3d0264beb35eb8a6eb066c87a0ea3f58.jpg');
+            background-size: cover;
+            background-position: center;
+        }
         .hero .invitation-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -781,19 +716,19 @@
 </head>
 <body>
 
-    <!-- НОВОЕ: слой с падающими звёздами -->
-   <div class="shooting-stars">
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-    <div class="meteor"></div>
-</div>
+    <!-- Падающие звёзды -->
+    <div class="shooting-stars">
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+    </div>
 
-    <!-- HERO -->
+    <!-- HERO (оригинальная структура) -->
     <section class="hero">
         <div class="container">
             <p class="invitation-text">
@@ -802,7 +737,7 @@
             </p>
             <h1>Ксения and Никита</h1>
 
-            <!-- Календарик по ширине таймера -->
+            <!-- Календарик -->
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
@@ -811,7 +746,7 @@
                             <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                            <tr><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
                             <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
                             <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
                             <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
@@ -874,7 +809,7 @@
         </div>
     </section>
 
-    <!-- ПРОГРАММА ДНЯ (прямая линия) -->
+    <!-- ПРОГРАММА ДНЯ -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
@@ -1014,7 +949,7 @@
 
     <script>
         // Таймер
-        const weddingDate = new Date(2026, 8, 5, 15, 0); // сентябрь = 8
+        const weddingDate = new Date(2026, 8, 5, 15, 0);
         function updateCountdown() {
             const now = new Date();
             const diff = weddingDate - now;
