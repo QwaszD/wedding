@@ -25,16 +25,140 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* НОВОЕ: изменяем фон body на тёмное звёздное небо */
         body {
             font-family: 'Lora', serif;
-            background-color: var(--bg);
-            background-image: radial-gradient(circle at 30% 30%, rgba(184,134,11,0.08) 0%, transparent 60%);
+            background: radial-gradient(ellipse at center, #0a0f2a 0%, #03050b 100%);
             color: var(--text);
             line-height: 1.8;
             font-weight: 400;
             overflow-x: hidden;
+            position: relative;
         }
 
+        /* НОВОЕ: слой с мерцающими звёздами (псевдоэлемент) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;  /* чтобы звёзды не мешали кликам */
+            z-index: 0;
+            /* Генерируем множество звёзд через box-shadow */
+            box-shadow: 
+                10px 20px 2px 1px rgba(255,255,200,0.6),
+                80px 120px 1px 1px rgba(255,255,200,0.8),
+                150px 40px 2px 1px rgba(255,255,200,0.5),
+                250px 300px 1px 1px rgba(255,255,200,0.7),
+                400px 80px 2px 1px rgba(255,255,200,0.4),
+                550px 200px 1px 1px rgba(255,255,200,0.9),
+                700px 50px 2px 1px rgba(255,255,200,0.6),
+                850px 350px 1px 1px rgba(255,255,200,0.5),
+                100px 500px 2px 1px rgba(255,255,200,0.7),
+                300px 600px 1px 1px rgba(255,255,200,0.8),
+                500px 700px 2px 1px rgba(255,255,200,0.4),
+                750px 800px 1px 1px rgba(255,255,200,0.9),
+                950px 200px 2px 1px rgba(255,255,200,0.5),
+                1100px 450px 1px 1px rgba(255,255,200,0.6),
+                1300px 600px 2px 1px rgba(255,255,200,0.7),
+                50px 900px 1px 1px rgba(255,255,200,0.8),
+                400px 1000px 2px 1px rgba(255,255,200,0.5),
+                800px 950px 1px 1px rgba(255,255,200,0.9),
+                1200px 850px 2px 1px rgba(255,255,200,0.4),
+                1600px 300px 1px 1px rgba(255,255,200,0.7);
+            animation: twinkle 3s infinite alternate;
+        }
+
+        /* Анимация мерцания для звёзд */
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* НОВОЕ: падающая звезда (метеор) */
+        .shooting-star {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, rgba(255,255,255,0));
+            border-radius: 50%;
+            transform: rotate(45deg);
+            animation: shoot 8s linear infinite;
+            opacity: 0;
+        }
+        @keyframes shoot {
+            0% {
+                transform: translate(0, 0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            20% {
+                opacity: 0;
+            }
+            100% {
+                transform: translate(2000px, 2000px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        /* НОВОЕ: добавляем полупрозрачность основным блокам, чтобы звёзды просвечивали, но текст оставался чётким */
+        .hero .container,
+        .col,
+        .look-slider-frame,
+        .timeline-content,
+        .wish-card,
+        .rsvp-form,
+        .location .btn,
+        footer,
+        .calendar-mini,
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+        }
+
+        /* Для блоков, у которых фон задан через переменную или специально, переопределим */
+        .dress-code {
+            background: rgba(232, 224, 213, 0.92);
+        }
+        .location {
+            background: rgba(232, 224, 213, 0.92);
+        }
+        .contacts {
+            background: rgba(232, 224, 213, 0.92);
+        }
+        /* Сам hero блок оставляем с исходным фоном (изображение), но накладываем поверх звёзд */
+        .hero {
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%),
+                        url('https://i.postimg.cc/FzbQSRjx/3d0264beb35eb8a6eb066c87a0ea3f58.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            z-index: 2;
+        }
+        /* Чтобы текст на hero был ярче, добавим тень */
+        .hero .invitation-text, .hero h1 {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Остальные стили остаются без изменений */
         h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
@@ -54,16 +178,12 @@
         }
 
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-        section { padding: 4.5rem 0; position: relative; }
+        section { padding: 4.5rem 0; position: relative; z-index: 2; }
 
         /* Hero */
         .hero {
             text-align: center;
             padding: 5rem 0 3.5rem;
-            background: linear-gradient(180deg, rgba(248,245,240,0.8) 0%, var(--bg) 100%),
-                url('https://i.postimg.cc/FzbQSRjx/3d0264beb35eb8a6eb066c87a0ea3f58.jpg');
-            background-size: cover;
-            background-position: center;
         }
         .hero .invitation-text {
             font-family: 'Playfair Display', serif;
@@ -71,7 +191,7 @@
             font-size: 1.4rem;
             max-width: 600px;
             margin: 0 auto 2rem;
-            color: #3a3a3a;
+            color: #ffffff;
             font-weight: 500;
             line-height: 1.6;
             opacity: 0;
@@ -84,31 +204,30 @@
             font-weight: 400;
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
-            color: #2c3a2f;
+            color: #ffffff;
             opacity: 0;
             animation: fadeUp 1s ease forwards;
         }
         .hero h1 span {
             font-family: 'Playfair Display', serif;
-            color: var(--accent);
+            color: #ffd966;
             font-size: 3rem;
             vertical-align: middle;
             margin: 0 0.3rem;
         }
 
-        /* Календарик – ширина как у таймера */
+        /* Календарик */
         .calendar-wrapper {
             display: flex;
             justify-content: center;
             margin-top: 1.5rem;
         }
         .calendar-mini {
-            background: var(--white);
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow);
             padding: 1.5rem 1.2rem;
             width: 100%;
-            max-width: 360px;    /* примерно ширина таймера в ряд */
+            max-width: 360px;
             opacity: 0;
             animation: fadeUp 1s ease 0.5s forwards;
         }
@@ -166,7 +285,6 @@
             flex-wrap: wrap;
         }
         .countdown-item {
-            background: var(--white);
             box-shadow: var(--shadow);
             padding: 1rem 1.2rem;
             border-radius: 12px;
@@ -198,7 +316,7 @@
         }
 
         /* Дресс-код */
-        .dress-code { background: var(--accent-light); text-align: center; }
+        .dress-code { text-align: center; }
         .two-cols {
             display: flex;
             justify-content: center;
@@ -209,7 +327,6 @@
         .col {
             flex: 1 1 260px;
             max-width: 320px;
-            background: var(--white);
             padding: 2rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -237,7 +354,7 @@
             font-weight: 600;
         }
 
-        /* Слайдер образов – простой, без бесконечности, ширина 600px */
+        /* Слайдер образов */
         .look-slider-wrapper {
             max-width: 600px;
             margin: 3rem auto 0;
@@ -248,7 +365,7 @@
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             position: relative;
-            background: transparent;
+            background: rgba(255,255,255,0.9);
             height: 70vh;
             max-height: 500px;
         }
@@ -366,7 +483,6 @@
         }
         .timeline-content {
             flex: 2;
-            background: var(--white);
             box-shadow: var(--shadow);
             padding: 1.5rem;
             border-radius: 12px;
@@ -387,7 +503,6 @@
         /* Локация */
         .location {
             text-align: center;
-            background: var(--accent-light);
             padding: 4rem 0;
         }
         .location p { font-family: 'Lora', serif; }
@@ -424,6 +539,9 @@
             line-height: 2;
             text-align: center;
             font-weight: 400;
+            background: rgba(255,255,255,0.92);
+            padding: 2rem;
+            border-radius: 24px;
         }
         .story .story-images {
             flex: 1;
@@ -444,7 +562,6 @@
         /* Просьбы */
         .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
         .wish-card {
-            background: var(--white);
             box-shadow: var(--shadow);
             border-radius: 12px;
             padding: 2rem;
@@ -465,7 +582,6 @@
         .rsvp-form {
             max-width: 600px;
             margin: 0 auto;
-            background: var(--white);
             box-shadow: var(--shadow);
             padding: 3rem;
             border-radius: 12px;
@@ -542,7 +658,7 @@
         .btn:hover { background: #5f6b5e; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
         /* Контакты */
-        .contacts { text-align: center; background: var(--accent-light); }
+        .contacts { text-align: center; }
         .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
         .contact-card { text-align: center; }
         .contact-card h3 {
@@ -559,7 +675,6 @@
             font-size: 0.9rem;
             color: var(--text);
             border-top: 1px solid var(--accent-light);
-            background: var(--white);
             font-family: 'Lora', serif;
         }
 
@@ -608,6 +723,9 @@
 </head>
 <body>
 
+    <!-- НОВОЕ: слой для падающей звезды -->
+    <div class="shooting-star"></div>
+
     <!-- HERO -->
     <section class="hero">
         <div class="container">
@@ -617,7 +735,7 @@
             </p>
             <h1>Ксения and Никита</h1>
 
-            <!-- Календарик по ширине таймера -->
+            <!-- Календарик -->
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
@@ -626,7 +744,7 @@
                             <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                            <tr><td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
                             <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
                             <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
                             <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
@@ -670,7 +788,7 @@
     </section>
 
     <!-- СЛАЙДЕР ОБРАЗОВ -->
-    <section style="background: var(--accent-light); padding: 0;">
+    <section style="background: transparent; padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
                 <div class="slides" id="slides-container">
@@ -689,7 +807,7 @@
         </div>
     </section>
 
-    <!-- ПРОГРАММА ДНЯ (прямая линия) -->
+    <!-- ПРОГРАММА ДНЯ -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
@@ -744,7 +862,7 @@
                         <label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label>
                     </div>
                 </div>
-                    <div class="form-group">
+                <div class="form-group">
                     <label>Аллергии или ограничения в еде</label>
                     <textarea name="allergies" rows="2" placeholder="Если есть, расскажите нам"></textarea>
                 </div>
