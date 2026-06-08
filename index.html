@@ -86,7 +86,8 @@
         .meteor:nth-child(6) { top: -25px; left: 85%; transform: rotate(45deg); animation: shootGold 10s linear infinite; animation-delay: 3s; }
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
-        /* Остальные стили вашего сайта (блоки, календарь, форма) - я их сохранил кратко, но они полностью рабочие */
+
+        /* Стили основного сайта */
         .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text, .look-slider-frame { background-color: rgba(255,255,255,0.92); backdrop-filter: blur(2px); }
         .dress-code, .location, .contacts { background-color: rgba(232,224,213,0.92); }
         section[style*="background: var(--accent-light)"] { background: transparent !important; }
@@ -180,7 +181,7 @@
         @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .look-slider-frame { height: 55vh; max-height: 450px; } .slider-btn { width: 36px; height: 36px; font-size: 1rem; } .timeline::before { left: 20px; transform: translateX(0); } .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; } .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; } .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; } .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); } .timeline-dot { display: none; } .two-cols { flex-direction: column; align-items: center; } .story .story-content { flex-direction: column; } }
         @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } .look-slider-frame { height: 50vh; max-height: 350px; } }
 
-        /* НОВЫЕ СТИЛИ ДЛЯ ПРЕЛОАДЕРА (КОНВЕРТ + ПЕЧАТЬ + АНИМАЦИЯ) */
+        /* ===== ПРЕЛОАДЕР С СИНИМ РАЗЪЕЗЖАЮЩИМСЯ КОНВЕРТОМ ===== */
         .preloader {
             position: fixed;
             top: 0;
@@ -200,70 +201,72 @@
             opacity: 0;
             visibility: hidden;
         }
-        .envelope-container {
+        .envelope {
             position: relative;
-            width: 400px;
+            width: 380px;
             max-width: 80vw;
+            height: 240px;
             cursor: pointer;
-            transform-origin: center center;
+            perspective: 1000px;
         }
-        @keyframes takeOutLetter {
-            0% { transform: translateX(0) rotate(0deg); }
-            20% { transform: translateX(-30px) rotate(-2deg); }
-            40% { transform: translateX(30px) rotate(2deg); }
-            60% { transform: translateX(-15px) rotate(-1deg); }
-            80% { transform: translateX(15px) rotate(1deg); }
-            100% { transform: translateX(0) scale(0.9); opacity: 0; visibility: hidden; }
-        }
-        .envelope-container.animate {
-            animation: takeOutLetter 0.8s ease forwards;
-        }
-        .envelope-img {
-            width: 100%;
-            display: block;
-            border-radius: 16px;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
-        }
-        .stamp {
+        .envelope-top {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 110px;
-            height: 110px;
-            background: radial-gradient(circle at 30% 30%, #c0392b, #922b21);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: #21283b;
+            border-right: 1px solid #3a445c;
+            border-radius: 12px 0 0 12px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            transition: transform 0.6s ease-in-out;
+            transform-origin: right center;
+            z-index: 2;
+        }
+        .envelope-bottom {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: #21283b;
+            border-left: 1px solid #3a445c;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            transition: transform 0.6s ease-in-out;
+            transform-origin: left center;
+            z-index: 2;
+        }
+        .letter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.4), inset 0 0 6px rgba(255,215,0,0.5);
-            transition: transform 0.2s;
-            z-index: 10;
-            border: 1px solid rgba(255,215,0,0.5);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #b8a07c;
+            text-align: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.4s ease 0.3s;
+            pointer-events: none;
+            z-index: 1;
         }
-        .stamp::before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            background: radial-gradient(circle, rgba(210,70,50,0.7), rgba(150,30,20,0.7));
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(5px);
+        .envelope.open .envelope-top {
+            transform: translateX(-100%) rotateY(5deg);
         }
-        .stamp:hover {
-            transform: translate(-50%, -50%) scale(1.02);
+        .envelope.open .envelope-bottom {
+            transform: translateX(100%) rotateY(-5deg);
         }
-        .stamp img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 1px solid rgba(255,215,0,0.7);
+        .envelope.open .letter {
+            opacity: 1;
         }
     </style>
 </head>
@@ -271,15 +274,16 @@
 
     <!-- ПРЕЛОАДЕР С КОНВЕРТОМ -->
     <div class="preloader" id="preloader">
-        <div class="envelope-container" id="envelopeContainer">
-            <img src="envelope.png" alt="Конверт" class="envelope-img" id="envelopeImg">
-            <div class="stamp" id="stampButton">
-                <img src="logo_wedding.png" alt="Логотип">
+        <div class="envelope" id="envelope">
+            <div class="envelope-top"></div>
+            <div class="envelope-bottom"></div>
+            <div class="letter">
+                ✉️ Наше приглашение ✉️
             </div>
         </div>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ (ваш сайт) -->
+    <!-- ОСНОВНОЙ САЙТ -->
     <div class="main-content">
         <div class="stars-container" id="starsContainer"></div>
         <div class="shooting-stars">
@@ -299,7 +303,9 @@
                         <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
                         <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
                         <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-                        <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+                        <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
                 <div class="countdown" id="countdown">
@@ -363,6 +369,7 @@
     </div>
 
     <script>
+        // Таймер
         const weddingDate = new Date(2026, 8, 5, 15, 0);
         function updateCountdown() {
             const now = new Date();
@@ -375,9 +382,11 @@
         }
         setInterval(updateCountdown, 1000); updateCountdown();
 
+        // Анимация появления таймлайна
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
+        // Слайдер
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
@@ -388,24 +397,25 @@
         slides.forEach((_, i) => { const dot = document.createElement('span'); dot.className = 'dot' + (i === 0 ? ' active' : ''); dot.addEventListener('click', () => { currentIndex = i; updateSlider(); }); dotsContainer.appendChild(dot); });
         slider.addEventListener('scroll', () => { const index = Math.round(slider.scrollLeft / slider.clientWidth); if (index !== currentIndex) { currentIndex = index; document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); } });
 
+        // Генерация звёзд
         function generateStars() { const container = document.getElementById('starsContainer'); const starCount = 80; for (let i = 0; i < starCount; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 1.5 + 0.5; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; const duration = Math.random() * 3 + 1; star.style.animationDuration = duration + 's'; star.style.animationDelay = Math.random() * 5 + 's'; container.appendChild(star); } }
         generateStars();
 
+        // Отправка формы
         const form = document.getElementById('rsvp-form');
         if (form) { form.addEventListener('submit', async function(e) { e.preventDefault(); const formData = new FormData(form); try { await fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' }); alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!'); form.reset(); } catch (error) { alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.'); } }); }
 
-        // Анимация конверта
+        // Анимация открытия конверта
         const preloader = document.getElementById('preloader');
-        const envelopeContainer = document.getElementById('envelopeContainer');
-        const stampBtn = document.getElementById('stampButton');
-        if (stampBtn) {
-            stampBtn.addEventListener('click', function(e) {
+        const envelope = document.getElementById('envelope');
+        if (envelope) {
+            envelope.addEventListener('click', function(e) {
                 e.stopPropagation();
-                envelopeContainer.classList.add('animate');
+                this.classList.add('open');
                 setTimeout(() => {
                     preloader.classList.add('hide');
                     setTimeout(() => { preloader.style.display = 'none'; }, 800);
-                }, 800);
+                }, 700);
             });
         }
     </script>
