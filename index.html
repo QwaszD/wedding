@@ -265,12 +265,266 @@
             </div>
         </div><div class="col"><h3>Атмосфера вечера</h3><p>Мы хотим, чтобы каждый чувствовал себя комфортно и свободно. Никакой строгости, только радость и тепло в кругу близких.</p></div></div></div></section>
 
-    <section class="program"><div class="container"><h2>Программа дня</h2><div class="timeline">
-        <div class="timeline-item"><div class="timeline-time">15:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Сбор гостей, welcome</h3><p>Время пролетит незаметно за игристым.</p></div></div>
-        <div class="timeline-item"><div class="timeline-time">16:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Церемония</h3><p>Вы станете свидетелями создания нашей семьи.</p></div></div>
-        <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Праздничный банкет</h3><p>Основная часть торжества.</p></div></div>
-        <div class="timeline-item"><div class="timeline-time">23:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Торт и дискотека</h3><p>Вкусный торт и танцы до утра.</p></div></div>
-    </div></div></section>
+    <section class="program">
+    <div class="container">
+        <h2>Программа дня</h2>
+        <div class="timeline-wrapper">
+            <!-- Волнистая линия (фон) -->
+            <div class="wave-line"></div>
+            <!-- Падающая звезда -->
+            <div class="falling-star" id="fallingStar">⭐</div>
+            <!-- События -->
+            <div class="timeline">
+                <div class="timeline-item" data-time="15:00">
+                    <div class="timeline-time">15:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Сбор гостей, welcome</h3>
+                        <p>Время пролетит незаметно за игристым.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-time="16:00">
+                    <div class="timeline-time">16:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Церемония</h3>
+                        <p>Вы станете свидетелями создания нашей семьи.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-time="18:00">
+                    <div class="timeline-time">18:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Праздничный банкет</h3>
+                        <p>Основная часть торжества.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-time="23:00">
+                    <div class="timeline-time">23:00</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Торт и дискотека</h3>
+                        <p>Вкусный торт и танцы до утра.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <style>
+/* Стили для обновлённой программы дня */
+.program .timeline-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+.wave-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--accent) 0px,
+        var(--accent) 20px,
+        transparent 20px,
+        transparent 40px
+    );
+    transform: translateX(-50%);
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100"><path d="M5,0 Q15,25 5,50 Q-5,75 5,100" stroke="black" fill="none" stroke-width="4"/></svg>');
+    mask-repeat: repeat-y;
+    mask-size: 10px 100%;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100"><path d="M5,0 Q15,25 5,50 Q-5,75 5,100" stroke="black" fill="none" stroke-width="4"/></svg>');
+    -webkit-mask-repeat: repeat-y;
+    -webkit-mask-size: 10px 100%;
+    opacity: 0.8;
+    pointer-events: none;
+}
+.falling-star {
+    position: absolute;
+    left: 50%;
+    font-size: 2rem;
+    filter: drop-shadow(0 0 6px gold);
+    transition: top 0.3s ease-out, transform 0.2s;
+    z-index: 10;
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+.timeline {
+    position: relative;
+    z-index: 2;
+}
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    position: relative;
+}
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.timeline-item:nth-child(odd) {
+    flex-direction: row;
+}
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+.timeline-time {
+    flex: 1;
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    font-weight: 600;
+    padding-right: 2rem;
+}
+.timeline-item:nth-child(even) .timeline-time {
+    text-align: left;
+    padding-left: 2rem;
+    padding-right: 0;
+}
+.timeline-dot {
+    width: 14px;
+    height: 14px;
+    background: #ffd700;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(255,215,0,0.4);
+    transition: all 0.3s;
+}
+.timeline-item.active .timeline-dot {
+    background: #ffaa00;
+    box-shadow: 0 0 0 8px rgba(255,215,0,0.6);
+    transform: scale(1.2);
+}
+.timeline-content {
+    flex: 2;
+    background-color: rgba(33,40,59,0.9);
+    backdrop-filter: blur(2px);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-left: 2rem;
+    transition: background 0.3s;
+}
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 0;
+    margin-right: 2rem;
+}
+.timeline-item.active .timeline-content {
+    background-color: rgba(33,40,59,1);
+    box-shadow: 0 0 15px rgba(255,215,0,0.3);
+}
+.timeline-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: #e8e0d5;
+}
+.timeline-content p {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    color: #f0f0f0;
+}
+@media (max-width: 768px) {
+    .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .timeline-time {
+        text-align: left;
+        padding-left: 2rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+    .timeline-item:nth-child(even) .timeline-time {
+        padding-left: 2rem;
+    }
+    .timeline-dot {
+        display: none;
+    }
+    .timeline-content {
+        margin-left: 1rem !important;
+        margin-right: 0 !important;
+        width: calc(100% - 2rem);
+    }
+    .wave-line {
+        display: none;
+    }
+    .falling-star {
+        display: none;
+    }
+}
+</style>
+
+<script>
+// Активация пунктов программы и движение звезды
+document.addEventListener('DOMContentLoaded', function() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const star = document.getElementById('fallingStar');
+    if (!timelineItems.length || !star) return;
+    
+    // Функция для определения текущего активного элемента (ближайший к центру экрана)
+    function updateActiveAndStar() {
+        let activeIndex = -1;
+        let minDist = Infinity;
+        const viewportMid = window.scrollY + window.innerHeight / 2;
+        
+        timelineItems.forEach((item, idx) => {
+            const rect = item.getBoundingClientRect();
+            const itemMid = rect.top + rect.height / 2;
+            const dist = Math.abs(viewportMid - (rect.top + window.scrollY + rect.height/2));
+            if (dist < minDist) {
+                minDist = dist;
+                activeIndex = idx;
+            }
+        });
+        
+        if (activeIndex !== -1) {
+            timelineItems.forEach((item, idx) => {
+                if (idx === activeIndex) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+            
+            // Перемещаем звезду к активному элементу с волнистым смещением
+            const activeItem = timelineItems[activeIndex];
+            const dot = activeItem.querySelector('.timeline-dot');
+            if (dot) {
+                const dotRect = dot.getBoundingClientRect();
+                const wrapperRect = document.querySelector('.timeline-wrapper').getBoundingClientRect();
+                const relativeTop = dotRect.top + window.scrollY - wrapperRect.top;
+                // Волнистое смещение по горизонтали
+                const waveOffset = Math.sin(Date.now() / 500 + activeIndex) * 12;
+                star.style.top = relativeTop + 'px';
+                star.style.transform = `translateX(calc(-50% + ${waveOffset}px))`;
+                // Анимация вращения
+                star.style.transform += ` rotate(${Date.now() / 20}deg)`;
+            }
+        }
+    }
+    
+    window.addEventListener('scroll', updateActiveAndStar);
+    window.addEventListener('resize', updateActiveAndStar);
+    updateActiveAndStar();
+    
+    // Постоянное мерцание и вращение звезды
+    setInterval(() => {
+        if (star && star.style.top) {
+            const currentTransform = star.style.transform;
+            const rotate = Date.now() / 30;
+            star.style.transform = currentTransform.replace(/rotate\([^)]*\)/, `rotate(${rotate}deg)`);
+        }
+    }, 100);
+});
+</script>
 
     <section class="wishes"><div class="container"><h2>Несколько просьб</h2><div class="cards"><div class="wish-card"><h3>Цветы</h3><p>Вместо букета мы будем благодарны сертификату в цветочный магазин — это позволит нам наслаждаться цветами гораздо дольше.</p></div><div class="wish-card"><h3>Дети</h3><p>Формат нашего праздника предполагает присутствие только взрослых гостей, поэтому просим прийти без малышей. Благодарим за понимание.</p></div></div></div></section>
 
