@@ -29,6 +29,32 @@
             overflow-x: hidden;
             position: relative;
         }
+        /* ФОНОВАЯ АСТРА (на весь экран, слева, прозрачность 85%) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('aster.png') no-repeat left center fixed;
+            background-size: auto 100%;
+            opacity: 0.85;
+            z-index: -2;
+            pointer-events: none;
+        }
+        /* Затемняющий слой */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: -1;
+            pointer-events: none;
+        }
         .stars-container {
             position: fixed;
             top: 0;
@@ -85,7 +111,7 @@
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card {
+        .calendar-mini, .countdown-item, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .dress-code .col {
             background-color: rgba(33,40,59,0.9);
             backdrop-filter: blur(2px);
         }
@@ -97,7 +123,7 @@
         h2::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 4.5rem 0; position: relative; z-index: 2; }
-        .hero { text-align: center; padding: 5rem 0 3.5rem; background: #21283b; background-size: cover; background-position: center; }
+        .hero { text-align: center; padding: 5rem 0 3.5rem; background: #21283b; }
         .hero .invitation-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; max-width: 600px; margin: 0 auto 2rem; color: #ffffff; font-weight: 500; line-height: 1.6; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; }
         .hero h1 { font-family: 'Manege', cursive; font-size: 5rem; font-weight: 300; margin-bottom: 0.5rem; letter-spacing: 2px; color: #ffffff; opacity: 0; animation: fadeUp 1s ease forwards; }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1.5rem; }
@@ -115,13 +141,94 @@
         .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .dress-code { text-align: center; }
-        .col { max-width: 400px; margin: 0 auto; }
-        .color-palette { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+        .dress-code .col { max-width: 800px; margin: 0 auto; padding: 2rem; border-radius: 20px; }
+        .color-palette { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
         .color-item { text-align: center; width: 70px; }
         .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-        .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
+        .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
 
-        /* ===== ПРОГРАММА ДНЯ ===== */
+        /* Слайдер образов внутри блока дресс-кода */
+        .look-slider-wrapper {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            padding: 0 1rem;
+        }
+        .look-slider-frame {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            background: rgba(0,0,0,0.3);
+            height: 70vh;
+            max-height: 400px;
+        }
+        .slides {
+            display: flex;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .slides::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            position: relative;
+            height: 100%;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: transparent;
+            border: none;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-size: 1.2rem;
+            color: #ffd700;
+            cursor: pointer;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .slider-btn:hover { background: #b8a07c; color: #fff; }
+        .slider-btn.prev { left: 0.8rem; }
+        .slider-btn.next { right: 0.8rem; }
+        .dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 5;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active { background: #b8a07c; }
+
+        /* Программа дня */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -237,58 +344,17 @@
             .timeline::before { left: 20px; transform: translateX(0); }
         }
 
-        /* Контейнер для вашего PNG цветка (белая астра) */
-        .aster-flower {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            width: 50px;
-            height: 50px;
-            z-index: 100;
-            cursor: pointer;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-        }
-        .aster-flower img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none; /* чтобы клик проходил сквозь картинку, если нужно */
-        }
-        /* Падающие белые лепестки */
-        .falling-petal {
-            position: fixed;
-            pointer-events: none;
-            z-index: 99;
-            width: 8px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 40% 60% 50% 50%;
-            box-shadow: 0 0 2px rgba(255,255,200,0.5);
-            opacity: 0;
-            animation: fallAndFadeWhite 5s ease-in forwards;
-        }
-        @keyframes fallAndFadeWhite {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(400px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
         /* Остальные блоки */
         .location { text-align: center; padding: 4rem 0; }
         .location p { font-family: 'Lora', serif; color: #ffffff; }
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Lora', serif; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
         .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .wish-card { box-shadow: var(--shadow); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
+        .wish-card { box-shadow: var(--shadow); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .wish-card p { font-family: 'Lora', serif; font-size: 0.95rem; color: #ffffff; }
-        .rsvp-form { max-width: 600px; margin: 0 auto; box-shadow: var(--shadow); padding: 3rem; border-radius: 12px; text-align: left; }
+        .rsvp-form { max-width: 600px; margin: 0 auto; box-shadow: var(--shadow); padding: 3rem; border-radius: 12px; text-align: left; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
         .form-group { margin-bottom: 2rem; }
         label { display: block; font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #ffffff; margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
         label span { color: var(--accent); font-size: 1rem; font-family: 'Lora', serif; }
@@ -303,10 +369,10 @@
         .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); color: #ffffff; }
         .contacts { text-align: center; }
         .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
-        .contact-card { text-align: center; padding: 1rem 2rem; border-radius: 12px; }
+        .contact-card { text-align: center; padding: 1rem 2rem; border-radius: 12px; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
         .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; }
         .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: #ffffff; }
-        footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
         @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } }
         @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
     </style>
@@ -319,14 +385,10 @@
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
     </div>
 
-    <div class="aster-flower">
-        <img src="aster.png" alt="Астра">
-    </div>
-
     <section class="hero">
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
-            <h1>Никита | Ксения</h1>
+            <h1>Никита & Ксения</h1>
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
@@ -357,19 +419,33 @@
         </div>
     </section>
 
+    <!-- Дресс-код и слайдер образов -->
     <section class="dress-code">
         <div class="container">
-            <h2>Дресс-код</h2>
             <div class="col">
                 <h3>Цвета вечера</h3>
                 <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
                 <div class="color-palette">
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #a8e6cf, #7bc5a8);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #a0d0f0, #7bb3d4);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #ffe0b5, #ffcc88);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fbc8c8, #f5a3a3);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d4b8e0, #c09fd4);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2c9a5, #d4b080);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d4e6d4, #c2d9c2);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #cde0f0, #bcd0e5);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5e6d3, #ecd8c0);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5d6d6, #ecc4c4);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f0e0c0, #e5d0a8);"></div></div>
+                </div>
+                <!-- Слайдер образов -->
+                <div class="look-slider-wrapper">
+                    <div class="look-slider-frame" id="look-slider">
+                        <div class="slides" id="slides-container">
+                            <div class="slide"><img src="sample1.png" alt="Образ 1"></div>
+                            <div class="slide"><img src="sample2.png" alt="Образ 2"></div>
+                            <div class="slide"><img src="sample3.png" alt="Образ 3"></div>
+                            <div class="slide"><img src="sample4.png" alt="Образ 4"></div>
+                        </div>
+                        <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+                        <button class="slider-btn next" onclick="nextSlide()">❯</button>
+                        <div class="dots" id="dots"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -474,7 +550,6 @@
             const viewportMid = window.scrollY + window.innerHeight / 2;
             items.forEach((item, idx) => {
                 const rect = item.getBoundingClientRect();
-                const itemMid = rect.top + rect.height / 2;
                 const dist = Math.abs(viewportMid - (rect.top + window.scrollY + rect.height/2));
                 if (dist < minDist) {
                     minDist = dist;
@@ -529,27 +604,45 @@
             });
         }
 
-        // Падающие белые лепестки с астры (каждые 5 секунд)
-        (function() {
-            const flower = document.querySelector('.aster-flower');
-            if (!flower) return;
-            function createPetal() {
-                const petal = document.createElement('div');
-                petal.classList.add('falling-petal');
-                const rect = flower.getBoundingClientRect();
-                const startX = rect.left + rect.width / 2 - 4;
-                const startY = rect.top + rect.height / 2;
-                petal.style.left = startX + 'px';
-                petal.style.top = startY + 'px';
-                petal.style.width = (Math.random() * 5 + 5) + 'px';
-                petal.style.height = (Math.random() * 8 + 7) + 'px';
-                const duration = Math.random() * 3 + 3;
-                petal.style.animationDuration = duration + 's';
-                document.body.appendChild(petal);
-                setTimeout(() => petal.remove(), duration * 1000);
-            }
-            setInterval(createPetal, 5000);
-        })();
+        // Слайдер образов
+        const slider = document.querySelector('#look-slider .slides');
+        const slides = document.querySelectorAll('#look-slider .slide');
+        const dotsContainer = document.getElementById('dots');
+        let currentIndex = 0;
+        function updateSlider() {
+            if (slider) slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
+            document.querySelectorAll('#look-slider .dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+        window.nextSlide = function() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        };
+        window.prevSlide = function() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        };
+        if (slides.length && dotsContainer) {
+            slides.forEach((_, i) => {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+            if (slider) slider.addEventListener('scroll', () => {
+                const index = Math.round(slider.scrollLeft / slider.clientWidth);
+                if (index !== currentIndex) {
+                    currentIndex = index;
+                    document.querySelectorAll('#look-slider .dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
