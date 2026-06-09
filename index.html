@@ -85,7 +85,7 @@
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text {
+        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card {
             background-color: rgba(33,40,59,0.9);
             backdrop-filter: blur(2px);
         }
@@ -115,14 +115,11 @@
         .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .dress-code { text-align: center; }
-        .two-cols { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2rem; }
-        .col { flex: 1 1 260px; max-width: 320px; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); }
+        .col { max-width: 400px; margin: 0 auto; }
         .color-palette { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
         .color-item { text-align: center; width: 70px; }
         .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-        .color-item span { font-size: 0.75rem; font-weight: 400; color: #ffffff; }
         .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
-        .col p { color: #ffffff; }
 
         /* ===== ПРОГРАММА ДНЯ (ровная линия + подсветка) ===== */
         .program .timeline-wrapper {
@@ -135,7 +132,6 @@
             position: relative;
             z-index: 2;
         }
-        /* Ровная линия */
         .timeline::before {
             content: '';
             position: absolute;
@@ -185,7 +181,6 @@
             box-shadow: 0 0 0 4px rgba(255,215,0,0.4);
             transition: all 0.3s;
         }
-        /* Подсветка активного блока */
         .timeline-item.active .timeline-dot {
             background: #ffaa00;
             box-shadow: 0 0 0 8px rgba(255,215,0,0.6);
@@ -247,10 +242,6 @@
         .location p { font-family: 'Lora', serif; color: #ffffff; }
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Lora', serif; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
-        .story .story-content { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .story .story-text { flex: 2; min-width: 250px; font-family: 'Lora', serif; font-style: italic; line-height: 2; text-align: center; font-weight: 400; padding: 1.5rem; border-radius: 12px; color: #ffffff; }
-        .story .story-images { flex: 1; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
-        .story .story-images img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid var(--accent); box-shadow: var(--shadow); }
         .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
         .wish-card { box-shadow: var(--shadow); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
@@ -275,7 +266,7 @@
         .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; }
         .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: #ffffff; }
         footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .two-cols { flex-direction: column; align-items: center; } .story .story-content { flex-direction: column; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .story .story-content { flex-direction: column; } }
         @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
     </style>
 </head>
@@ -293,17 +284,21 @@
             <h1>Никита & Ксения</h1>
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
-                    <div class="month-year">Сентябрь 2026</div>
+                    <div class="month-year">Сентябрь 2026 (неделя свадьбы)</div>
                     <table>
                         <thead>
-                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th><tr>
+                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td><td>7</td></tr>
-                            <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
-                            <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
-                            <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
-                            <tr><td>29</td><td>30</td><td></td><td></td><td></td><td></td><td></td></tr>
+                            <tr>
+                                <td>31</td>
+                                <td class="heart-day">1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td class="heart-day">5</td>
+                                <td>6</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -317,17 +312,23 @@
         </div>
     </section>
 
-    <section class="dress-code"><div class="container"><h2>Дресс-код</h2>
-        <div class="two-cols"><div class="col"><h3>Цвета вечера</h3><p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
-            <div class="color-palette">
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8e5da, #c8dac9);"></div><span>Светло-зелёный</span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c9e0e8, #b6cfdb);"></div><span>Голубой</span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fcf5e0, #faeec8);"></div><span>Светло-жёлтый</span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f7e0e0, #f0cfcf);"></div><span>Светло-розовый</span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);"></div><span>Сиреневый</span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2d5c8, #d4c4b3);"></div><span>Светло-коричневый</span></div>
+    <section class="dress-code">
+        <div class="container">
+            <h2>Дресс-код</h2>
+            <div class="col">
+                <h3>Цвета вечера</h3>
+                <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
+                <div class="color-palette">
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #a8e6cf, #7bc5a8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #a0d0f0, #7bb3d4);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #ffe0b5, #ffcc88);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fbc8c8, #f5a3a3);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d4b8e0, #c09fd4);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2c9a5, #d4b080);"></div></div>
+                </div>
             </div>
-        </div><div class="col"><h3>Атмосфера вечера</h3><p>Нам будет приятно, если вы поддержите атмосферу праздника и отдадите предпочтение спокойным пастельным оттенкам из предложенной палитры.</p></div></div></div></section>
+        </div>
+    </section>
 
     <!-- ПРОГРАММА ДНЯ (ровная линия, подсветка при скролле) -->
     <section class="program">
@@ -360,29 +361,47 @@
         </div>
     </section>
 
-    <section class="story"><div class="container"><h2>Наша история</h2><div class="story-content"><div class="story-images"><img src="https://photocentra.ru/images/main119/1191683_main.jpg" alt="море"><img src="https://i.pinimg.com/736x/88/09/a8/8809a88da4363de0e73a85e7cc692842.jpg" alt="кольца"></div><div class="story-text"><p>Скоро напишу...</p></div></div></div></section>
+    <section class="wishes">
+        <div class="container">
+            <h2>Несколько просьб</h2>
+            <div class="cards">
+                <div class="wish-card">
+                    <h3>Цветы</h3>
+                    <p>Вместо букета мы будем благодарны сертификату в цветочный магазин — это позволит нам наслаждаться цветами гораздо дольше.</p>
+                </div>
+                <div class="wish-card">
+                    <h3>Дети</h3>
+                    <p>Формат нашего праздника предполагает присутствие только взрослых гостей, поэтому просим прийти без малышей. Благодарим за понимание.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section class="wishes"><div class="container"><h2>Несколько просьб</h2><div class="cards"><div class="wish-card"><h3>Цветы</h3><p>Вместо букета мы будем благодарны сертификату в цветочный магазин — это позволит нам наслаждаться цветами гораздо дольше.</p></div><div class="wish-card"><h3>Дети</h3><p>Формат нашего праздника предполагает присутствие только взрослых гостей, поэтому просим прийти без малышей. Благодарим за понимание.</p></div></div></div></section>
+    <section class="rsvp">
+        <div class="container">
+            <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
+            <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
+                <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
+                <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
+                <div class="form-group"><label>Нужен ли трансфер?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label></div></div>
+                <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши тёплые слова..."></textarea></div>
+                <button type="submit" class="btn">Отправить</button>
+            </form>
+        </div>
+    </section>
 
-    <section class="rsvp"><div class="container"><h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
-        <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
-            <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
-            <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
-            <div class="form-group"><label>Нужен ли трансфер?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label></div></div>
-            <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши тёплые слова..."></textarea></div>
-            <button type="submit" class="btn">Отправить</button>
-        </form>
-    </div></section>
-
-    <section class="location"><div class="container"><h2>Локация</h2><p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
-        <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5" width="100%" height="350" frameborder="0" allowfullscreen="true" style="border-radius: 20px; display: block;"></iframe></div>
-        <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" target="_blank" class="btn">Открыть в Яндекс.Картах →</a>
-    </div></section>
+    <section class="location">
+        <div class="container">
+            <h2>Локация</h2>
+            <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
+            <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5" width="100%" height="350" frameborder="0" allowfullscreen="true" style="border-radius: 20px; display: block;"></iframe></div>
+            <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" target="_blank" class="btn">Открыть в Яндекс.Картах →</a>
+        </div>
+    </section>
 
     <footer><p>С любовью, Ксения и Никита</p><p>05.09.2026</p></footer>
 
     <script>
-        // Таймер
         const weddingDate = new Date(2026, 8, 5, 15, 0);
         function updateCountdown() {
             const now = new Date();
@@ -396,7 +415,6 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Анимация появления элементов при скролле
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -404,7 +422,6 @@
         }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // Подсветка активного элемента при скролле (ближайший к центру экрана)
         function updateActiveOnScroll() {
             const items = document.querySelectorAll('.timeline-item');
             if (!items.length) return;
@@ -429,7 +446,6 @@
         window.addEventListener('resize', updateActiveOnScroll);
         updateActiveOnScroll();
 
-        // Генерация мерцающих звёзд
         function generateStars() {
             const container = document.getElementById('starsContainer');
             if (!container) return;
@@ -450,7 +466,6 @@
         }
         generateStars();
 
-        // Отправка формы RSVP
         const form = document.getElementById('rsvp-form');
         if (form) {
             form.addEventListener('submit', async function(e) {
