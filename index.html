@@ -29,32 +29,7 @@
             overflow-x: hidden;
             position: relative;
         }
-        /* ФОНОВАЯ АСТРА (на весь экран, слева, прозрачность 85%) */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('aster.png') no-repeat left center fixed;
-            background-size: auto 100%;
-            opacity: 0.85;
-            z-index: -2;
-            pointer-events: none;
-        }
-        /* Затемняющий слой */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: -1;
-            pointer-events: none;
-        }
+        /* Звёзды и метеоры */
         .stars-container {
             position: fixed;
             top: 0;
@@ -111,19 +86,33 @@
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-        .calendar-mini, .countdown-item, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .dress-code .col {
-            background-color: rgba(33,40,59,0.9);
+        /* Общие стили для всех блоков (полупрозрачный фон) */
+        .hero .container,
+        .dress-code .col,
+        .timeline-content,
+        .wish-card,
+        .rsvp-form,
+        .location,
+        .contact-card,
+        footer,
+        .calendar-mini,
+        .countdown-item {
+            background-color: rgba(33, 40, 59, 0.9);
             backdrop-filter: blur(2px);
         }
+        /* Для блоков, где нужна своя специфика */
         .dress-code, .location, .contacts {
-            background-color: rgba(33,40,59,0.92);
-            backdrop-filter: blur(2px);
+            background: none;
         }
         h2 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 2.4rem; margin-bottom: 1.5rem; text-align: center; position: relative; color: #ffffff; }
         h2::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 4.5rem 0; position: relative; z-index: 2; }
-        .hero { text-align: center; padding: 5rem 0 3.5rem; background: #21283b; }
+        .hero { text-align: center; padding: 5rem 0 3.5rem; background: none; }
+        .hero .container {
+            border-radius: 20px;
+            padding: 2rem;
+        }
         .hero .invitation-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; max-width: 600px; margin: 0 auto 2rem; color: #ffffff; font-weight: 500; line-height: 1.6; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; }
         .hero h1 { font-family: 'Manege', cursive; font-size: 5rem; font-weight: 300; margin-bottom: 0.5rem; letter-spacing: 2px; color: #ffffff; opacity: 0; animation: fadeUp 1s ease forwards; }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1.5rem; }
@@ -142,7 +131,6 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .dress-code { text-align: center; }
         .dress-code .col { max-width: 800px; margin: 0 auto; padding: 2rem; border-radius: 20px; }
-        /* Цвета в сетке 3 в ряд (всегда, без адаптива) */
         .color-palette {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -155,7 +143,7 @@
         .color-circle:hover { transform: scale(1.05); }
         .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
 
-        /* Слайдер образов (6 слайдов) */
+        /* Слайдер образов */
         .look-slider-wrapper {
             max-width: 600px;
             margin: 2rem auto 0;
@@ -236,7 +224,7 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня (усиленная подсветка) */
+        /* Программа дня */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -304,9 +292,6 @@
         }
         .timeline-content {
             flex: 2;
-            background-color: rgba(33,40,59,0.9);
-            backdrop-filter: blur(2px);
-            box-shadow: var(--shadow);
             padding: 1.5rem;
             border-radius: 12px;
             margin-left: 2rem;
@@ -356,16 +341,16 @@
         }
 
         /* Остальные блоки */
-        .location { text-align: center; padding: 4rem 0; }
+        .location { text-align: center; padding: 4rem 0; border-radius: 20px; margin: 0 1.5rem; }
         .location p { font-family: 'Lora', serif; color: #ffffff; }
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Lora', serif; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
-        .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .wish-card { box-shadow: var(--shadow); border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
+        .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+        .wish-card { border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .wish-card p { font-family: 'Lora', serif; font-size: 0.95rem; color: #ffffff; }
-        .rsvp-form { max-width: 600px; margin: 0 auto; box-shadow: var(--shadow); padding: 3rem; border-radius: 12px; text-align: left; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
+        .rsvp-form { max-width: 600px; margin: 0 auto; padding: 3rem; border-radius: 12px; text-align: left; }
         .form-group { margin-bottom: 2rem; }
         label { display: block; font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #ffffff; margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
         label span { color: var(--accent); font-size: 1rem; font-family: 'Lora', serif; }
@@ -380,12 +365,12 @@
         .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); color: #ffffff; }
         .contacts { text-align: center; }
         .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
-        .contact-card { text-align: center; padding: 1rem 2rem; border-radius: 12px; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
+        .contact-card { text-align: center; padding: 1rem 2rem; border-radius: 12px; }
         .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; }
         .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: #ffffff; }
-        footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; background-color: rgba(33,40,59,0.9); backdrop-filter: blur(2px); }
-        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } }
-        @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; border-radius: 12px; margin: 0 1.5rem 1.5rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .color-palette { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; } .color-circle { width: 60px; height: 60px; } }
+        @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } .color-palette { grid-template-columns: repeat(3, 1fr); } .color-circle { width: 50px; height: 50px; } }
     </style>
 </head>
 <body>
@@ -430,7 +415,6 @@
         </div>
     </section>
 
-    <!-- Дресс-код + слайдер образов (6 образов) -->
     <section class="dress-code">
         <div class="container">
             <div class="col">
@@ -444,14 +428,13 @@
                     <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0e8, #d0c0dc);"></div></div>
                     <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e8d8c0, #dccca8);"></div></div>
                 </div>
-                
                 <div class="look-slider-wrapper">
                     <div class="look-slider-frame" id="look-slider">
                         <div class="slides" id="slides-container">
-                            <div class="slide"><img src="obraz7.png" alt="Образ 1"></div>
+                            <div class="slide"><img src="obraz4.png" alt="Образ 1"></div>
                             <div class="slide"><img src="obraz6.png" alt="Образ 2"></div>
                             <div class="slide"><img src="obraz5.png" alt="Образ 3"></div>
-                            <div class="slide"><img src="obraz4.png" alt="Образ 4"></div>
+                            <div class="slide"><img src="obraz7.png" alt="Образ 4"></div>
                             <div class="slide"><img src="obraz3.png" alt="Образ 5"></div>
                             <div class="slide"><img src="obraz2.png" alt="Образ 6"></div>
                             <div class="slide"><img src="obraz1.png" alt="Образ 7"></div>
@@ -465,7 +448,6 @@
         </div>
     </section>
 
-    <!-- Программа дня -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
@@ -619,7 +601,6 @@
             });
         }
 
-        // Слайдер образов (6 слайдов)
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
