@@ -29,7 +29,6 @@
             overflow-x: hidden;
             position: relative;
         }
-        /* Звёзды */
         .stars-container {
             position: fixed;
             top: 0;
@@ -51,7 +50,6 @@
             0% { opacity: 0.2; transform: scale(1); }
             100% { opacity: 0.9; transform: scale(1.1); }
         }
-        /* Метеоры */
         .shooting-stars {
             position: fixed;
             top: 0;
@@ -207,42 +205,35 @@
         }
         .dot.active { background: var(--accent); }
 
-        /* ========== НОВАЯ ПРОГРАММА ДНЯ (волнистая линия и звезда) ========== */
+        /* ПРОГРАММА ДНЯ (надёжный вариант с inline SVG) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem 0;
         }
-        /* Волнистая линия через CSS-маску (без SVG) */
-        .wave-line {
+        /* SVG волна */
+        .wave-svg {
             position: absolute;
             left: 50%;
             top: 0;
-            width: 4px;
+            width: 30px;
             height: 100%;
-            background: repeating-linear-gradient(
-                to bottom,
-                #ffd700 0px,
-                #ffd700 15px,
-                transparent 15px,
-                transparent 30px
-            );
             transform: translateX(-50%);
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100"><path d="M5,0 Q15,25 5,50 Q-5,75 5,100" stroke="black" fill="none" stroke-width="4"/></svg>');
-            mask-repeat: repeat-y;
-            mask-size: 10px 100%;
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100"><path d="M5,0 Q15,25 5,50 Q-5,75 5,100" stroke="black" fill="none" stroke-width="4"/></svg>');
-            -webkit-mask-repeat: repeat-y;
-            -webkit-mask-size: 10px 100%;
             pointer-events: none;
             z-index: 1;
+        }
+        .wave-svg path {
+            stroke: #ffd700;
+            stroke-width: 2.5;
+            stroke-dasharray: 6 8;
+            fill: none;
         }
         .falling-star {
             position: absolute;
             left: 50%;
-            font-size: 2rem;
-            filter: drop-shadow(0 0 6px gold);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 4px gold);
             z-index: 20;
             pointer-events: none;
             transform: translateX(-50%);
@@ -253,9 +244,8 @@
             position: relative;
             z-index: 2;
         }
-        /* Удаляем старую прямую линию, если она была */
         .timeline::before {
-            display: none !important;
+            display: none; /* убираем старую прямую линию */
         }
         .timeline-item {
             display: flex;
@@ -356,7 +346,7 @@
                 margin-right: 0 !important;
                 width: calc(100% - 2rem);
             }
-            .wave-line {
+            .wave-svg {
                 display: none;
             }
             .falling-star {
@@ -403,14 +393,12 @@
 </head>
 <body>
 
-    <!-- Звёзды и метеоры -->
     <div class="stars-container" id="starsContainer"></div>
     <div class="shooting-stars">
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
     </div>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
@@ -418,15 +406,14 @@
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
-                    <table>
-                        <thead><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr></thead>
-                        <tbody>
-                            <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td><td></td></tr>
-                            <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
-                            <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-                            <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-                            <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
-                        </tbody>
+                    <table><thead><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th><tr></thead>
+                    <tbody>
+                        <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td><td></td></tr>
+                        <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                        <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+                        <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+                        <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
                     </table>
                 </div>
             </div>
@@ -439,7 +426,6 @@
         </div>
     </section>
 
-    <!-- Дресс-код -->
     <section class="dress-code">
         <div class="container">
             <h2>Дресс-код</h2>
@@ -464,7 +450,6 @@
         </div>
     </section>
 
-    <!-- Слайдер образов (можно удалить, если не нужен) -->
     <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
@@ -484,12 +469,16 @@
         </div>
     </section>
 
-    <!-- Программа дня (исправленная) -->
+    <!-- ПРОГРАММА ДНЯ (исправленная) -->
     <section class="program" id="programSection">
         <div class="container">
             <h2>Программа дня</h2>
             <div class="timeline-wrapper">
-                <div class="wave-line"></div>
+                <!-- Волнистая линия через SVG -->
+                <svg class="wave-svg" viewBox="0 0 30 100" preserveAspectRatio="none">
+                    <path d="M15,0 Q22,25 15,50 Q8,75 15,100" stroke="#ffd700" stroke-width="2.5" fill="none" stroke-dasharray="6 8" />
+                </svg>
+                <!-- Падающая звезда -->
                 <div class="falling-star" id="fallingStar">⭐</div>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -529,7 +518,6 @@
         </div>
     </section>
 
-    <!-- История -->
     <section class="story">
         <div class="container">
             <h2>Наша история</h2>
@@ -545,7 +533,6 @@
         </div>
     </section>
 
-    <!-- Пожелания -->
     <section class="wishes">
         <div class="container">
             <h2>Несколько просьб</h2>
@@ -562,7 +549,6 @@
         </div>
     </section>
 
-    <!-- RSVP форма -->
     <section class="rsvp">
         <div class="container">
             <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
@@ -576,7 +562,6 @@
         </div>
     </section>
 
-    <!-- Локация -->
     <section class="location">
         <div class="container">
             <h2>Локация</h2>
@@ -589,7 +574,6 @@
     <footer><p>С любовью, Ксения и Никита</p><p>05.09.2026</p></footer>
 
     <script>
-        // Таймер
         const weddingDate = new Date(2026, 8, 5, 15, 0);
         function updateCountdown() {
             const now = new Date();
@@ -602,11 +586,9 @@
         }
         setInterval(updateCountdown, 1000); updateCountdown();
 
-        // Анимация появления элементов
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // Слайдер
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
@@ -619,15 +601,13 @@
             if (slider) slider.addEventListener('scroll', () => { const index = Math.round(slider.scrollLeft / slider.clientWidth); if (index !== currentIndex) { currentIndex = index; document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); } });
         }
 
-        // Генерация звёзд
         function generateStars() { const container = document.getElementById('starsContainer'); if (!container) return; const starCount = 80; for (let i = 0; i < starCount; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 1.5 + 0.5; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; const duration = Math.random() * 3 + 1; star.style.animationDuration = duration + 's'; star.style.animationDelay = Math.random() * 5 + 's'; container.appendChild(star); } }
         generateStars();
 
-        // Отправка формы
         const form = document.getElementById('rsvp-form');
         if (form) { form.addEventListener('submit', async function(e) { e.preventDefault(); const formData = new FormData(form); try { await fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' }); alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!'); form.reset(); } catch (error) { alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.'); } }); }
 
-        // Движение звезды по волнистой линии
+        // Движение звезды по волнистой линии (inline SVG)
         (function() {
             const programSection = document.getElementById('programSection');
             if (!programSection) return;
