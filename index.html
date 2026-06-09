@@ -85,7 +85,7 @@
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text, .look-slider-frame {
+        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text {
             background-color: rgba(33,40,59,0.9);
             backdrop-filter: blur(2px);
         }
@@ -123,84 +123,6 @@
         .color-item span { font-size: 0.75rem; font-weight: 400; color: #ffffff; }
         .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .col p { color: #ffffff; }
-        .look-slider-wrapper {
-            max-width: 600px;
-            margin: 3rem auto 0;
-            padding: 0 1.5rem;
-        }
-        .look-slider-frame {
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            position: relative;
-            height: 70vh;
-            max-height: 500px;
-        }
-        .slides {
-            display: flex;
-            height: 100%;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .slides::-webkit-scrollbar { display: none; }
-        .slide {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
-            position: relative;
-            height: 100%;
-        }
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            background: #21283b;
-            border: none;
-        }
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-size: 1.2rem;
-            color: var(--accent);
-            cursor: pointer;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .slider-btn:hover { background: var(--accent); color: #fff; }
-        .slider-btn.prev { left: 0.8rem; }
-        .slider-btn.next { right: 0.8rem; }
-        .dots {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 5;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .dot.active { background: var(--accent); }
 
         /* ===== ПРОГРАММА ДНЯ (canvas + звезда) ===== */
         .program .timeline-wrapper {
@@ -380,15 +302,18 @@
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
-                    <table><thead><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr></thead>
-                    <tbody>
-                        <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td><td></td></tr>
-                        <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
-                        <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-                        <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-                        <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
-                    </tbody>
-                </table>
+                    <table>
+                        <thead>
+                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td></td><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
+                            <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                            <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+                            <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+                            <tr><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="countdown" id="countdown">
@@ -411,16 +336,6 @@
                 <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2d5c8, #d4c4b3);"></div><span></span></div>
             </div>
         </div><div class="col"><h3>Атмосфера вечера</h3><p>Нам будет приятно, если вы поддержите атмосферу праздника и отдадите предпочтение спокойным пастельным оттенкам из предложенной палитры.</p></div></div></div></section>
-
-    <section style="background: var(--accent-light); padding: 0;"><div class="look-slider-wrapper"><div class="look-slider-frame" id="look-slider"><div class="slides" id="slides-container">
-        <div class="slide"><img src="https://i.pinimg.com/736x/45/35/4e/45354ec0e4e27679df8a299acfe72dbb.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/50/d9/f5/50d9f55274744952c548d6e276231db3.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/d7/9e/6c/d79e6c729bc6f4e72ee4f5564cbb3c27.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/originals/ba/d2/fa/bad2fab7be828dff4e1b2372fcfa99e6.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/2d/f4/91/2df4915c1087096e40ea19ad14c91c53.jpg"></div>
-        <div class="slide"><img src="https://avatars.mds.yandex.net/i?id=d5af1673b4314dd03c882e1fc493fa4e_l-7716469-images-thumbs&n=13"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/7a/60/10/7a6010eb117dd96219120809f8b5b44e.jpg"></div>
-    </div><button class="slider-btn prev" onclick="prevSlide()">❮</button><button class="slider-btn next" onclick="nextSlide()">❯</button><div class="dots" id="dots"></div></div></div></section>
 
     <!-- ПРОГРАММА ДНЯ (canvas + звезда) -->
     <section class="program" id="programSection">
@@ -490,22 +405,9 @@
         }
         setInterval(updateCountdown, 1000); updateCountdown();
 
-        // Анимация появления
+        // Анимация появления элементов
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
-
-        // Слайдер
-        const slider = document.querySelector('#look-slider .slides');
-        const slides = document.querySelectorAll('#look-slider .slide');
-        const dotsContainer = document.getElementById('dots');
-        let currentIndex = 0;
-        function updateSlider() { if (slider) slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' }); document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); }
-        window.nextSlide = function() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); };
-        window.prevSlide = function() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); };
-        if (slides.length && dotsContainer) {
-            slides.forEach((_, i) => { const dot = document.createElement('span'); dot.className = 'dot' + (i === 0 ? ' active' : ''); dot.addEventListener('click', () => { currentIndex = i; updateSlider(); }); dotsContainer.appendChild(dot); });
-            if (slider) slider.addEventListener('scroll', () => { const index = Math.round(slider.scrollLeft / slider.clientWidth); if (index !== currentIndex) { currentIndex = index; document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); } });
-        }
 
         // Звёзды
         function generateStars() { const container = document.getElementById('starsContainer'); if (!container) return; const starCount = 80; for (let i = 0; i < starCount; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 1.5 + 0.5; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; const duration = Math.random() * 3 + 1; star.style.animationDuration = duration + 's'; star.style.animationDelay = Math.random() * 5 + 's'; container.appendChild(star); } }
@@ -520,6 +422,7 @@
             const canvas = document.getElementById('waveCanvas');
             if (!canvas) return;
             const wrapper = document.querySelector('.timeline-wrapper');
+            if (!wrapper) return;
             const height = wrapper.offsetHeight;
             canvas.width = 30;
             canvas.height = height;
@@ -531,13 +434,11 @@
             ctx.setLineDash([6, 8]);
             
             const step = 2;
-            let x = canvas.width / 2;
-            let y = 0;
-            ctx.moveTo(x, y);
             for (let y = 0; y < height; y += step) {
-                let offset = Math.sin(y * 0.06) * 8; // амплитуда волны
+                let offset = Math.sin(y * 0.06) * 8;
                 let xPos = canvas.width / 2 + offset;
-                ctx.lineTo(xPos, y);
+                if (y === 0) ctx.moveTo(xPos, y);
+                else ctx.lineTo(xPos, y);
             }
             ctx.stroke();
         }
@@ -551,7 +452,6 @@
             const star = document.getElementById('fallingStarCanvas');
             if (!wrapper || !star || items.length === 0) return;
             
-            // Получаем позиции точек (timeline-dot)
             let dotsTop = [];
             items.forEach(item => {
                 const dot = item.querySelector('.timeline-dot');
@@ -584,13 +484,11 @@
                 targetTop = dotsTop[idx] + t * (dotsTop[idx+1] - dotsTop[idx]);
             }
             
-            // Горизонтальное смещение по синусоиде
             const amplitude = 12;
             const waveOffset = Math.sin(progress * Math.PI * 2) * amplitude;
             star.style.top = targetTop + 'px';
             star.style.transform = `translateX(calc(-50% + ${waveOffset}px)) rotate(${Date.now() / 20}deg)`;
             
-            // Подсветка активного пункта
             let active = 0;
             let minDiff = Infinity;
             dotsTop.forEach((pos, i) => {
@@ -603,11 +501,9 @@
             });
         }
         
-        // Перерисовка canvas при изменении размера окна и загрузке
         window.addEventListener('resize', () => { drawWave(); updateStarPosition(); });
         window.addEventListener('load', () => { drawWave(); updateStarPosition(); });
         window.addEventListener('scroll', updateStarPosition);
-        // Также обновляем звезду постоянно
         setInterval(() => {
             const star = document.getElementById('fallingStarCanvas');
             if (star && star.style.top) {
