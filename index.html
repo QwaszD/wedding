@@ -23,7 +23,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Lora', serif;
-            background: radial-gradient(ellipse at center, #0a0f2a 0%, #03050b 100%);
+            background: #21283b;  /* новый тёмно-синий фон */
             color: var(--text);
             line-height: 1.8;
             overflow-x: hidden;
@@ -88,16 +88,20 @@
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
         /* Стили основного сайта */
-        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text, .look-slider-frame { background-color: rgba(255,255,255,0.92); backdrop-filter: blur(2px); }
-        .dress-code, .location, .contacts { background-color: rgba(232,224,213,0.92); }
-        section[style*="background: var(--accent-light)"] { background: transparent !important; }
+        .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text {
+            background-color: rgba(255,255,255,0.92);
+            backdrop-filter: blur(2px);
+        }
+        .dress-code, .location, .contacts {
+            background-color: rgba(232,224,213,0.92);
+        }
         h2 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 2.4rem; margin-bottom: 1.5rem; text-align: center; position: relative; color: #2c3a2f; }
         h2::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 4.5rem 0; position: relative; z-index: 2; }
-        .hero { text-align: center; padding: 5rem 0 3.5rem; background: linear-gradient(180deg, rgba(248,245,240,0.8) 0%, var(--bg) 100%), url('https://i.postimg.cc/FzbQSRjx/3d0264beb35eb8a6eb066c87a0ea3f58.jpg'); background-size: cover; background-position: center; }
-        .hero .invitation-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; max-width: 600px; margin: 0 auto 2rem; color: #3a3a3a; font-weight: 500; line-height: 1.6; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; }
-        .hero h1 { font-family: 'Alaya Roza', cursive; font-size: 5rem; font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 2px; color: #2c3a2f; opacity: 0; animation: fadeUp 1s ease forwards; }
+        .hero { text-align: center; padding: 5rem 0 3.5rem; background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url('https://i.postimg.cc/FzbQSRjx/3d0264beb35eb8a6eb066c87a0ea3f58.jpg'); background-size: cover; background-position: center; }
+        .hero .invitation-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; max-width: 600px; margin: 0 auto 2rem; color: #ffffff; font-weight: 500; line-height: 1.6; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; }
+        .hero h1 { font-family: 'Alaya Roza', cursive; font-size: 5rem; font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 2px; color: #ffffff; opacity: 0; animation: fadeUp 1s ease forwards; }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1.5rem; }
         .calendar-mini { border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); padding: 1.5rem 1.2rem; width: 100%; max-width: 360px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
         .calendar-mini .month-year { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; text-align: center; }
@@ -120,19 +124,6 @@
         .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
         .color-item span { font-size: 0.75rem; font-weight: 400; color: var(--text); }
         .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; }
-        .look-slider-wrapper { max-width: 600px; margin: 3rem auto 0; padding: 0 1.5rem; }
-        .look-slider-frame { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative; height: 70vh; max-height: 500px; }
-        .slides { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
-        .slides::-webkit-scrollbar { display: none; }
-        .slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; height: 100%; }
-        .slide img { width: 100%; height: 100%; object-fit: contain; display: block; background: #e8e0d5; border: none; }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 1.2rem; color: var(--accent); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-        .slider-btn:hover { background: var(--accent); color: #fff; }
-        .slider-btn.prev { left: 0.8rem; }
-        .slider-btn.next { right: 0.8rem; }
-        .dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 5; }
-        .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; cursor: pointer; transition: 0.3s; }
-        .dot.active { background: var(--accent); }
         .timeline { position: relative; }
         .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--accent); transform: translateX(-50%); opacity: 0.5; }
         .timeline-item { display: flex; align-items: center; margin-bottom: 2.5rem; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
@@ -178,18 +169,20 @@
         .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; }
         .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; }
         footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--text); border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; }
-        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .look-slider-frame { height: 55vh; max-height: 450px; } .slider-btn { width: 36px; height: 36px; font-size: 1rem; } .timeline::before { left: 20px; transform: translateX(0); } .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; } .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; } .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; } .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); } .timeline-dot { display: none; } .two-cols { flex-direction: column; align-items: center; } .story .story-content { flex-direction: column; } }
-        @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } .look-slider-frame { height: 50vh; max-height: 350px; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .timeline::before { left: 20px; transform: translateX(0); } .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; } .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; } .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; } .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); } .timeline-dot { display: none; } .two-cols { flex-direction: column; align-items: center; } .story .story-content { flex-direction: column; } }
+        @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
     </style>
 </head>
 <body>
 
+    <!-- Звёзды и метеоры -->
     <div class="stars-container" id="starsContainer"></div>
     <div class="shooting-stars">
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
     </div>
 
+    <!-- Основной контент -->
     <section class="hero">
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
@@ -198,7 +191,9 @@
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
                     <table>
-                        <thead><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr></thead>
+                        <thead>
+                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
+                        </thead>
                         <tbody>
                             <tr><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td><td></td></tr>
                             <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
@@ -221,24 +216,14 @@
     <section class="dress-code"><div class="container"><h2>Дресс-код</h2>
         <div class="two-cols"><div class="col"><h3>Цвета вечера</h3><p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
             <div class="color-palette">
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8e5da, #c8dac9);"></div><span></span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c9e0e8, #b6cfdb);"></div><span></span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fcf5e0, #faeec8);"></div><span></span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f7e0e0, #f0cfcf);"></div><span></span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);"></div><span></span></div>
-                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2d5c8, #d4c4b3);"></div><span></span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8e5da, #c8dac9);"></div><span>Светло-зелёный</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c9e0e8, #b6cfdb);"></div><span>Голубой</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #fcf5e0, #faeec8);"></div><span>Светло-жёлтый</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f7e0e0, #f0cfcf);"></div><span>Светло-розовый</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);"></div><span>Сиреневый</span></div>
+                <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e2d5c8, #d4c4b3);"></div><span>Светло-коричневый</span></div>
             </div>
-        </div><div class="col"><h3>Атмосфера вечера</h3><p>Нам будет приятно, если вы поддержите атмосферу праздника и отдадите предпочтение спокойным пастельным оттенкам из предложенной палитры.</p></div></div></div></section>
-
-    <section style="background: var(--accent-light); padding: 0;"><div class="look-slider-wrapper"><div class="look-slider-frame" id="look-slider"><div class="slides" id="slides-container">
-        <div class="slide"><img src="https://i.pinimg.com/736x/45/35/4e/45354ec0e4e27679df8a299acfe72dbb.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/50/d9/f5/50d9f55274744952c548d6e276231db3.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/d7/9e/6c/d79e6c729bc6f4e72ee4f5564cbb3c27.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/originals/ba/d2/fa/bad2fab7be828dff4e1b2372fcfa99e6.jpg"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/2d/f4/91/2df4915c1087096e40ea19ad14c91c53.jpg"></div>
-        <div class="slide"><img src="https://avatars.mds.yandex.net/i?id=d5af1673b4314dd03c882e1fc493fa4e_l-7716469-images-thumbs&n=13"></div>
-        <div class="slide"><img src="https://i.pinimg.com/736x/7a/60/10/7a6010eb117dd96219120809f8b5b44e.jpg"></div>
-    </div><button class="slider-btn prev" onclick="prevSlide()">❮</button><button class="slider-btn next" onclick="nextSlide()">❯</button><div class="dots" id="dots"></div></div></div></section>
+        </div><div class="col"><h3>Атмосфера вечера</h3><p>Мы хотим, чтобы каждый чувствовал себя комфортно и свободно. Никакой строгости, только радость и тепло в кругу близких.</p></div></div></div></section>
 
     <section class="program"><div class="container"><h2>Программа дня</h2><div class="timeline">
         <div class="timeline-item"><div class="timeline-time">15:00</div><div class="timeline-dot"></div><div class="timeline-content"><h3>Сбор гостей, welcome</h3><p>Время пролетит незаметно за игристым.</p></div></div>
@@ -283,16 +268,6 @@
 
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.3 });
         document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
-
-        const slider = document.querySelector('#look-slider .slides');
-        const slides = document.querySelectorAll('#look-slider .slide');
-        const dotsContainer = document.getElementById('dots');
-        let currentIndex = 0;
-        function updateSlider() { slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' }); document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); }
-        window.nextSlide = function() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); };
-        window.prevSlide = function() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); };
-        slides.forEach((_, i) => { const dot = document.createElement('span'); dot.className = 'dot' + (i === 0 ? ' active' : ''); dot.addEventListener('click', () => { currentIndex = i; updateSlider(); }); dotsContainer.appendChild(dot); });
-        slider.addEventListener('scroll', () => { const index = Math.round(slider.scrollLeft / slider.clientWidth); if (index !== currentIndex) { currentIndex = index; document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); } });
 
         function generateStars() { const container = document.getElementById('starsContainer'); const starCount = 80; for (let i = 0; i < starCount; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 1.5 + 0.5; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; const duration = Math.random() * 3 + 1; star.style.animationDuration = duration + 's'; star.style.animationDelay = Math.random() * 5 + 's'; container.appendChild(star); } }
         generateStars();
