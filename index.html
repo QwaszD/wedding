@@ -37,7 +37,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('big-aster.png') no-repeat left center fixed;
+            background: url('aster.png') no-repeat left center fixed;
             background-size: auto 100%;
             opacity: 0.85;
             z-index: -2;
@@ -142,7 +142,7 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .dress-code { text-align: center; }
         .dress-code .col { max-width: 800px; margin: 0 auto; padding: 2rem; border-radius: 20px; }
-        /* Цвета в сетке 3 в ряд ДЛЯ ВСЕХ ЭКРАНОВ */
+        /* Цвета в сетке 3 в ряд (всегда, без адаптива) */
         .color-palette {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -154,12 +154,8 @@
         .color-circle { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
         .color-circle:hover { transform: scale(1.05); }
         .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
-        /* Для мобильных уменьшаем кружки, но 3 колонки */
-        @media (max-width: 600px) {
-            .color-circle { width: 55px; height: 55px; }
-        }
 
-        /* Слайдер образов */
+        /* Слайдер образов (6 слайдов) */
         .look-slider-wrapper {
             max-width: 600px;
             margin: 2rem auto 0;
@@ -240,7 +236,7 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня */
+        /* Программа дня (усиленная подсветка) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -260,7 +256,7 @@
             width: 2px;
             background: #ffd700;
             transform: translateX(-50%);
-            opacity: 0.6;
+            opacity: 0.8;
         }
         .timeline-item {
             display: flex;
@@ -285,6 +281,7 @@
             color: #ffd700;
             font-weight: 600;
             padding-right: 2rem;
+            text-shadow: 0 0 4px rgba(0,0,0,0.5);
         }
         .timeline-item:nth-child(even) .timeline-time {
             text-align: left;
@@ -302,8 +299,8 @@
         }
         .timeline-item.active .timeline-dot {
             background: #ffaa00;
-            box-shadow: 0 0 0 8px rgba(255,215,0,0.6);
-            transform: scale(1.2);
+            box-shadow: 0 0 0 10px rgba(255,215,0,0.7);
+            transform: scale(1.3);
         }
         .timeline-content {
             flex: 2;
@@ -313,7 +310,8 @@
             padding: 1.5rem;
             border-radius: 12px;
             margin-left: 2rem;
-            transition: background 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,215,0,0);
         }
         .timeline-item:nth-child(even) .timeline-content {
             margin-left: 0;
@@ -321,14 +319,15 @@
         }
         .timeline-item.active .timeline-content {
             background-color: rgba(33,40,59,1);
-            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+            box-shadow: 0 0 20px rgba(255,215,0,0.5);
+            border: 1px solid rgba(255,215,0,0.6);
         }
         .timeline-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             margin-bottom: 0.3rem;
             font-weight: 600;
-            color: #e8e0d5;
+            color: #ffffff;
         }
         .timeline-content p {
             font-family: 'Lora', serif;
@@ -411,7 +410,7 @@
                         <tbody>
                             <tr>
                                 <td>31</td>
-                                <td>1</td>   <!-- Убран класс heart-day -->
+                                <td>1</td>
                                 <td>2</td>
                                 <td>3</td>
                                 <td>4</td>
@@ -431,7 +430,7 @@
         </div>
     </section>
 
-    <!-- Дресс-код и слайдер образов -->
+    <!-- Дресс-код + слайдер образов (6 образов) -->
     <section class="dress-code">
         <div class="container">
             <div class="col">
@@ -445,14 +444,16 @@
                     <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0e8, #d0c0dc);"></div></div>
                     <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e8d8c0, #dccca8);"></div></div>
                 </div>
-                <!-- Слайдер образов -->
+                <!-- Слайдер с 6 образами -->
                 <div class="look-slider-wrapper">
                     <div class="look-slider-frame" id="look-slider">
                         <div class="slides" id="slides-container">
-                            <div class="slide"><img src="sample1.png" alt="Образ 1"></div>
-                            <div class="slide"><img src="sample2.png" alt="Образ 2"></div>
-                            <div class="slide"><img src="sample3.png" alt="Образ 3"></div>
-                            <div class="slide"><img src="sample4.png" alt="Образ 4"></div>
+                            <div class="slide"><img src="obraz1.png" alt="Образ 1"></div>
+                            <div class="slide"><img src="obraz2.png" alt="Образ 2"></div>
+                            <div class="slide"><img src="obraz3.png" alt="Образ 3"></div>
+                            <div class="slide"><img src="obraz4.png" alt="Образ 4"></div>
+                            <div class="slide"><img src="obraz5.png" alt="Образ 5"></div>
+                            <div class="slide"><img src="obraz6.png" alt="Образ 6"></div>
                         </div>
                         <button class="slider-btn prev" onclick="prevSlide()">❮</button>
                         <button class="slider-btn next" onclick="nextSlide()">❯</button>
@@ -617,7 +618,7 @@
             });
         }
 
-        // Слайдер образов
+        // Слайдер образов (6 слайдов)
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
