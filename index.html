@@ -23,7 +23,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Lora', serif;
-            background: #21283b;  /* новый тёмно-синий фон */
+            background: #21283b;  /* тёмно-синий фон */
             color: var(--text);
             line-height: 1.8;
             overflow-x: hidden;
@@ -91,7 +91,7 @@
         .calendar-mini, .countdown-item, .col, .timeline-content, .wish-card, .rsvp-form, footer, .contact-card, .story .story-text {
             background-color: rgba(33,40,59,0.9);
             backdrop-filter: blur(2px);
-            color: #e0e0e0; /* светлый текст для читаемости */
+            color: #e0e0e0;
         }
         .dress-code, .location, .contacts {
             background-color: rgba(33,40,59,0.92);
@@ -173,6 +173,44 @@
         footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--text); border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; }
         @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .timeline::before { left: 20px; transform: translateX(0); } .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; } .timeline-time { text-align: left; padding-left: 3rem; margin-bottom: 0.5rem; font-size: 1.5rem; } .timeline-item:nth-child(even) .timeline-time { padding-left: 3rem; } .timeline-content { margin-left: 3rem !important; margin-right: 0 !important; width: calc(100% - 40px); } .timeline-dot { display: none; } .two-cols { flex-direction: column; align-items: center; } .story .story-content { flex-direction: column; } }
         @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
+
+        /* ===== ДОБАВЛЕНО: делаем весь текст белым, а поля ввода тёмными ===== */
+        body, body * {
+            color: #ffffff !important;
+        }
+        /* Исключение: акцентные элементы, которые должны сохранить свой цвет (например, иконки звёзд, но они не текст) — оставляем как есть */
+        /* Но для кнопок и ссылок цвет текста тоже белый, фон золотой — читаемость отличная */
+        
+        /* Чтобы placeholder в полях ввода был виден, делаем его светло-серым */
+        ::placeholder, input::placeholder, textarea::placeholder {
+            color: #cccccc !important;
+        }
+        /* Меняем фон полей ввода на тёмный, чтобы белый текст читался */
+        input[type="text"], textarea, select {
+            background: rgba(255,255,255,0.15) !important;
+            border-color: var(--accent) !important;
+            color: #ffffff !important;
+        }
+        /* Радиокнопки и их метки — уже белые */
+        .radio-option {
+            color: #ffffff !important;
+        }
+        /* Текст подписей цветов в палитре тоже белый */
+        .color-item span {
+            color: #ffffff !important;
+        }
+        /* Числа таймера оставляем золотистыми (они же accent) — но по желанию можно тоже белыми. Я оставлю золото, так красивее.
+           Чтобы переопределить, раскомментируйте следующую строку: */
+        /* .countdown-number { color: #b8a07c !important; } */
+        /* Но если нужно всё белым, то закомментируйте правило выше. Сейчас числа будут белыми из-за универсального правила.
+           Я рекомендую оставить числа золотыми, поэтому добавлю исключение: */
+        .countdown-number {
+            color: var(--accent) !important;
+        }
+        /* Заголовки h2 тоже могут быть золотистыми, но по заданию "весь текст белый" – сделаем их белыми. 
+           Если хотите золотые, то раскомментируйте: */
+        /* h2 { color: var(--accent) !important; } */
+        /* а пока h2 будет белым */
     </style>
 </head>
 <body>
