@@ -237,59 +237,43 @@
             .timeline::before { left: 20px; transform: translateX(0); }
         }
 
-        /* Цветочек астры и лепестки */
+        /* Контейнер для вашего PNG цветка (белая астра) */
         .aster-flower {
             position: fixed;
             left: 20px;
             top: 20px;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             z-index: 100;
             cursor: pointer;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
-        .aster-center {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #f0c040;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            box-shadow: 0 0 0 2px #d4a030;
+        .aster-flower img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none; /* чтобы клик проходил сквозь картинку, если нужно */
         }
-        .aster-petal {
-            position: absolute;
-            width: 14px;
-            height: 20px;
-            background: linear-gradient(135deg, #e8a0c0, #c06a8a);
-            border-radius: 40% 60% 50% 50%;
-            top: 50%;
-            left: 50%;
-            transform-origin: 0% 0%;
-            transform: rotate(var(--angle)) translate(12px, -10px);
-            filter: blur(0.5px);
-        }
+        /* Падающие белые лепестки */
         .falling-petal {
             position: fixed;
             pointer-events: none;
             z-index: 99;
-            width: 10px;
-            height: 14px;
-            background: linear-gradient(135deg, #e8a0c0, #c06a8a);
+            width: 8px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 40% 60% 50% 50%;
+            box-shadow: 0 0 2px rgba(255,255,200,0.5);
             opacity: 0;
-            animation: fallAndFade 3s ease-in forwards;
+            animation: fallAndFadeWhite 5s ease-in forwards;
         }
-        @keyframes fallAndFade {
+        @keyframes fallAndFadeWhite {
             0% {
                 transform: translateY(0) rotate(0deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(300px) rotate(360deg);
+                transform: translateY(400px) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -335,23 +319,14 @@
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
     </div>
 
-    <!-- Цветочек астры -->
     <div class="aster-flower">
-        <div class="aster-center"></div>
-        <div class="aster-petal" style="--angle: 0deg;"></div>
-        <div class="aster-petal" style="--angle: 45deg;"></div>
-        <div class="aster-petal" style="--angle: 90deg;"></div>
-        <div class="aster-petal" style="--angle: 135deg;"></div>
-        <div class="aster-petal" style="--angle: 180deg;"></div>
-        <div class="aster-petal" style="--angle: 225deg;"></div>
-        <div class="aster-petal" style="--angle: 270deg;"></div>
-        <div class="aster-petal" style="--angle: 315deg;"></div>
+        <img src="aster.png" alt="Астра">
     </div>
 
     <section class="hero">
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
-            <h1>Никита & Ксения</h1>
+            <h1>Никита | Ксения</h1>
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
@@ -549,12 +524,12 @@
                     alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!');
                     form.reset();
                 } catch (error) {
-                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в Telegram.');
+                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.');
                 }
             });
         }
 
-        // Падающие лепестки с астры
+        // Падающие белые лепестки с астры (каждые 5 секунд)
         (function() {
             const flower = document.querySelector('.aster-flower');
             if (!flower) return;
@@ -562,18 +537,18 @@
                 const petal = document.createElement('div');
                 petal.classList.add('falling-petal');
                 const rect = flower.getBoundingClientRect();
-                const startX = rect.left + rect.width / 2 - 5;
+                const startX = rect.left + rect.width / 2 - 4;
                 const startY = rect.top + rect.height / 2;
                 petal.style.left = startX + 'px';
                 petal.style.top = startY + 'px';
-                petal.style.width = (Math.random() * 6 + 6) + 'px';
-                petal.style.height = (Math.random() * 10 + 10) + 'px';
-                const duration = Math.random() * 3 + 2;
+                petal.style.width = (Math.random() * 5 + 5) + 'px';
+                petal.style.height = (Math.random() * 8 + 7) + 'px';
+                const duration = Math.random() * 3 + 3;
                 petal.style.animationDuration = duration + 's';
                 document.body.appendChild(petal);
                 setTimeout(() => petal.remove(), duration * 1000);
             }
-            setInterval(createPetal, 2000);
+            setInterval(createPetal, 5000);
         })();
     </script>
 </body>
