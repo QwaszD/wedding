@@ -29,7 +29,6 @@
             overflow-x: hidden;
             position: relative;
         }
-        /* Звёзды и метеоры */
         .stars-container {
             position: fixed;
             top: 0;
@@ -86,7 +85,6 @@
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-        /* Общие стили для всех блоков (полупрозрачный фон) */
         .hero .container,
         .dress-code .col,
         .timeline-content,
@@ -100,7 +98,6 @@
             background-color: rgba(33, 40, 59, 0.9);
             backdrop-filter: blur(2px);
         }
-        /* Для блоков, где нужна своя специфика */
         .dress-code, .location, .contacts {
             background: none;
         }
@@ -115,6 +112,13 @@
         }
         .hero .invitation-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; max-width: 600px; margin: 0 auto 2rem; color: #ffffff; font-weight: 500; line-height: 1.6; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; }
         .hero h1 { font-family: 'Manege', cursive; font-size: 5rem; font-weight: 300; margin-bottom: 0.5rem; letter-spacing: 2px; color: #ffffff; opacity: 0; animation: fadeUp 1s ease forwards; }
+        .invitation-subtext, .pre-calendar-text {
+            opacity: 0;
+            animation: fadeUp 1s ease 0.3s forwards;
+        }
+        .pre-calendar-text {
+            animation-delay: 0.4s;
+        }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1.5rem; }
         .calendar-mini { border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); padding: 1.5rem 1.2rem; width: 100%; max-width: 360px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
         .calendar-mini .month-year { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; text-align: center; }
@@ -123,7 +127,7 @@
         .calendar-mini td { font-family: 'Lora', serif; font-size: 0.9rem; text-align: center; color: #ffffff; width: 2rem; height: 2rem; line-height: 2rem; border-radius: 50%; transition: all 0.2s; }
         .calendar-mini td.heart-day { background: var(--accent); color: #21283b; font-weight: 600; box-shadow: 0 0 0 4px rgba(184,160,124,0.3); }
         .calendar-mini td.heart-day::after { content: ' ♡'; font-size: 0.7rem; }
-        .countdown { display: flex; justify-content: center; gap: 1.2rem; margin: 2rem 0; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; flex-wrap: wrap; }
+        .countdown { display: flex; justify-content: center; gap: 1.2rem; margin: 2rem 0; opacity: 0; animation: fadeUp 1s ease 0.6s forwards; flex-wrap: wrap; }
         .countdown-item { box-shadow: var(--shadow); padding: 1rem 1.2rem; border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number { font-family: 'Lora', serif; font-size: 2.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
@@ -143,87 +147,87 @@
         .color-circle:hover { transform: scale(1.05); }
         .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
 
-      .look-slider-wrapper {
-    max-width: 400px;          /* ширина примерно в 2 раза меньше исходной (было 800px) */
-    margin: 2rem auto 0;
-    padding: 0 1rem;
-}
-.look-slider-frame {
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    position: relative;
-    background-color: rgba(33, 40, 59, 0.9);
-    backdrop-filter: blur(2px);
-    height: 70vh;
-    max-height: 500px;
-}
-/* Остальные стили слайдера (кнопки, точки, слайды) остаются без изменений */
-.slides {
-    display: flex;
-    height: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.slides::-webkit-scrollbar { display: none; }
-.slide {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    position: relative;
-    height: 100%;
-}
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    background: transparent;
-    border: none;
-}
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.6);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    font-size: 1.2rem;
-    color: #ffd700;
-    cursor: pointer;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-}
-.slider-btn:hover { background: #b8a07c; color: #fff; }
-.slider-btn.prev { left: 0.8rem; }
-.slider-btn.next { right: 0.8rem; }
-.dots {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
-    z-index: 5;
-}
-.dot {
-    width: 8px;
-    height: 8px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.dot.active { background: #b8a07c; }
+        /* Слайдер образов – ширина в 2 раза меньше */
+        .look-slider-wrapper {
+            max-width: 400px;
+            margin: 2rem auto 0;
+            padding: 0 1rem;
+        }
+        .look-slider-frame {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            background-color: rgba(33, 40, 59, 0.9);
+            backdrop-filter: blur(2px);
+            height: 70vh;
+            max-height: 500px;
+        }
+        .slides {
+            display: flex;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .slides::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            position: relative;
+            height: 100%;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: transparent;
+            border: none;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-size: 1.2rem;
+            color: #ffd700;
+            cursor: pointer;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .slider-btn:hover { background: #b8a07c; color: #fff; }
+        .slider-btn.prev { left: 0.8rem; }
+        .slider-btn.next { right: 0.8rem; }
+        .dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 5;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active { background: #b8a07c; }
 
         /* Программа дня */
         .program .timeline-wrapper {
@@ -369,7 +373,19 @@
         .contact-card { text-align: center; padding: 1rem 2rem; border-radius: 12px; }
         .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; }
         .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: #ffffff; }
-        footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; border-radius: 12px; margin: 0 1.5rem 1.5rem; }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; border-radius: 12px; margin: 0 1.5rem 1.5rem; background-color: rgba(33, 40, 59, 0.9); backdrop-filter: blur(2px); }
+        footer .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        footer img {
+            width: 24px;
+            height: 24px;
+            opacity: 0.8;
+        }
         @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .color-palette { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; } .color-circle { width: 60px; height: 60px; } }
         @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } .color-palette { grid-template-columns: repeat(3, 1fr); } .color-circle { width: 50px; height: 50px; } }
     </style>
@@ -386,6 +402,8 @@
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
             <h1>Никита & Ксения</h1>
+            <p class="invitation-subtext">Приглашаем вас стать частью нашей истории.</p>
+            <p class="pre-calendar-text">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</p>
             <div class="calendar-wrapper">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
@@ -396,7 +414,7 @@
                         <tbody>
                             <tr>
                                 <td>31</td>
-                                <td>1</td>
+                                <td class="heart-day">1</td>
                                 <td>2</td>
                                 <td>3</td>
                                 <td>4</td>
@@ -404,7 +422,7 @@
                                 <td>6</td>
                             </tr>
                         </tbody>
-                    </table>
+                    <td>
                 </div>
             </div>
             <div class="countdown" id="countdown">
@@ -432,10 +450,10 @@
                 <div class="look-slider-wrapper">
                     <div class="look-slider-frame" id="look-slider">
                         <div class="slides" id="slides-container">
-                            <div class="slide"><img src="obraz4.png" alt="Образ 1"></div>
+                            <div class="slide"><img src="obraz7.png" alt="Образ 1"></div>
                             <div class="slide"><img src="obraz6.png" alt="Образ 2"></div>
                             <div class="slide"><img src="obraz5.png" alt="Образ 3"></div>
-                            <div class="slide"><img src="obraz7.png" alt="Образ 4"></div>
+                            <div class="slide"><img src="obraz4.png" alt="Образ 4"></div>
                             <div class="slide"><img src="obraz3.png" alt="Образ 5"></div>
                             <div class="slide"><img src="obraz2.png" alt="Образ 6"></div>
                             <div class="slide"><img src="obraz1.png" alt="Образ 7"></div>
@@ -517,7 +535,13 @@
         </div>
     </section>
 
-    <footer><p>С любовью, Ксения и Никита</p><p>05.09.2026</p></footer>
+    <footer>
+        <div class="footer-content">
+            <img src="aster.png" alt="Астра">
+            <span>С любовью, Ксения и Никита</span>
+        </div>
+        <p>05.09.2026</p>
+    </footer>
 
     <script>
         const weddingDate = new Date(2026, 8, 5, 15, 0);
