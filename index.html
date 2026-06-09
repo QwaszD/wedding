@@ -266,11 +266,81 @@
         .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; }
         .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: #ffffff; }
         footer { text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--accent-light); font-family: 'Lora', serif; color: #ffffff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } .story .story-content { flex-direction: column; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 3.8rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } }
         @media (max-width: 480px) { .hero h1 { font-size: 3.2rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
+
+        /* ===== ЦВЕТОК АСТРЫ С ПАДАЮЩИМИ ЛЕПЕСТКАМИ ===== */
+        .aster-flower {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            z-index: 100;
+            cursor: pointer;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .aster-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #f0c040;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 0 2px #d4a030;
+        }
+        .aster-petal {
+            position: absolute;
+            width: 14px;
+            height: 20px;
+            background: linear-gradient(135deg, #e8a0c0, #c06a8a);
+            border-radius: 40% 60% 50% 50%;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 0%;
+            transform: rotate(var(--angle)) translate(12px, -10px);
+            filter: blur(0.5px);
+        }
+        .falling-petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99;
+            width: 10px;
+            height: 14px;
+            background: linear-gradient(135deg, #e8a0c0, #c06a8a);
+            border-radius: 40% 60% 50% 50%;
+            opacity: 0;
+            animation: fallAndFade 3s ease-in forwards;
+        }
+        @keyframes fallAndFade {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Цветочек астры -->
+    <div class="aster-flower">
+        <div class="aster-center"></div>
+        <div class="aster-petal" style="--angle: 0deg;"></div>
+        <div class="aster-petal" style="--angle: 45deg;"></div>
+        <div class="aster-petal" style="--angle: 90deg;"></div>
+        <div class="aster-petal" style="--angle: 135deg;"></div>
+        <div class="aster-petal" style="--angle: 180deg;"></div>
+        <div class="aster-petal" style="--angle: 225deg;"></div>
+        <div class="aster-petal" style="--angle: 270deg;"></div>
+        <div class="aster-petal" style="--angle: 315deg;"></div>
+    </div>
 
     <div class="stars-container" id="starsContainer"></div>
     <div class="shooting-stars">
@@ -290,15 +360,7 @@
                             <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>31</td>
-                                <td class="heart-day">1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td class="heart-day">5</td>
-                                <td>6</td>
-                            </tr>
+                            <tr><td class="heart-day">31</td><td class="heart-day">1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -330,7 +392,7 @@
         </div>
     </section>
 
-    <!-- ПРОГРАММА ДНЯ (ровная линия, подсветка при скролле) -->
+    <!-- ПРОГРАММА ДНЯ -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
@@ -430,7 +492,6 @@
             const viewportMid = window.scrollY + window.innerHeight / 2;
             items.forEach((item, idx) => {
                 const rect = item.getBoundingClientRect();
-                const itemMid = rect.top + rect.height / 2;
                 const dist = Math.abs(viewportMid - (rect.top + window.scrollY + rect.height/2));
                 if (dist < minDist) {
                     minDist = dist;
@@ -480,10 +541,32 @@
                     alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!');
                     form.reset();
                 } catch (error) {
-                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.');
+                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в Telegram.');
                 }
             });
         }
+
+        // Падающие лепестки с цветка астры
+        (function() {
+            const flower = document.querySelector('.aster-flower');
+            if (!flower) return;
+            function createPetal() {
+                const petal = document.createElement('div');
+                petal.classList.add('falling-petal');
+                const rect = flower.getBoundingClientRect();
+                const startX = rect.left + rect.width / 2 - 5;
+                const startY = rect.top + rect.height / 2;
+                petal.style.left = startX + 'px';
+                petal.style.top = startY + 'px';
+                petal.style.width = (Math.random() * 6 + 6) + 'px';
+                petal.style.height = (Math.random() * 10 + 10) + 'px';
+                const duration = Math.random() * 3 + 2;
+                petal.style.animationDuration = duration + 's';
+                document.body.appendChild(petal);
+                setTimeout(() => petal.remove(), duration * 1000);
+            }
+            setInterval(createPetal, 2000);
+        })();
     </script>
 </body>
 </html>
