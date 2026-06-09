@@ -142,12 +142,20 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .dress-code { text-align: center; }
         .dress-code .col { max-width: 800px; margin: 0 auto; padding: 2rem; border-radius: 20px; }
-        .color-palette { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-        .color-item { text-align: center; width: 70px; }
-        .color-circle { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        /* Цвета в сетке 3 в ряд */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            justify-items: center;
+            margin-bottom: 2rem;
+        }
+        .color-item { text-align: center; width: 100%; }
+        .color-circle { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
+        .color-circle:hover { transform: scale(1.05); }
         .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
 
-        /* Слайдер образов внутри блока дресс-кода */
+        /* Слайдер образов */
         .look-slider-wrapper {
             max-width: 600px;
             margin: 2rem auto 0;
@@ -342,6 +350,10 @@
                 width: calc(100% - 2rem);
             }
             .timeline::before { left: 20px; transform: translateX(0); }
+            .color-palette { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .color-palette { grid-template-columns: 1fr; }
         }
 
         /* Остальные блоки */
@@ -399,7 +411,7 @@
                         <tbody>
                             <tr>
                                 <td>31</td>
-                                <td>1</td>
+                                <td class="heart-day">1</td>
                                 <td>2</td>
                                 <td>3</td>
                                 <td>4</td>
@@ -426,12 +438,12 @@
                 <h3>Цвета вечера</h3>
                 <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
                 <div class="color-palette">
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d4e6d4, #c2d9c2);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #cde0f0, #bcd0e5);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5e6d3, #ecd8c0);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5d6d6, #ecc4c4);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0f0, #cfbde5);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f0e0c0, #e5d0a8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d4e0d0, #c0d0ba);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c5d9e8, #b0c9dd);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5e6c8, #f0dcb0);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5d8d8, #eec8c8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0e8, #d0c0dc);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e8d8c0, #dccca8);"></div></div>
                 </div>
                 <!-- Слайдер образов -->
                 <div class="look-slider-wrapper">
@@ -451,6 +463,7 @@
         </div>
     </section>
 
+    <!-- Программа дня -->
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
