@@ -127,7 +127,7 @@
         .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .col p { color: #ffffff; }
 
-        /* Слайдер образов (оставлен как у вас) */
+        /* Слайдер образов (оставлен как есть) */
         .look-slider-wrapper {
             max-width: 600px;
             margin: 3rem auto 0;
@@ -207,13 +207,14 @@
         }
         .dot.active { background: var(--accent); }
 
-        /* Программа дня (новая версия) */
+        /* ========== НОВАЯ ПРОГРАММА ДНЯ (волнистая линия и звезда) ========== */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem 0;
         }
+        /* Волнистая линия через SVG (прямая удалена) */
         .wave-svg {
             position: absolute;
             left: 50%;
@@ -228,12 +229,13 @@
             stroke: #ffd700;
             stroke-width: 3;
             stroke-dasharray: 6 8;
+            fill: none;
             filter: drop-shadow(0 0 2px gold);
         }
         .falling-star {
             position: absolute;
             left: 50%;
-            font-size: 2.2rem;
+            font-size: 2rem;
             filter: drop-shadow(0 0 6px gold);
             z-index: 20;
             pointer-events: none;
@@ -244,6 +246,10 @@
         .timeline {
             position: relative;
             z-index: 2;
+        }
+        /* Убираем старую прямую линию */
+        .timeline::before {
+            display: none;
         }
         .timeline-item {
             display: flex;
@@ -452,7 +458,7 @@
         </div>
     </section>
 
-    <!-- Слайдер образов (если хотите убрать – удалите этот блок) -->
+    <!-- Слайдер образов (если не нужен – удалите) -->
     <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
@@ -472,16 +478,16 @@
         </div>
     </section>
 
-    <!-- Программа дня (звезда движется по волнистой линии) -->
+    <!-- ПРОГРАММА ДНЯ (волнистая линия, звезда движется при скролле) -->
     <section class="program" id="programSection">
         <div class="container">
             <h2>Программа дня</h2>
             <div class="timeline-wrapper">
                 <svg class="wave-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path id="wavePath" d="M50,0 Q65,25 50,50 Q35,75 50,100" stroke="var(--accent)" stroke-width="3" fill="none" stroke-dasharray="4 6" />
+                    <path d="M50,0 Q65,25 50,50 Q35,75 50,100" stroke="#ffd700" stroke-width="3" fill="none" stroke-dasharray="6 8" />
                 </svg>
                 <div class="falling-star" id="fallingStar">⭐</div>
-                <div class="timeline" id="timeline">
+                <div class="timeline">
                     <div class="timeline-item" data-time="15:00">
                         <div class="timeline-time">15:00</div>
                         <div class="timeline-dot"></div>
@@ -552,7 +558,7 @@
         </div>
     </section>
 
-    <!-- Форма RSVP -->
+    <!-- RSVP -->
     <section class="rsvp">
         <div class="container">
             <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
@@ -601,7 +607,7 @@
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
         let currentIndex = 0;
-        function updateSlider() { slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' }); document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); }
+        function updateSlider() { if (slider) slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' }); document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); }
         window.nextSlide = function() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); };
         window.prevSlide = function() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); };
         if (slides.length && dotsContainer) {
@@ -609,15 +615,15 @@
             if (slider) slider.addEventListener('scroll', () => { const index = Math.round(slider.scrollLeft / slider.clientWidth); if (index !== currentIndex) { currentIndex = index; document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); } });
         }
 
-        // Генерация мерцающих звёзд
+        // Звёзды
         function generateStars() { const container = document.getElementById('starsContainer'); if (!container) return; const starCount = 80; for (let i = 0; i < starCount; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 1.5 + 0.5; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; const duration = Math.random() * 3 + 1; star.style.animationDuration = duration + 's'; star.style.animationDelay = Math.random() * 5 + 's'; container.appendChild(star); } }
         generateStars();
 
-        // Отправка формы
+        // Форма
         const form = document.getElementById('rsvp-form');
         if (form) { form.addEventListener('submit', async function(e) { e.preventDefault(); const formData = new FormData(form); try { await fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' }); alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!'); form.reset(); } catch (error) { alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.'); } }); }
 
-        // ПРОГРАММА: движение звезды по волнистой линии при скролле
+        // Движение звезды по волнистой линии
         (function() {
             const programSection = document.getElementById('programSection');
             if (!programSection) return;
@@ -673,7 +679,6 @@
                 star.style.top = targetTop + 'px';
                 star.style.transform = `translateX(calc(-50% + ${waveOffset}px)) rotate(${Date.now() / 20}deg)`;
                 
-                // Подсветка активного пункта
                 let activeIndex = 0;
                 let minDiff = Infinity;
                 dotPositions.forEach((pos, i) => {
