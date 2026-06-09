@@ -127,7 +127,7 @@
         .col h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .col p { color: #ffffff; }
 
-        /* Слайдер образов (оставлен как есть) */
+        /* Слайдер образов */
         .look-slider-wrapper {
             max-width: 600px;
             margin: 3rem auto 0;
@@ -214,23 +214,29 @@
             margin: 0 auto;
             padding: 2rem 0;
         }
-        /* Волнистая линия через SVG (прямая удалена) */
-        .wave-svg {
+        /* Волнистая линия через CSS-маску (без SVG) */
+        .wave-line {
             position: absolute;
             left: 50%;
             top: 0;
-            width: 40px;
+            width: 4px;
             height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                #ffd700 0px,
+                #ffd700 15px,
+                transparent 15px,
+                transparent 30px
+            );
             transform: translateX(-50%);
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100"><path d="M5,0 Q15,25 5,50 Q-5,75 5,100" stroke="black" fill="none" stroke-width="4"/></svg>');
+            mask-repeat: repeat-y;
+            mask-size: 10px 100%;
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 100"><path d="M5,0 Q15,25 5,50 Q-5,75 5,100" stroke="black" fill="none" stroke-width="4"/></svg>');
+            -webkit-mask-repeat: repeat-y;
+            -webkit-mask-size: 10px 100%;
             pointer-events: none;
             z-index: 1;
-        }
-        .wave-svg path {
-            stroke: #ffd700;
-            stroke-width: 3;
-            stroke-dasharray: 6 8;
-            fill: none;
-            filter: drop-shadow(0 0 2px gold);
         }
         .falling-star {
             position: absolute;
@@ -247,9 +253,9 @@
             position: relative;
             z-index: 2;
         }
-        /* Убираем старую прямую линию */
+        /* Удаляем старую прямую линию, если она была */
         .timeline::before {
-            display: none;
+            display: none !important;
         }
         .timeline-item {
             display: flex;
@@ -350,7 +356,7 @@
                 margin-right: 0 !important;
                 width: calc(100% - 2rem);
             }
-            .wave-svg {
+            .wave-line {
                 display: none;
             }
             .falling-star {
@@ -458,7 +464,7 @@
         </div>
     </section>
 
-    <!-- Слайдер образов (если не нужен – удалите) -->
+    <!-- Слайдер образов (можно удалить, если не нужен) -->
     <section style="background: var(--accent-light); padding: 0;">
         <div class="look-slider-wrapper">
             <div class="look-slider-frame" id="look-slider">
@@ -478,17 +484,15 @@
         </div>
     </section>
 
-    <!-- ПРОГРАММА ДНЯ (волнистая линия, звезда движется при скролле) -->
+    <!-- Программа дня (исправленная) -->
     <section class="program" id="programSection">
         <div class="container">
             <h2>Программа дня</h2>
             <div class="timeline-wrapper">
-                <svg class="wave-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d="M50,0 Q65,25 50,50 Q35,75 50,100" stroke="#ffd700" stroke-width="3" fill="none" stroke-dasharray="6 8" />
-                </svg>
+                <div class="wave-line"></div>
                 <div class="falling-star" id="fallingStar">⭐</div>
                 <div class="timeline">
-                    <div class="timeline-item" data-time="15:00">
+                    <div class="timeline-item">
                         <div class="timeline-time">15:00</div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -496,7 +500,7 @@
                             <p>Время пролетит незаметно за игристым.</p>
                         </div>
                     </div>
-                    <div class="timeline-item" data-time="16:00">
+                    <div class="timeline-item">
                         <div class="timeline-time">16:00</div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -504,7 +508,7 @@
                             <p>Вы станете свидетелями создания нашей семьи.</p>
                         </div>
                     </div>
-                    <div class="timeline-item" data-time="18:00">
+                    <div class="timeline-item">
                         <div class="timeline-time">18:00</div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -512,7 +516,7 @@
                             <p>Основная часть торжества.</p>
                         </div>
                     </div>
-                    <div class="timeline-item" data-time="23:00">
+                    <div class="timeline-item">
                         <div class="timeline-time">23:00</div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -558,7 +562,7 @@
         </div>
     </section>
 
-    <!-- RSVP -->
+    <!-- RSVP форма -->
     <section class="rsvp">
         <div class="container">
             <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
@@ -615,11 +619,11 @@
             if (slider) slider.addEventListener('scroll', () => { const index = Math.round(slider.scrollLeft / slider.clientWidth); if (index !== currentIndex) { currentIndex = index; document.querySelectorAll('#look-slider .dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); } });
         }
 
-        // Звёзды
+        // Генерация звёзд
         function generateStars() { const container = document.getElementById('starsContainer'); if (!container) return; const starCount = 80; for (let i = 0; i < starCount; i++) { const star = document.createElement('div'); star.classList.add('star'); const size = Math.random() * 1.5 + 0.5; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%'; const duration = Math.random() * 3 + 1; star.style.animationDuration = duration + 's'; star.style.animationDelay = Math.random() * 5 + 's'; container.appendChild(star); } }
         generateStars();
 
-        // Форма
+        // Отправка формы
         const form = document.getElementById('rsvp-form');
         if (form) { form.addEventListener('submit', async function(e) { e.preventDefault(); const formData = new FormData(form); try { await fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' }); alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!'); form.reset(); } catch (error) { alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.'); } }); }
 
@@ -633,13 +637,13 @@
             if (!timelineWrapper || !star || timelineItems.length === 0) return;
 
             function getDotPositions() {
-                const dots = [];
+                let dots = [];
                 timelineItems.forEach(item => {
                     const dot = item.querySelector('.timeline-dot');
                     if (dot) {
                         const rect = dot.getBoundingClientRect();
                         const wrapperRect = timelineWrapper.getBoundingClientRect();
-                        const topRelative = rect.top + window.scrollY - wrapperRect.top;
+                        let topRelative = rect.top + window.scrollY - wrapperRect.top;
                         dots.push(topRelative);
                     }
                 });
@@ -654,15 +658,15 @@
                 let progress = (scrollTop + window.innerHeight / 2 - wrapperTop) / (wrapperBottom - wrapperTop);
                 progress = Math.min(1, Math.max(0, progress));
                 
-                const dotPositions = getDotPositions();
+                let dotPositions = getDotPositions();
                 if (dotPositions.length < 2) return;
                 
                 let targetTop;
                 if (progress <= 0) targetTop = dotPositions[0];
                 else if (progress >= 1) targetTop = dotPositions[dotPositions.length - 1];
                 else {
-                    const totalLength = dotPositions[dotPositions.length - 1] - dotPositions[0];
-                    const targetY = dotPositions[0] + progress * totalLength;
+                    let totalLength = dotPositions[dotPositions.length - 1] - dotPositions[0];
+                    let targetY = dotPositions[0] + progress * totalLength;
                     let idx = 0;
                     for (let i = 0; i < dotPositions.length - 1; i++) {
                         if (targetY >= dotPositions[i] && targetY <= dotPositions[i+1]) {
@@ -670,19 +674,19 @@
                             break;
                         }
                     }
-                    const t = (targetY - dotPositions[idx]) / (dotPositions[idx+1] - dotPositions[idx]);
+                    let t = (targetY - dotPositions[idx]) / (dotPositions[idx+1] - dotPositions[idx]);
                     targetTop = dotPositions[idx] + t * (dotPositions[idx+1] - dotPositions[idx]);
                 }
                 
-                const amplitude = 18;
-                const waveOffset = Math.sin(progress * Math.PI * 2) * amplitude;
+                let amplitude = 18;
+                let waveOffset = Math.sin(progress * Math.PI * 2) * amplitude;
                 star.style.top = targetTop + 'px';
                 star.style.transform = `translateX(calc(-50% + ${waveOffset}px)) rotate(${Date.now() / 20}deg)`;
                 
                 let activeIndex = 0;
                 let minDiff = Infinity;
                 dotPositions.forEach((pos, i) => {
-                    const diff = Math.abs(pos - targetTop);
+                    let diff = Math.abs(pos - targetTop);
                     if (diff < minDiff) {
                         minDiff = diff;
                         activeIndex = i;
@@ -701,7 +705,7 @@
             setInterval(() => {
                 if (star.style.top) {
                     let currentTransform = star.style.transform;
-                    const rotate = Date.now() / 30;
+                    let rotate = Date.now() / 30;
                     currentTransform = currentTransform.replace(/rotate\([^)]*\)/, `rotate(${rotate}deg)`);
                     star.style.transform = currentTransform;
                 }
