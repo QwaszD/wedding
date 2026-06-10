@@ -29,7 +29,7 @@
             overflow-x: hidden;
             position: relative;
         }
-        /* Звёзды и метеоры */
+        /* Звёзды и метеоры (без изменений, они уже есть) */
         .stars-container {
             position: fixed;
             top: 0;
@@ -191,7 +191,7 @@
         .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Дресс-код и цвета — сужены, центрированы, ширина 480px */
+        /* Дресс-код и цвета */
         .dress-code { text-align: center; }
         .dress-code .col {
             max-width: 480px;
@@ -407,14 +407,18 @@
             .timeline::before { left: 20px; transform: translateX(0); }
             .color-palette { gap: 0.5rem; }
             .color-circle { width: 60px; height: 60px; }
-            .name-nikita, .name-kseniya { font-size: 3.8rem; }
-            .name-and { font-size: 1.6rem; }
+            .name-nikita, .name-kseniya { font-size: 4.5rem; }
+            .name-and { font-size: 2rem; }
+            .hero .invite-line { font-size: 1.4rem; }
+            .calendar-story { font-size: 1.2rem; }
         }
         @media (max-width: 480px) {
             .hero h1 { gap: 0.1rem; }
-            .name-nikita, .name-kseniya { font-size: 2.8rem; }
-            .name-and { font-size: 1.3rem; }
+            .name-nikita, .name-kseniya { font-size: 3.5rem; }
+            .name-and { font-size: 1.8rem; }
             .color-circle { width: 50px; height: 50px; }
+            .hero .invite-line { font-size: 1.3rem; }
+            .calendar-story { font-size: 1.1rem; }
         }
 
         /* Локация */
@@ -489,8 +493,6 @@
                 opacity: 0;
             }
         }
-        @media (max-width: 768px) { .hero h1 { font-size: 3.5rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } }
-        @media (max-width: 480px) { .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
     </style>
 </head>
 <body>
