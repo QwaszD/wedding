@@ -130,7 +130,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-top: 16vh;  /* больше воздуха сверху */
+            padding-top: 16vh;
             text-align: center;
             background: none;
         }
@@ -151,7 +151,7 @@
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
             margin-top: 2rem;
-            margin-bottom: 6rem;  /* больше воздуха перед именами */
+            margin-bottom: 8rem;  /* ещё больше воздуха */
         }
         .hero h1 {
             position: relative;
@@ -172,13 +172,13 @@
         }
         .name-nikita {
             top: 0;
-            left: 7rem;  /* дальше от and */
+            left: 7rem;
         }
         .name-kseniya {
             bottom: 0;
-            right: 7rem;  /* дальше от and */
+            right: 7rem;
         }
-        /* Светящиеся пятна под именами (ярче и шире) */
+        /* Белые пятна под именами */
         .name-nikita::before,
         .name-kseniya::before {
             content: '';
@@ -186,13 +186,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 170%;      /* увеличенный диаметр */
+            width: 170%;
             height: 170%;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 75%);
+            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 80%);
             border-radius: 50%;
-            filter: blur(18px);
+            filter: blur(20px);
             z-index: -1;
-            opacity: 0.85;
+            opacity: 0.9;
             pointer-events: none;
         }
         .name-and {
@@ -217,25 +217,18 @@
             position: relative;
             display: inline-block;
         }
-        /* Золотая овальная рамка вокруг фразы */
-        .invite-line::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: calc(100% + 2.5rem);
-            height: calc(100% + 1.2rem);
-            border: 2px solid var(--accent);
-            border-radius: 50%;
+        /* Пустой контейнер для PNG */
+        .decor-line {
+            display: block;
+            margin: 1.2rem auto 0;   /* воздух между фразой и картинкой */
+            width: 200px;           /* можно подогнать под размер PNG */
+            height: auto;
             opacity: 0;
-            animation: fadeUp 1s ease 0.5s forwards;
-            z-index: -1;
-            pointer-events: none;
+            animation: fadeUp 1s ease 0.6s forwards;
         }
 
         /* Остальной контент */
-        .rest-content { margin-top: 1rem; }
+        .rest-content { margin-top: 0.5rem; }  /* уменьшено расстояние */
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
         .calendar-mini {
             border-radius: 20px;
@@ -391,11 +384,8 @@
             .name-kseniya { right: 3rem; }
             .name-and { font-size: 2.5rem; }
             .hero h1 { height: 250px; }
-            .hero .small-note { font-size: 0.9rem; margin-bottom: 4rem; }
-            .invite-line::before {
-                width: calc(100% + 2rem);
-                height: calc(100% + 1rem);
-            }
+            .hero .small-note { font-size: 0.9rem; margin-bottom: 5rem; }
+            .decor-line { width: 160px; }
             .color-palette { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .color-circle { width: 70px; height: 70px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
@@ -420,11 +410,8 @@
             .name-and { font-size: 2rem; }
             .name-nikita::before,
             .name-kseniya::before { width: 150%; height: 150%; }
-            .invite-line::before {
-                width: calc(100% + 1.5rem);
-                height: calc(100% + 0.8rem);
-            }
-            .hero .small-note { margin-bottom: 3rem; }
+            .hero .small-note { margin-bottom: 4rem; }
+            .decor-line { width: 140px; }
             .color-circle { width: 60px; height: 60px; }
             .calendar-mini { padding: 1rem; }
             .calendar-mini td { font-size: 0.8rem; width: 1.8rem; height: 1.8rem; line-height: 1.8rem; }
@@ -455,6 +442,8 @@
                 <span class="name-kseniya">КСЕНИЯ</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории.</div>
+            <!-- Место для твоего PNG с декоративной линией -->
+            <img src="decor-line.png" alt="линия" class="decor-line">
         </div>
     </section>
 
