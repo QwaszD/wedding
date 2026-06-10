@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Свадьба Никиты и Ксении 05.09.2026</title>
+    <title>Свадьба Ксении и Никиты 05.09.2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         @font-face {
@@ -133,19 +133,29 @@
             animation: fadeUp 1s ease 0.2s forwards;
         }
         .hero h1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
             font-family: 'CD Masvol', cursive;
-            font-size: 7rem;
+            margin: 1.5rem 0;
+        }
+        .name-nikita, .name-kseniya {
+            font-size: 5rem;
             font-weight: 100;
-            margin: 0.5rem 0;
+            line-height: 1.2;
+        }
+        .name-and {
+            font-size: 2rem;
+            font-family: 'Lora', serif;
+            font-style: italic;
             letter-spacing: 2px;
-            color: #ffffff;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
+            opacity: 0.9;
         }
         .hero .invite-line {
             font-family: 'Lora', serif;
             font-size: 1.3rem;
-            margin: 1rem auto 0;
+            margin-top: 0.5rem;
             opacity: 0;
             animation: fadeUp 1s ease 0.3s forwards;
             font-style: italic;
@@ -397,9 +407,13 @@
             .timeline::before { left: 20px; transform: translateX(0); }
             .color-palette { gap: 0.5rem; }
             .color-circle { width: 60px; height: 60px; }
+            .name-nikita, .name-kseniya { font-size: 3.8rem; }
+            .name-and { font-size: 1.6rem; }
         }
         @media (max-width: 480px) {
-            .hero h1 { font-size: 3rem; }
+            .hero h1 { gap: 0.1rem; }
+            .name-nikita, .name-kseniya { font-size: 2.8rem; }
+            .name-and { font-size: 1.3rem; }
             .color-circle { width: 50px; height: 50px; }
         }
 
@@ -476,7 +490,7 @@
             }
         }
         @media (max-width: 768px) { .hero h1 { font-size: 3.5rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } }
-        @media (max-width: 480px) { .hero h1 { font-size: 2.8rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
+        @media (max-width: 480px) { .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
     </style>
 </head>
 <body>
@@ -491,9 +505,11 @@
     <section class="hero">
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
-            <h1>НИКИТА</h1>
-            <h1>and</h1>
-            <h1>КСЕНИЯ</h1>
+            <h1>
+                <span class="name-nikita">НИКИТА</span>
+                <span class="name-and">and</span>
+                <span class="name-kseniya">КСЕНИЯ</span>
+            </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории.</div>
         </div>
     </section>
@@ -511,13 +527,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>31</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td class="heart-day">5</td>
-                                <td>6</td>
+                                <td>31<\/td>
+                                <td>1<\/td>
+                                <td>2<\/td>
+                                <td>3<\/td>
+                                <td>4<\/td>
+                                <td class="heart-day">5<\/td>
+                                <td>6<\/td>
                             </tr>
                         </tbody>
                     </table>
