@@ -29,6 +29,7 @@
             overflow-x: hidden;
             position: relative;
         }
+        /* Звёзды и метеоры */
         .stars-container {
             position: fixed;
             top: 0;
@@ -85,14 +86,12 @@
         .meteor:nth-child(7) { top: -8px; left: 10%; transform: rotate(48deg); animation: shootGold 6s linear infinite; animation-delay: 7s; }
         .meteor:nth-child(8) { top: -18px; left: 50%; transform: rotate(40deg); animation: shootGold 8.5s linear infinite; animation-delay: 1.5s; }
 
-        /* Общие стили для блоков */
-        .hero .container,
+        /* Общие стили для всех блоков (кроме hero) */
         .dress-code .col,
         .timeline-content,
         .wish-card,
         .rsvp-form,
         .location,
-        .contact-card,
         footer,
         .calendar-mini,
         .countdown-item,
@@ -105,26 +104,28 @@
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 4.5rem 0; position: relative; z-index: 2; }
 
-        /* Hero — только имена и приглашение */
+        /* HERO на весь экран */
         .hero {
-            text-align: center;
-            padding: 5rem 0;
-            background: none;
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: none;
+            padding: 0;
         }
         .hero .container {
+            background-color: rgba(33, 40, 59, 0.9);
+            backdrop-filter: blur(2px);
             border-radius: 20px;
             padding: 2rem;
-            width: 100%;
+            max-width: 800px;
+            width: 90%;
         }
         .hero .invitation-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: 1.4rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
             color: #ffffff;
             font-weight: 500;
             line-height: 1.6;
@@ -135,148 +136,59 @@
             font-family: 'Manege', cursive;
             font-size: 5rem;
             font-weight: 300;
-            margin-bottom: 1rem;
+            margin: 0.5rem 0;
             letter-spacing: 2px;
             color: #ffffff;
             opacity: 0;
             animation: fadeUp 1s ease forwards;
         }
         .hero .invite-line {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin: 1rem auto;
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            margin: 1rem auto 0;
             opacity: 0;
             animation: fadeUp 1s ease 0.3s forwards;
             font-style: italic;
             letter-spacing: 0.5px;
-            max-width: 500px;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Блок календаря и таймера (появляется при скролле) */
-        .calendar-section {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .calendar-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .calendar-wrapper {
-            display: flex;
-            justify-content: center;
+        /* Остальной контент (календарь и далее) */
+        .rest-content {
             margin-top: 1rem;
         }
-        .calendar-mini {
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-            padding: 1.5rem 1.2rem;
-            width: 100%;
-            max-width: 360px;
-        }
-        .calendar-mini .month-year {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 0.8rem;
-            text-align: center;
-        }
-        .calendar-mini table {
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-        .calendar-mini th {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            font-size: 0.75rem;
-            color: #ccc;
-            padding: 0.3rem 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .calendar-mini td {
-            font-family: 'Lora', serif;
-            font-size: 0.9rem;
-            text-align: center;
-            color: #ffffff;
-            width: 2rem;
-            height: 2rem;
-            line-height: 2rem;
-            border-radius: 50%;
-            transition: all 0.2s;
-        }
-        .calendar-mini td.heart-day {
-            background: var(--accent);
-            color: #21283b;
-            font-weight: 600;
-            box-shadow: 0 0 0 4px rgba(184,160,124,0.3);
-        }
-        .calendar-mini td.heart-day::after {
-            content: ' ♡';
-            font-size: 0.7rem;
-        }
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        .countdown-item {
-            box-shadow: var(--shadow);
-            padding: 1rem 1.2rem;
-            border-radius: 12px;
-            text-align: center;
-            min-width: 70px;
-            transition: transform 0.3s;
-            flex: 0 1 auto;
-        }
-        .countdown-item:hover { transform: translateY(-5px); }
-        .countdown-number {
-            font-family: 'Lora', serif;
-            font-size: 2.4rem;
-            font-weight: 600;
-            color: var(--accent);
-            line-height: 1;
-        }
-        .countdown-label {
-            font-family: 'Lora', serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 0.3rem;
-            color: #ffffff;
-        }
-        /* Фраза над календарём */
         .calendar-story {
             text-align: center;
-            margin: 1rem auto;
+            max-width: 600px;
+            margin: 2rem auto 1rem;
             font-family: 'Lora', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-style: italic;
-            max-width: 500px;
-            color: #f0f0f0;
-        }
-
-        /* Остальные блоки (дресс-код, программа дня и т.д.) тоже появляются при скролле */
-        .fade-on-scroll {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            animation: fadeUp 1s ease 0.2s forwards;
         }
-        .fade-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
+        .calendar-mini { border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); padding: 1.5rem 1.2rem; width: 100%; max-width: 360px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
+        .calendar-mini .month-year { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; text-align: center; }
+        .calendar-mini table { border-collapse: collapse; margin: 0 auto; }
+        .calendar-mini th { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 0.75rem; color: #ccc; padding: 0.3rem 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .calendar-mini td { font-family: 'Lora', serif; font-size: 0.9rem; text-align: center; color: #ffffff; width: 2rem; height: 2rem; line-height: 2rem; border-radius: 50%; transition: all 0.2s; }
+        .calendar-mini td.heart-day { background: var(--accent); color: #21283b; font-weight: 600; box-shadow: 0 0 0 4px rgba(184,160,124,0.3); }
+        .calendar-mini td.heart-day::after { content: ' ♡'; font-size: 0.7rem; }
+        .countdown { display: flex; justify-content: center; gap: 1.2rem; margin: 2rem 0; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; flex-wrap: wrap; }
+        .countdown-item { box-shadow: var(--shadow); padding: 1rem 1.2rem; border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
+        .countdown-item:hover { transform: translateY(-5px); }
+        .countdown-number { font-family: 'Lora', serif; font-size: 2.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
+        .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Дресс-код и цвета */
+        /* Дресс-код и цвета — сужены, центрированы, ширина 480px */
         .dress-code { text-align: center; }
-        .dress-code .col { max-width: 800px; margin: 0 auto; padding: 2rem; border-radius: 20px; }
+        .dress-code .col {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 20px;
+        }
         .color-palette {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -488,20 +400,23 @@
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 3rem; }
-            .hero .invite-line { font-size: 1.2rem; }
             .color-circle { width: 50px; height: 50px; }
         }
 
-        /* Локация, пожелания, форма, контакты, футер */
+        /* Локация */
         .location { text-align: center; padding: 4rem 0; border-radius: 20px; margin: 0 1.5rem; }
         .location p { font-family: 'Lora', serif; color: #ffffff; }
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Lora', serif; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
+
+        /* Пожелания */
         .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
         .wish-card { border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .wish-card p { font-family: 'Lora', serif; font-size: 0.95rem; color: #ffffff; }
+
+        /* RSVP форма */
         .rsvp-form { max-width: 600px; margin: 0 auto; padding: 3rem; border-radius: 12px; text-align: left; }
         .form-group { margin-bottom: 2rem; }
         label { display: block; font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #ffffff; margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
@@ -515,11 +430,8 @@
         .radio-option input[type="radio"]:checked { background: var(--accent); box-shadow: inset 0 0 0 4px #21283b; }
         .btn { display: block; width: 100%; background: var(--accent); color: #21283b; border: none; padding: 1rem; border-radius: 30px; font-family: 'Lora', serif; font-weight: 500; letter-spacing: 1px; cursor: pointer; font-size: 1rem; transition: all 0.3s; margin-top: 1rem; }
         .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); color: #ffffff; }
-        .contacts { text-align: center; }
-        .contact-cards { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
-        .contact-card { text-align: center; padding: 1rem 2rem; border-radius: 12px; }
-        .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; }
-        .contact-card p { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: #ffffff; }
+
+        /* Футер */
         footer {
             display: flex;
             align-items: center;
@@ -533,12 +445,38 @@
             color: #ffffff;
             border-radius: 12px;
             margin: 0 1.5rem 1.5rem;
+            position: relative;
         }
         footer img {
             width: 30px;
             height: auto;
             opacity: 0.9;
         }
+        /* Падающие лепестки */
+        .falling-petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            width: 8px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 40% 60% 50% 50%;
+            box-shadow: 0 0 2px rgba(255,255,200,0.5);
+            opacity: 0;
+            animation: fallAndFadeWhite 5s ease-in forwards;
+        }
+        @keyframes fallAndFadeWhite {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @media (max-width: 768px) { .hero h1 { font-size: 3.5rem; } .calendar-mini { max-width: 320px; } .countdown-item { padding: 0.8rem 1rem; min-width: 60px; } .countdown-number { font-size: 1.8rem; } }
+        @media (max-width: 480px) { .hero h1 { font-size: 2.8rem; } .hero .invitation-text { font-size: 1.1rem; } .countdown { gap: 0.8rem; } .countdown-item { padding: 0.7rem 0.8rem; } .countdown-number { font-size: 1.5rem; } .countdown-label { font-size: 0.7rem; } }
     </style>
 </head>
 <body>
@@ -549,7 +487,7 @@
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
     </div>
 
-    <!-- Hero: только имена и приглашение -->
+    <!-- Hero на весь экран -->
     <section class="hero">
         <div class="container">
             <p class="invitation-text">Будто все складывалось именно так, как должно было сложиться.<br>А мы лишь раз за разом выбирали друг друга.</p>
@@ -558,8 +496,8 @@
         </div>
     </section>
 
-    <!-- Календарь и таймер (появляются при скролле) -->
-    <section class="calendar-section fade-on-scroll">
+    <!-- Остальной контент (календарь и далее) -->
+    <div class="rest-content">
         <div class="container">
             <div class="calendar-story">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</div>
             <div class="calendar-wrapper">
@@ -571,7 +509,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>31</td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td>
+                                <td>31</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td class="heart-day">5</td>
+                                <td>6</td>
                             </tr>
                         </tbody>
                     </table>
@@ -584,10 +528,9 @@
                 <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">секунд</div></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Дресс-код + слайдер -->
-    <section class="dress-code fade-on-scroll">
+    <section class="dress-code">
         <div class="container">
             <div class="col">
                 <h3>Цвета вечера</h3>
@@ -620,8 +563,7 @@
         </div>
     </section>
 
-    <!-- Программа дня -->
-    <section class="program fade-on-scroll">
+    <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
             <div class="timeline-wrapper">
@@ -651,8 +593,7 @@
         </div>
     </section>
 
-    <!-- Локация (после программы дня) -->
-    <section class="location fade-on-scroll">
+    <section class="location">
         <div class="container">
             <h2>Локация</h2>
             <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
@@ -661,8 +602,7 @@
         </div>
     </section>
 
-    <!-- Несколько просьб -->
-    <section class="wishes fade-on-scroll">
+    <section class="wishes">
         <div class="container">
             <h2>Несколько просьб</h2>
             <div class="cards">
@@ -678,8 +618,7 @@
         </div>
     </section>
 
-    <!-- RSVP форма -->
-    <section class="rsvp fade-on-scroll">
+    <section class="rsvp">
         <div class="container">
             <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
             <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
@@ -692,30 +631,12 @@
         </div>
     </section>
 
-    <!-- Контакты -->
-    <section class="contacts fade-on-scroll">
-        <div class="container">
-            <h2>Контакты</h2>
-            <div class="contact-cards">
-                <div class="contact-card">
-                    <h3>Помощник 1</h3>
-                    <p>8 (999) 123-45-67</p>
-                </div>
-                <div class="contact-card">
-                    <h3>Помощник 2</h3>
-                    <p>8 (999) 765-43-21</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="fade-on-scroll">
-        <span>С любовью, Ксения и Никита</span>
-        <img src="aster.png" alt="Астра">
+    <footer>
+        <span>То, что было лишь маленькой точкой на горизонте, со временем расцвело в нечто большее.</span>
+        <img src="aster.png" alt="Астра" id="asterFooter">
     </footer>
 
     <script>
-        // Таймер
         const weddingDate = new Date(2026, 8, 5, 15, 0);
         function updateCountdown() {
             const now = new Date();
@@ -729,28 +650,13 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Появление элементов при скролле (fade-on-scroll)
-        const fadeElements = document.querySelectorAll('.fade-on-scroll');
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // чтобы не анимировать повторно
-                }
-            });
-        }, { threshold: 0.2 });
-        fadeElements.forEach(el => observer.observe(el));
-
-        // Анимация таймлайна (появление элементов внутри программы дня)
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const timelineObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.3 });
-        timelineItems.forEach(item => timelineObserver.observe(item));
+        document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-        // Подсветка активного пункта программы дня при скролле
         function updateActiveOnScroll() {
             const items = document.querySelectorAll('.timeline-item');
             if (!items.length) return;
@@ -774,7 +680,6 @@
         window.addEventListener('resize', updateActiveOnScroll);
         updateActiveOnScroll();
 
-        // Генерация звезд
         function generateStars() {
             const container = document.getElementById('starsContainer');
             if (!container) return;
@@ -795,7 +700,6 @@
         }
         generateStars();
 
-        // Отправка формы RSVP
         const form = document.getElementById('rsvp-form');
         if (form) {
             form.addEventListener('submit', async function(e) {
@@ -815,7 +719,6 @@
             });
         }
 
-        // Слайдер образов
         const slider = document.querySelector('#look-slider .slides');
         const slides = document.querySelectorAll('#look-slider .slide');
         const dotsContainer = document.getElementById('dots');
@@ -853,6 +756,27 @@
                     });
                 }
             });
+        }
+
+        // Падающие лепестки с астры в футере (каждые 5 секунд)
+        const asterImg = document.getElementById('asterFooter');
+        if (asterImg) {
+            function createPetal() {
+                const petal = document.createElement('div');
+                petal.classList.add('falling-petal');
+                const rect = asterImg.getBoundingClientRect();
+                const startX = rect.left + rect.width / 2 - 5;
+                const startY = rect.top + rect.height / 2;
+                petal.style.left = startX + 'px';
+                petal.style.top = startY + 'px';
+                petal.style.width = (Math.random() * 6 + 6) + 'px';
+                petal.style.height = (Math.random() * 10 + 10) + 'px';
+                const duration = Math.random() * 3 + 3;
+                petal.style.animationDuration = duration + 's';
+                document.body.appendChild(petal);
+                setTimeout(() => petal.remove(), duration * 1000);
+            }
+            setInterval(createPetal, 5000);
         }
     </script>
 </body>
