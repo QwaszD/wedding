@@ -29,7 +29,7 @@
             overflow-x: hidden;
             position: relative;
         }
-        /* Звёзды и метеоры (без изменений, они уже есть) */
+        /* Звёзды и метеоры */
         .stars-container {
             position: fixed;
             top: 0;
@@ -162,7 +162,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Остальной контент (календарь и далее) */
+        /* Остальной контент */
         .rest-content {
             margin-top: 1rem;
         }
@@ -177,19 +177,46 @@
             animation: fadeUp 1s ease 0.2s forwards;
         }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
-        .calendar-mini { border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); padding: 1.5rem 1.2rem; width: 100%; max-width: 360px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
+        .calendar-mini {
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            padding: 1.5rem 1.2rem;
+            width: 100%;
+            max-width: 360px;
+            /* убраны opacity и animation, используется reveal */
+        }
         .calendar-mini .month-year { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; text-align: center; }
         .calendar-mini table { border-collapse: collapse; margin: 0 auto; }
         .calendar-mini th { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 0.75rem; color: #ccc; padding: 0.3rem 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
         .calendar-mini td { font-family: 'Lora', serif; font-size: 0.9rem; text-align: center; color: #ffffff; width: 2rem; height: 2rem; line-height: 2rem; border-radius: 50%; transition: all 0.2s; }
         .calendar-mini td.heart-day { background: var(--accent); color: #21283b; font-weight: 600; box-shadow: 0 0 0 4px rgba(184,160,124,0.3); }
         .calendar-mini td.heart-day::after { content: ' ♡'; font-size: 0.7rem; }
-        .countdown { display: flex; justify-content: center; gap: 1.2rem; margin: 2rem 0; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; flex-wrap: wrap; }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            /* убраны opacity и animation, используется reveal */
+        }
         .countdown-item { box-shadow: var(--shadow); padding: 1rem 1.2rem; border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
         .countdown-item:hover { transform: translateY(-5px); }
         .countdown-number { font-family: 'Lora', serif; font-size: 2.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
         .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Новый эффект перелистывания */
+        .reveal {
+            opacity: 0;
+            transform: perspective(800px) rotateX(15deg) translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            will-change: opacity, transform;
+            transform-origin: center top;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: perspective(800px) rotateX(0deg) translateY(0);
+        }
 
         /* Дресс-код и цвета */
         .dress-code { text-align: center; }
@@ -520,7 +547,7 @@
     <div class="rest-content">
         <div class="container">
             <div class="calendar-story">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</div>
-            <div class="calendar-wrapper">
+            <div class="calendar-wrapper reveal">
                 <div class="calendar-mini">
                     <div class="month-year">Сентябрь 2026</div>
                     <table>
@@ -529,19 +556,55 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>31<\/td>
-                                <td>1<\/td>
-                                <td>2<\/td>
-                                <td>3<\/td>
-                                <td>4<\/td>
-                                <td class="heart-day">5<\/td>
-                                <td>6<\/td>
+                                <td>31</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td class="heart-day">5</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                                <td>11</td>
+                                <td>12</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>15</td>
+                                <td>16</td>
+                                <td>17</td>
+                                <td>18</td>
+                                <td>19</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td>22</td>
+                                <td>23</td>
+                                <td>24</td>
+                                <td>25</td>
+                                <td>26</td>
+                                <td>27</td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td>29</td>
+                                <td>30</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="countdown" id="countdown">
+            <div class="countdown reveal" id="countdown">
                 <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">минут</div></div>
@@ -552,7 +615,7 @@
 
     <section class="dress-code">
         <div class="container">
-            <div class="col">
+            <div class="col reveal">
                 <h3>Цвета вечера</h3>
                 <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
                 <div class="color-palette">
@@ -586,7 +649,7 @@
     <section class="program">
         <div class="container">
             <h2>Программа дня</h2>
-            <div class="timeline-wrapper">
+            <div class="timeline-wrapper reveal">
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-time">15:00</div>
@@ -613,7 +676,7 @@
         </div>
     </section>
 
-    <section class="location">
+    <section class="location reveal">
         <div class="container">
             <h2>Локация</h2>
             <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
@@ -626,11 +689,11 @@
         <div class="container">
             <h2>Несколько просьб</h2>
             <div class="cards">
-                <div class="wish-card">
+                <div class="wish-card reveal">
                     <h3>Цветы</h3>
                     <p>Вместо букета мы будем благодарны сертификату в цветочный магазин — это позволит нам наслаждаться цветами гораздо дольше.</p>
                 </div>
-                <div class="wish-card">
+                <div class="wish-card reveal">
                     <h3>Дети</h3>
                     <p>Формат нашего праздника предполагает присутствие только взрослых гостей, поэтому просим прийти без малышей. Благодарим за понимание.</p>
                 </div>
@@ -641,7 +704,7 @@
     <section class="rsvp">
         <div class="container">
             <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
-            <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
+            <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
                 <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
                 <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
                 <div class="form-group"><label>Нужен ли трансфер?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label></div></div>
@@ -651,7 +714,7 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="reveal">
         <span>То, что было лишь маленькой точкой на горизонте, со временем расцвело в нечто большее.</span>
         <img src="aster.png" alt="Астра" id="asterFooter">
     </footer>
@@ -798,6 +861,22 @@
             }
             setInterval(createPetal, 5000);
         }
+
+        // Наплывание блоков при скролле (перелистывание)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
