@@ -108,6 +108,7 @@
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -161,20 +162,21 @@
             font-style: italic;
             letter-spacing: 0.5px;
         }
+        .hero .small-note {
+            text-align: center;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: #ffffff;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
 
         /* Остальной контент */
         .rest-content {
             margin-top: 1rem;
-        }
-        .calendar-story {
-            text-align: center;
-            max-width: 600px;
-            margin: 2rem auto 1rem;
-            font-family: 'Lora', serif;
-            font-size: 1.1rem;
-            font-style: italic;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.2s forwards;
         }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
         .calendar-mini {
@@ -183,7 +185,6 @@
             padding: 1.5rem 1.2rem;
             width: 100%;
             max-width: 360px;
-            /* убраны opacity и animation, используется reveal */
         }
         .calendar-mini .month-year { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; text-align: center; }
         .calendar-mini table { border-collapse: collapse; margin: 0 auto; }
@@ -197,7 +198,6 @@
             gap: 1.2rem;
             margin: 2rem 0;
             flex-wrap: wrap;
-            /* убраны opacity и animation, используется reveal */
         }
         .countdown-item { box-shadow: var(--shadow); padding: 1rem 1.2rem; border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
         .countdown-item:hover { transform: translateY(-5px); }
@@ -205,7 +205,7 @@
         .countdown-label { font-family: 'Lora', serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Новый эффект перелистывания */
+        /* Эффект перелистывания */
         .reveal {
             opacity: 0;
             transform: perspective(800px) rotateX(15deg) translateY(30px);
@@ -437,7 +437,6 @@
             .name-nikita, .name-kseniya { font-size: 4.5rem; }
             .name-and { font-size: 2rem; }
             .hero .invite-line { font-size: 1.4rem; }
-            .calendar-story { font-size: 1.2rem; }
         }
         @media (max-width: 480px) {
             .hero h1 { gap: 0.1rem; }
@@ -445,7 +444,6 @@
             .name-and { font-size: 1.8rem; }
             .color-circle { width: 50px; height: 50px; }
             .hero .invite-line { font-size: 1.3rem; }
-            .calendar-story { font-size: 1.1rem; }
         }
 
         /* Локация */
@@ -540,68 +538,38 @@
                 <span class="name-kseniya">КСЕНИЯ</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории.</div>
+            <p class="small-note">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</p>
         </div>
     </section>
 
-    <!-- Остальной контент (календарь и далее) -->
+    <!-- Остальной контент -->
     <div class="rest-content">
         <div class="container">
-            <div class="calendar-story">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</div>
-            <div class="calendar-wrapper reveal">
-                <div class="calendar-mini">
-                    <div class="month-year">Сентябрь 2026</div>
-                    <table>
-                        <thead>
-                            <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>31</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td class="heart-day">5</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>8</td>
-                                <td>9</td>
-                                <td>10</td>
-                                <td>11</td>
-                                <td>12</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>15</td>
-                                <td>16</td>
-                                <td>17</td>
-                                <td>18</td>
-                                <td>19</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>21</td>
-                                <td>22</td>
-                                <td>23</td>
-                                <td>24</td>
-                                <td>25</td>
-                                <td>26</td>
-                                <td>27</td>
-                            </tr>
-                            <tr>
-                                <td>28</td>
-                                <td>29</td>
-                                <td>30</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="reveal">
+                <h2>Дорогой гость!</h2>
+                <p style="text-align:center; max-width:600px; margin: 1.5rem auto; font-family: 'Lora', serif; font-size: 1.2rem; font-style: italic; line-height:1.6;">
+                    Мы рады сообщить вам, что 05.09.2026 состоится самое главное торжество в нашей жизни — день рождения нашей семьи!
+                </p>
+                <div class="calendar-wrapper">
+                    <div class="calendar-mini">
+                        <div class="month-year">Сентябрь 2026</div>
+                        <table>
+                            <thead>
+                                <tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>31</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td class="heart-day">5</td>
+                                    <td>6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="countdown reveal" id="countdown">
