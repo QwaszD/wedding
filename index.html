@@ -413,38 +413,6 @@
             font-size: 0.95rem;
             color: #f0f0f0;
         }
-        @media (max-width: 768px) {
-            .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .timeline-time {
-                text-align: left;
-                padding-left: 2rem;
-                margin-bottom: 0.5rem;
-                font-size: 1.5rem;
-            }
-            .timeline-item:nth-child(even) .timeline-time { padding-left: 2rem; }
-            .timeline-dot { display: none; }
-            .timeline-content {
-                margin-left: 1rem !important;
-                margin-right: 0 !important;
-                width: calc(100% - 2rem);
-            }
-            .timeline::before { left: 20px; transform: translateX(0); }
-            .color-palette { gap: 0.5rem; }
-            .color-circle { width: 60px; height: 60px; }
-            .name-nikita, .name-kseniya { font-size: 4.5rem; }
-            .name-and { font-size: 2rem; }
-            .hero .invite-line { font-size: 1.4rem; }
-        }
-        @media (max-width: 480px) {
-            .hero h1 { gap: 0.1rem; }
-            .name-nikita, .name-kseniya { font-size: 3.5rem; }
-            .name-and { font-size: 1.8rem; }
-            .color-circle { width: 50px; height: 50px; }
-            .hero .invite-line { font-size: 1.3rem; }
-        }
 
         /* Локация */
         .location { text-align: center; padding: 4rem 0; border-radius: 20px; margin: 0 1.5rem; }
@@ -518,6 +486,153 @@
                 opacity: 0;
             }
         }
+
+        /* ========== МЕДИА-ЗАПРОСЫ ДЛЯ АДАПТИВНОСТИ ========== */
+        /* Планшеты (портрет и небольшие) */
+        @media (max-width: 1024px) {
+            .hero .container {
+                width: 95%;
+                padding: 1.8rem;
+            }
+            .name-nikita, .name-kseniya {
+                font-size: 4.5rem;
+            }
+            .name-and {
+                font-size: 1.9rem;
+            }
+            .hero .invitation-text {
+                font-size: 1.3rem;
+            }
+            .hero .invite-line {
+                font-size: 1.2rem;
+            }
+            section {
+                padding: 3.5rem 0;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Мобильные (ширина до 768px) */
+        @media (max-width: 768px) {
+            .hero .container {
+                padding: 1.5rem;
+            }
+            .name-nikita, .name-kseniya {
+                font-size: 4rem;
+            }
+            .name-and {
+                font-size: 1.7rem;
+            }
+            .hero .invitation-text {
+                font-size: 1.2rem;
+            }
+            .hero .invite-line {
+                font-size: 1.1rem;
+            }
+            .hero .small-note {
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .color-palette {
+                grid-template-columns: repeat(2, 1fr); /* 2 колонки для палитры */
+                gap: 0.8rem;
+            }
+            .color-circle {
+                width: 70px;
+                height: 70px;
+            }
+            .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .timeline-time {
+                text-align: left;
+                padding-left: 2rem;
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+            }
+            .timeline-item:nth-child(even) .timeline-time { padding-left: 2rem; }
+            .timeline-dot { display: none; }
+            .timeline-content {
+                margin-left: 1rem !important;
+                margin-right: 0 !important;
+                width: calc(100% - 2rem);
+            }
+            .timeline::before { left: 20px; transform: translateX(0); }
+            .rsvp-form {
+                padding: 2rem 1.5rem;
+            }
+            label {
+                font-size: 1.4rem;
+            }
+            .location {
+                margin: 0 1rem;
+                padding: 3rem 0;
+            }
+            .wish-card {
+                flex: 1 1 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            footer {
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Маленькие телефоны (до 480px) */
+        @media (max-width: 480px) {
+            .hero .container {
+                width: 100%;
+                border-radius: 0;
+                padding: 1.2rem;
+            }
+            .hero h1 { gap: 0.1rem; }
+            .name-nikita, .name-kseniya { font-size: 3.2rem; }
+            .name-and { font-size: 1.5rem; }
+            .color-circle { width: 60px; height: 60px; }
+            .hero .invite-line { font-size: 1rem; }
+            .calendar-mini {
+                padding: 1rem;
+            }
+            .calendar-mini td {
+                font-size: 0.8rem;
+                width: 1.8rem;
+                height: 1.8rem;
+                line-height: 1.8rem;
+            }
+            .countdown {
+                gap: 0.5rem;
+            }
+            .countdown-item {
+                padding: 0.8rem 1rem;
+                min-width: 60px;
+            }
+            .countdown-number {
+                font-size: 2rem;
+            }
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+            .rsvp-form {
+                padding: 1.5rem 1rem;
+            }
+            label {
+                font-size: 1.3rem;
+            }
+            .btn {
+                padding: 0.8rem;
+            }
+            .look-slider-frame {
+                height: 60vh;
+                max-height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -587,12 +702,13 @@
                 <h3>Цвета вечера</h3>
                 <p style="opacity:0.8; margin-bottom:1.5rem;">Будем благодарны, если вы поддержите нашу палитру.</p>
                 <div class="color-palette">
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d4e0d0, #c0d0ba);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c5d9e8, #b0c9dd);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5e6c8, #f0dcb0);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5d8d8, #eec8c8);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e0d0e8, #d0c0dc);"></div></div>
-                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e8d8c0, #dccca8);"></div></div>
+                    <!-- Обновлённые, чуть более яркие пастельные цвета -->
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c8e0c8, #b0d0a8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #b8d0e8, #a0c0dd);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #faf0d0, #f5e0b0);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5d0d0, #e8b8b8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8c8e8, #c8b0dc);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #e8d0b0, #dcc098);"></div></div>
                 </div>
                 <div class="look-slider-wrapper">
                     <div class="look-slider-frame" id="look-slider">
