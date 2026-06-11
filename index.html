@@ -130,7 +130,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-top: 16vh;
+            padding-top: 18vh;
             text-align: center;
             background: none;
         }
@@ -145,13 +145,13 @@
         }
         .hero .small-note {
             font-family: 'Shobhika', 'Lora', serif;
-            font-size: 1rem;
+            font-size: 1.3rem;        /* увеличенный шрифт */
             font-style: italic;
             color: #ffffff;
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
             margin-top: 2rem;
-            margin-bottom: 8rem;  /* ещё больше воздуха */
+            margin-bottom: 8rem;      /* больше воздуха */
         }
         .hero h1 {
             position: relative;
@@ -178,7 +178,7 @@
             bottom: 0;
             right: 7rem;
         }
-        /* Белые пятна под именами */
+        /* Белые пятна под именами (очень яркие и плавные) */
         .name-nikita::before,
         .name-kseniya::before {
             content: '';
@@ -186,18 +186,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 170%;
-            height: 170%;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 80%);
+            width: 180%;
+            height: 180%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0) 80%);
             border-radius: 50%;
-            filter: blur(20px);
+            filter: blur(24px);
             z-index: -1;
-            opacity: 0.9;
+            opacity: 1;
             pointer-events: none;
         }
         .name-and {
             font-family: 'Caravan', 'Lora', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;         /* увеличенный and */
             font-style: normal;
             color: #ffffff;
             position: absolute;
@@ -217,18 +217,25 @@
             position: relative;
             display: inline-block;
         }
-        /* Пустой контейнер для PNG */
-        .decor-line {
-            display: block;
-            margin: 1.2rem auto 0;   /* воздух между фразой и картинкой */
-            width: 200px;           /* можно подогнать под размер PNG */
-            height: auto;
+        /* Кружок вокруг фразы */
+        .invite-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% + 2.5rem);
+            aspect-ratio: 1 / 1;           /* делает квадрат */
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;            /* превращает в круг */
             opacity: 0;
-            animation: fadeUp 1s ease 0.6s forwards;
+            animation: fadeUp 1s ease 0.5s forwards;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Остальной контент */
-        .rest-content { margin-top: 0.5rem; }  /* уменьшено расстояние */
+        .rest-content { margin-top: 0.5rem; }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
         .calendar-mini {
             border-radius: 20px;
@@ -371,21 +378,24 @@
         /* ========== МЕДИА-ЗАПРОСЫ ========== */
         @media (max-width: 1024px) {
             .name-nikita, .name-kseniya { font-size: 6.5rem; }
-            .name-and { font-size: 3rem; }
+            .name-and { font-size: 3.5rem; }
             .hero h1 { height: 300px; }
             .name-nikita { left: 5rem; }
             .name-kseniya { right: 5rem; }
+            .hero .small-note { font-size: 1.2rem; }
         }
         @media (max-width: 768px) {
-            .hero { padding-top: 8vh; }
+            .hero { padding-top: 12vh; }
             .hero .container { padding: 1.5rem; }
             .name-nikita, .name-kseniya { font-size: 5rem; }
             .name-nikita { left: 3rem; }
             .name-kseniya { right: 3rem; }
-            .name-and { font-size: 2.5rem; }
+            .name-and { font-size: 3rem; }
             .hero h1 { height: 250px; }
-            .hero .small-note { font-size: 0.9rem; margin-bottom: 5rem; }
-            .decor-line { width: 160px; }
+            .hero .small-note { font-size: 1.1rem; margin-bottom: 5rem; }
+            .invite-line::before {
+                width: calc(100% + 2rem);
+            }
             .color-palette { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .color-circle { width: 70px; height: 70px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
@@ -401,17 +411,19 @@
             footer { flex-direction: column; gap: 0.5rem; font-size: 0.8rem; }
         }
         @media (max-width: 480px) {
-            .hero { padding-top: 5vh; }
+            .hero { padding-top: 8vh; }
             .hero .container { width: 100%; border-radius: 0; padding: 1.2rem; }
             .hero h1 { height: 180px; }
             .name-nikita, .name-kseniya { font-size: 3.8rem; }
             .name-nikita { left: 1.5rem; }
             .name-kseniya { right: 1.5rem; }
-            .name-and { font-size: 2rem; }
+            .name-and { font-size: 2.5rem; }
             .name-nikita::before,
-            .name-kseniya::before { width: 150%; height: 150%; }
-            .hero .small-note { margin-bottom: 4rem; }
-            .decor-line { width: 140px; }
+            .name-kseniya::before { width: 160%; height: 160%; }
+            .hero .small-note { font-size: 1rem; margin-bottom: 4rem; }
+            .invite-line::before {
+                width: calc(100% + 1.5rem);
+            }
             .color-circle { width: 60px; height: 60px; }
             .calendar-mini { padding: 1rem; }
             .calendar-mini td { font-size: 0.8rem; width: 1.8rem; height: 1.8rem; line-height: 1.8rem; }
@@ -442,8 +454,6 @@
                 <span class="name-kseniya">КСЕНИЯ</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории.</div>
-            <!-- Место для твоего PNG с декоративной линией -->
-            <img src="decor-line.png" alt="линия" class="decor-line">
         </div>
     </section>
 
