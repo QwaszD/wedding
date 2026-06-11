@@ -145,13 +145,13 @@
         }
         .hero .small-note {
             font-family: 'Shobhika', 'Lora', serif;
-            font-size: 1.3rem;        /* увеличенный шрифт */
+            font-size: 1.3rem;
             font-style: italic;
             color: #ffffff;
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
             margin-top: 2rem;
-            margin-bottom: 8rem;      /* больше воздуха */
+            margin-bottom: 8rem;
         }
         .hero h1 {
             position: relative;
@@ -176,9 +176,9 @@
         }
         .name-kseniya {
             bottom: 0;
-            right: 7rem;
+            right: 9rem;   /* увеличено, чтобы добавить воздуха */
         }
-        /* Белые пятна под именами (очень яркие и плавные) */
+        /* Белые пятна под именами */
         .name-nikita::before,
         .name-kseniya::before {
             content: '';
@@ -197,7 +197,7 @@
         }
         .name-and {
             font-family: 'Caravan', 'Lora', serif;
-            font-size: 4rem;         /* увеличенный and */
+            font-size: 4rem;
             font-style: normal;
             color: #ffffff;
             position: absolute;
@@ -216,22 +216,6 @@
             letter-spacing: 0.5px;
             position: relative;
             display: inline-block;
-        }
-        /* Кружок вокруг фразы */
-        .invite-line::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: calc(100% + 2.5rem);
-            aspect-ratio: 1 / 1;           /* делает квадрат */
-            border: 1.5px solid var(--accent);
-            border-radius: 50%;            /* превращает в круг */
-            opacity: 0;
-            animation: fadeUp 1s ease 0.5s forwards;
-            z-index: -1;
-            pointer-events: none;
         }
 
         /* Остальной контент */
@@ -381,7 +365,7 @@
             .name-and { font-size: 3.5rem; }
             .hero h1 { height: 300px; }
             .name-nikita { left: 5rem; }
-            .name-kseniya { right: 5rem; }
+            .name-kseniya { right: 7rem; }
             .hero .small-note { font-size: 1.2rem; }
         }
         @media (max-width: 768px) {
@@ -389,13 +373,10 @@
             .hero .container { padding: 1.5rem; }
             .name-nikita, .name-kseniya { font-size: 5rem; }
             .name-nikita { left: 3rem; }
-            .name-kseniya { right: 3rem; }
+            .name-kseniya { right: 5rem; }
             .name-and { font-size: 3rem; }
             .hero h1 { height: 250px; }
             .hero .small-note { font-size: 1.1rem; margin-bottom: 5rem; }
-            .invite-line::before {
-                width: calc(100% + 2rem);
-            }
             .color-palette { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .color-circle { width: 70px; height: 70px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
@@ -416,14 +397,11 @@
             .hero h1 { height: 180px; }
             .name-nikita, .name-kseniya { font-size: 3.8rem; }
             .name-nikita { left: 1.5rem; }
-            .name-kseniya { right: 1.5rem; }
+            .name-kseniya { right: 2.5rem; }
             .name-and { font-size: 2.5rem; }
             .name-nikita::before,
             .name-kseniya::before { width: 160%; height: 160%; }
             .hero .small-note { font-size: 1rem; margin-bottom: 4rem; }
-            .invite-line::before {
-                width: calc(100% + 1.5rem);
-            }
             .color-circle { width: 60px; height: 60px; }
             .calendar-mini { padding: 1rem; }
             .calendar-mini td { font-size: 0.8rem; width: 1.8rem; height: 1.8rem; line-height: 1.8rem; }
