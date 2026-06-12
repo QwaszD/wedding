@@ -41,9 +41,10 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Исправление двойного скролла */
+        /* Убираем двойной скролл и отбрасывание */
         html {
             overflow-x: hidden;
+            width: 100%;
         }
         body {
             overflow-x: hidden;
@@ -53,13 +54,14 @@
             color: #ffffff;
             line-height: 1.8;
             position: relative;
+            overscroll-behavior: none;   /* запрет отскоков */
         }
         /* Звёзды и метеоры */
         .stars-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 100%;
             pointer-events: none;
             z-index: 0;
@@ -80,7 +82,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 100%;
             pointer-events: none;
             z-index: 1;
@@ -337,6 +339,10 @@
             margin: 0 1.5rem 1.5rem;
             position: relative;
         }
+        /* Защита от вылезания iframe */
+        iframe {
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -348,7 +354,7 @@
 
     <section class="hero">
         <div class="container">
-            <p class="small-note">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</p>
+            <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
             <h1>
                 <span class="name-nikita">НИКИТА</span>
                 <span class="name-kseniya">КСЕНИЯ</span>
