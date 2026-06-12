@@ -30,6 +30,12 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'Miama Nueva';
+            src: url('miamanueva.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
         :root {
             --bg: #21283b;
             --text: #ffffff;
@@ -130,7 +136,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-top: 18vh;
+            padding-top: 3vh;   /* минимальный отступ сверху */
             text-align: center;
             background: none;
         }
@@ -150,8 +156,8 @@
             color: #ffffff;
             opacity: 0;
             animation: fadeUp 1s ease 0.2s forwards;
-            margin-top: 2rem;
-            margin-bottom: 8rem;
+            margin-top: 1rem;        /* небольшой отступ от верха контейнера */
+            margin-bottom: 10rem;    /* много воздуха перед именами */
         }
         .hero h1 {
             position: relative;
@@ -196,10 +202,10 @@
             pointer-events: none;
         }
         .name-and {
-            font-family: 'Caravan', cursive;
+            font-family: 'Miama Nueva', 'Caravan', cursive;   /* новый шрифт */
             font-size: 8rem;
             font-style: normal;
-            color: var(--accent);
+            color: var(--bg);                /* цвет как у имён */
             position: absolute;
             top: 50%;
             left: 50%;
@@ -209,7 +215,7 @@
         .hero .invite-line {
             font-family: 'Shobhika', serif;
             font-size: 1.3rem;
-            margin-top: 1rem;
+            margin-top: 4rem;        /* опущена ниже */
             opacity: 0;
             animation: fadeUp 1s ease 0.3s forwards;
             font-style: italic;
@@ -369,14 +375,15 @@
             .hero .small-note { font-size: 1.2rem; }
         }
         @media (max-width: 768px) {
-            .hero { padding-top: 12vh; }
+            .hero { padding-top: 2vh; }
             .hero .container { padding: 1.5rem; }
             .name-nikita, .name-kseniya { font-size: 5rem; }
             .name-nikita { left: 3rem; }
             .name-kseniya { bottom: -1.5rem; right: 3rem; }
             .name-and { font-size: 5.5rem; }
             .hero h1 { height: 250px; }
-            .hero .small-note { font-size: 1.1rem; margin-bottom: 5rem; }
+            .hero .small-note { font-size: 1.1rem; margin-bottom: 8rem; }
+            .hero .invite-line { margin-top: 3rem; }
             .color-palette { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .color-circle { width: 70px; height: 70px; }
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
@@ -392,7 +399,7 @@
             footer { flex-direction: column; gap: 0.5rem; font-size: 0.8rem; }
         }
         @media (max-width: 480px) {
-            .hero { padding-top: 8vh; }
+            .hero { padding-top: 1vh; }
             .hero .container { width: 100%; border-radius: 0; padding: 1.2rem; }
             .hero h1 { height: 180px; }
             .name-nikita, .name-kseniya { font-size: 3.8rem; }
@@ -401,7 +408,8 @@
             .name-and { font-size: 4.5rem; }
             .name-nikita::before,
             .name-kseniya::before { width: 160%; height: 160%; }
-            .hero .small-note { font-size: 1rem; margin-bottom: 4rem; }
+            .hero .small-note { font-size: 1rem; margin-bottom: 6rem; }
+            .hero .invite-line { margin-top: 2.5rem; }
             .color-circle { width: 60px; height: 60px; }
             .calendar-mini { padding: 1rem; }
             .calendar-mini td { font-size: 0.8rem; width: 1.8rem; height: 1.8rem; line-height: 1.8rem; }
