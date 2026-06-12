@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Свадьба Ксении и Никиты 05.09.2026</title>
+    <title>Свадьба Никиты и Ксении</title>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         @font-face {
@@ -198,7 +198,6 @@
             opacity: 1;
             pointer-events: none;
         }
-        /* "and" удалён — оставлен только стиль для invite-line */
         .hero .invite-line {
             font-family: 'Shobhika', serif;
             font-size: clamp(1rem, 2.5vw, 1.3rem);
@@ -321,9 +320,10 @@
         /* Футер */
         footer {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.3rem;
             text-align: center;
             padding: 2rem;
             font-size: clamp(0.8rem, 1.5vw, 0.9rem);
@@ -333,25 +333,6 @@
             border-radius: 12px;
             margin: 0 1.5rem 1.5rem;
             position: relative;
-            flex-wrap: wrap;
-        }
-        footer img { width: 30px; height: auto; opacity: 0.9; }
-        /* Падающие лепестки */
-        .falling-petal {
-            position: fixed;
-            pointer-events: none;
-            z-index: 100;
-            width: 8px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 40% 60% 50% 50%;
-            box-shadow: 0 0 2px rgba(255,255,200,0.5);
-            opacity: 0;
-            animation: fallAndFadeWhite 5s ease-in forwards;
-        }
-        @keyframes fallAndFadeWhite {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -367,7 +348,6 @@
             <p class="small-note">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</p>
             <h1>
                 <span class="name-nikita">НИКИТА</span>
-                <!-- "and" удалён -->
                 <span class="name-kseniya">КСЕНИЯ</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории.</div>
@@ -480,8 +460,8 @@
     </section>
 
     <footer class="reveal">
-        <span>То, что было лишь маленькой точкой на горизонте, со временем расцвело в нечто большее.</span>
-        <img src="aster.png" alt="Астра" id="asterFooter">
+        <span>С любовью Никита и Ксения ♡</span>
+        <span>05.09.2026</span>
     </footer>
 
     <script>
@@ -548,7 +528,7 @@
                     alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!');
                     form.reset();
                 } catch (error) {
-                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в WhatsApp.');
+                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в Telegram.');
                 }
             });
         }
@@ -577,23 +557,6 @@
                     document.querySelectorAll('#look-slider .dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
                 }
             });
-        }
-
-        const asterImg = document.getElementById('asterFooter');
-        if (asterImg) {
-            function createPetal() {
-                const petal = document.createElement('div');
-                petal.classList.add('falling-petal');
-                const rect = asterImg.getBoundingClientRect();
-                petal.style.left = (rect.left + rect.width / 2 - 5) + 'px';
-                petal.style.top = (rect.top + rect.height / 2) + 'px';
-                petal.style.width = (Math.random() * 6 + 6) + 'px';
-                petal.style.height = (Math.random() * 10 + 10) + 'px';
-                petal.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                document.body.appendChild(petal);
-                setTimeout(() => petal.remove(), parseFloat(petal.style.animationDuration) * 1000);
-            }
-            setInterval(createPetal, 5000);
         }
 
         const revealElements = document.querySelectorAll('.reveal');
