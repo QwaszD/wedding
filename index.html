@@ -40,12 +40,15 @@
             --name-color: #21283b;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
         body {
             font-family: 'Shobhika', serif;
             background: #21283b;
             color: #ffffff;
             line-height: 1.8;
-            overflow-x: hidden;
             position: relative;
         }
         /* Звёзды и метеоры */
@@ -195,17 +198,7 @@
             opacity: 1;
             pointer-events: none;
         }
-        .name-and {
-            font-family: 'Miama Nueva', cursive;
-            font-size: clamp(1rem, 8vw, 3rem);
-            font-style: normal;
-            color: var(--bg);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-        }
+        /* "and" удалён — оставлен только стиль для invite-line */
         .hero .invite-line {
             font-family: 'Shobhika', serif;
             font-size: clamp(1rem, 2.5vw, 1.3rem);
@@ -374,7 +367,7 @@
             <p class="small-note">Кажется, некоторые встречи происходят не случайно.<br>Будто задолго до нас кто-то уже соединил эти линии.</p>
             <h1>
                 <span class="name-nikita">НИКИТА</span>
-                <span class="name-and">and</span>
+                <!-- "and" удалён -->
                 <span class="name-kseniya">КСЕНИЯ</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории.</div>
