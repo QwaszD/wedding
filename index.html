@@ -208,17 +208,18 @@
             letter-spacing: 0.5px;
             position: relative;
             display: inline-block;
+            padding-bottom: 3.5rem; /* освобождаем место для линии */
         }
         /* Золотая линия-росчерк */
         .invite-line::after {
             content: '';
             position: absolute;
-            bottom: -2.5rem;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 180px;
-            height: 30px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 30'%3E%3Cpath d='M0,15 C30,5 60,20 90,15 C120,10 150,20 180,15' fill='none' stroke='%23b8a07c' stroke-width='1.5' stroke-linecap='round' opacity='0.9'/%3E%3Ccircle cx='90' cy='15' r='2' fill='%23b8a07c' opacity='0.8'/%3E%3C/svg%3E") no-repeat center;
+            width: 280px;              /* увеличена ширина */
+            height: 40px;              /* увеличена высота */
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 40'%3E%3Cpath d='M10,20 C40,10 70,28 100,20 C130,12 160,28 190,20 C220,12 250,28 270,20' fill='none' stroke='%23b8a07c' stroke-width='1.8' stroke-linecap='round' opacity='0.9'/%3E%3Cpath d='M0,20 C20,14 40,26 60,20' fill='none' stroke='%23b8a07c' stroke-width='1.2' stroke-linecap='round' opacity='0.6'/%3E%3Cpath d='M220,20 C240,14 260,26 280,20' fill='none' stroke='%23b8a07c' stroke-width='1.2' stroke-linecap='round' opacity='0.6'/%3E%3Ccircle cx='100' cy='20' r='2.5' fill='%23b8a07c' opacity='0.9'/%3E%3Ccircle cx='190' cy='20' r='2.5' fill='%23b8a07c' opacity='0.9'/%3E%3C/svg%3E") no-repeat center;
             background-size: contain;
             z-index: -1;
             opacity: 0;
