@@ -86,6 +86,18 @@
         .name-nikita { top: 0; left: clamp(4rem, 15%, 8rem); }
         .name-kseniya { bottom: -1rem; right: clamp(4rem, 15%, 8rem); }
 
+        /* Амперсанд между именами */
+        .name-and {
+            font-family: 'Forum', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
+
         .hero .invite-line { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(5rem, 10vh, 7rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; letter-spacing: 0.5px; display: inline-block; position: relative; }
         .invite-line::after { content: ''; position: absolute; bottom: -0.6rem; left: 0; width: 100%; height: 2px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
         .invite-line::before { content: ''; position: absolute; bottom: calc(-0.6rem - 2px); left: 50%; transform: translateX(-50%) rotate(45deg); width: 6px; height: 6px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
@@ -216,6 +228,7 @@
             <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
             <h1>
                 <span class="name-nikita">Никита</span>
+                <span class="name-and">&</span>
                 <span class="name-kseniya">Ксения</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
@@ -342,7 +355,7 @@
             <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
                 <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
                 <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
-                <div class="form-group"><label>Нужен ли трансфер?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да, из города</label></div></div>
+                <div class="form-group"><label>Нужен ли трансфер из Симферополя?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да</label></div></div>
                 <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши тёплые слова..."></textarea></div>
                 <button type="submit" class="btn">Отправить</button>
             </form>
