@@ -97,11 +97,10 @@
         .meteor:nth-child(7) { top: -3px; left: 10%;  transform: rotate(48deg); animation: shootGold 3.8s linear infinite; animation-delay: 2.5s; }
         .meteor:nth-child(8) { top: -6px; left: 50%;  transform: rotate(40deg); animation: shootGold 4.8s linear infinite; animation-delay: 0.8s; }
 
-        /* Общие полупрозрачные блоки */
+        /* Общие полупрозрачные блоки (без таймлайна) */
         .calendar-mini,
         .countdown-item,
         .look-slider-frame,
-        .timeline-content,
         .rsvp-form,
         .wish-card {
             background-color: var(--block-bg);
@@ -123,7 +122,7 @@
 
         h2, h3 {
             font-family: 'Forum', serif;
-            font-weight: 600;
+            font-weight: normal; /* убрали жирность */
             font-size: clamp(2rem, 5vw, 2.8rem);
             margin-bottom: 1.5rem;
             text-align: center;
@@ -163,6 +162,8 @@
             max-width: 800px;
             width: 90%;
             position: relative;
+            /* Виньетка по краям */
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.5);
         }
         .hero .small-note {
             font-family: 'Forum', serif;
@@ -191,7 +192,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* только свечение */
             text-shadow: 0 0 20px rgba(184, 160, 124, 0.5),
                          0 0 40px rgba(184, 160, 124, 0.2);
         }
@@ -207,38 +207,55 @@
             transform: translate(-50%, -50%);
             white-space: nowrap;
             z-index: 2;
-            /* без кольца и анимации */
         }
 
         .hero .invite-line {
             font-family: 'Forum', serif;
             font-size: clamp(1rem, 2.5vw, 1.4rem);
             margin-top: clamp(5rem, 10vh, 7rem);
-            opacity: 0;
-            animation: fadeUp 1s ease 0.3s forwards;
+            opacity: 1; /* базовая непрозрачность, слова анимируются отдельно */
             letter-spacing: 0.5px;
             display: inline-block;
             position: relative;
         }
-        .invite-line::after {
-            content: '';
-            position: absolute;
-            bottom: -0.6rem; left: 0;
-            width: 100%; height: 2px;
-            background: var(--accent);
-            opacity: 0;
-            animation: fadeUp 1s ease 0.6s forwards;
-        }
+        /* Убираем старые анимации underline */
+        .invite-line::after,
         .invite-line::before {
-            content: '';
-            position: absolute;
-            bottom: calc(-0.6rem - 2px);
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            width: 6px; height: 6px;
-            background: var(--accent);
+            display: none;
+        }
+
+        /* Анимация появления слов */
+        .invite-line .word {
+            display: inline-block;
             opacity: 0;
-            animation: fadeUp 1s ease 0.6s forwards;
+            transform: translateY(15px);
+            animation: wordReveal 0.8s ease forwards;
+            will-change: transform, opacity, color, text-shadow;
+        }
+        /* Задержки для каждого слова */
+        .invite-line .word:nth-child(1) { animation-delay: 0.3s; }
+        .invite-line .word:nth-child(2) { animation-delay: 0.55s; }
+        .invite-line .word:nth-child(3) { animation-delay: 0.8s; }
+        .invite-line .word:nth-child(4) { animation-delay: 1.05s; }
+        .invite-line .word:nth-child(5) { animation-delay: 1.3s; }
+
+        @keyframes wordReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+                color: #b8a07c;
+                text-shadow: 0 0 12px rgba(184,160,124,0.7);
+            }
+            60% {
+                color: #b8a07c;
+                text-shadow: 0 0 8px rgba(184,160,124,0.3);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                color: #ffffff;
+                text-shadow: none;
+            }
         }
 
         @keyframes fadeUp {
@@ -299,7 +316,7 @@
         .calendar-mini td.heart-day {
             background: var(--accent);
             color: #21283b;
-            font-weight: 600;
+            font-weight: normal;
             position: relative;
         }
         .calendar-mini td.heart-day::after {
@@ -452,7 +469,7 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня (статичная линия позади) */
+        /* Программа дня (статичная линия позади, блоки непрозрачные) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -489,7 +506,7 @@
             text-align: right;
             font-size: clamp(1.5rem, 4vw, 2.2rem);
             color: #ffd700;
-            font-weight: 600;
+            font-weight: normal;
             padding-right: 2rem;
             text-shadow: 0 0 4px rgba(0,0,0,0.5);
         }
@@ -516,6 +533,9 @@
             padding: 1.5rem;
             border-radius: 12px;
             margin-left: 2rem;
+            background-color: #21283b; /* непрозрачный */
+            border: 1px solid rgba(184,160,124,.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
         .timeline-item:nth-child(even) .timeline-content {
@@ -523,11 +543,12 @@
             margin-right: 2rem;
         }
         .timeline-item.active .timeline-content {
-            background-color: rgba(33,40,59,0.85);
-            box-shadow: 0 0 20px rgba(255,215,0,0.5);
+            background-color: #21283b;
+            box-shadow: 0 0 20px rgba(255,215,0,0.5), 0 4px 15px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,215,0,0.6);
         }
         .timeline-content h3 {
+            font-weight: normal;
             margin-bottom: 0.3rem;
             color: #ffffff;
             text-align: center;
@@ -596,7 +617,7 @@
             padding: 0.9rem 2.2rem;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: normal;
             letter-spacing: 1px;
             transition: all 0.3s;
             font-size: clamp(0.9rem, 2vw, 1.1rem);
@@ -625,7 +646,7 @@
             transition: transform 0.3s;
         }
         .wish-card:hover { transform: translateY(-8px); }
-        .wish-card h3 { margin-bottom: 0.8rem; }
+        .wish-card h3 { font-weight: normal; margin-bottom: 0.8rem; }
         .wish-card p { font-size: clamp(1rem, 2.5vw, 1.4rem); }
 
         /* RSVP форма */
@@ -642,7 +663,7 @@
             font-size: clamp(1rem, 2.5vw, 1.4rem);
             color: #ffffff;
             margin-bottom: 0.8rem;
-            font-weight: 600;
+            font-weight: normal;
             letter-spacing: 0.5px;
         }
         label span {
@@ -702,7 +723,7 @@
             padding: 1rem;
             border-radius: 30px;
             font-family: 'Forum', serif;
-            font-weight: 500;
+            font-weight: normal;
             letter-spacing: 1px;
             cursor: pointer;
             font-size: clamp(0.9rem, 2vw, 1.1rem);
@@ -791,7 +812,14 @@
                 <span class="name-kseniya">Ксения</span>
             </h1>
             
-            <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
+            <div class="invite-line">
+                <span class="word">Приглашаем</span>
+                <span class="word">вас</span>
+                <span class="word">стать</span>
+                <span class="word">частью</span>
+                <span class="word">нашей</span>
+                <span class="word">истории</span>
+            </div>
         </div>
     </header>
 
