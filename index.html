@@ -91,7 +91,7 @@
         .hero .small-note { font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); font-style: italic; color: #ffffff; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; margin-top: 1rem; margin-bottom: clamp(4rem, 10vh, 7rem); }
         .hero h1 { position: relative; width: 100%; height: clamp(170px, 35vw, 280px); margin: 1.5rem 0; }
         .name-nikita, .name-kseniya {
-            font-family: 'Isadora Cyr', cursive;
+            font-family: 'Miama Nueva', cursive;
             font-size: clamp(4rem, 12vw, 8rem);
             font-weight: normal;
             line-height: 1.2;
@@ -104,7 +104,7 @@
         .name-nikita { top: 0; left: clamp(2rem, 10%, 6rem); }
         .name-kseniya { bottom: -1rem; right: clamp(2rem, 10%, 6rem); }
 
-        .hero .invite-line { font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(3rem, 7vh, 5rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; font-style: italic; letter-spacing: 0.5px; display: inline-block; position: relative; }
+        .hero .invite-line { font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(3rem, 7vh, 5rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; letter-spacing: 0.5px; display: inline-block; position: relative; }
         .invite-line::after { content: ''; position: absolute; bottom: -0.6rem; left: 0; width: 100%; height: 2px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
         .invite-line::before { content: ''; position: absolute; bottom: calc(-0.6rem - 2px); left: 50%; transform: translateX(-50%) rotate(45deg); width: 6px; height: 6px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
 
@@ -130,7 +130,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--accent);
             z-index: -1;
             line-height: 1;
@@ -154,7 +154,7 @@
         .color-item { text-align: center; width: 100%; }
         .color-circle { width: clamp(60px, 15vw, 80px); height: clamp(60px, 15vw, 80px); border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
         .color-circle:hover { transform: scale(1.05); }
-        .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
+        .dress-code .col h3 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
 
         /* Слайдер */
         .look-slider-wrapper { max-width: 400px; margin: 2rem auto 0; padding: 0 1rem; }
@@ -241,8 +241,8 @@
         <div class="container">
             <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
             <h1>
-                <span class="name-nikita">НИКИТА</span>
-                <span class="name-kseniya">КСЕНИЯ</span>
+                <span class="name-nikita">Никита</span>
+                <span class="name-kseniya">Ксения</span>
             </h1>
             <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
         </div>
@@ -364,6 +364,7 @@
     <section class="rsvp">
         <div class="container">
             <h2>Анкета</h2>
+            <p style="text-align:center; margin-top: -0.5rem; margin-bottom: 2rem; font-family: 'Shobhika', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); opacity: 0.9;">Пожалуйста, сообщите о своем решении</p>
             <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
                 <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
                 <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
