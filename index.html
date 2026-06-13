@@ -73,7 +73,6 @@
             text-align: center;
             position: relative;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(184,160,124,.15);
         }
         h2::after, h3::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
@@ -109,11 +108,6 @@
             transform: translate(-50%, -50%);
             white-space: nowrap;
         }
-
-        /* Дата и место */
-        .hero-info { margin-top: 1rem; }
-        .hero-date { color: white; font-size: 1.4rem; letter-spacing: 3px; }
-        .hero-place { color: #b8a07c; margin-top: .6rem; font-size: 1.05rem; }
 
         .hero .invite-line { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(5rem, 10vh, 7rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; letter-spacing: 0.5px; display: inline-block; position: relative; }
         .invite-line::after { content: ''; position: absolute; bottom: -0.6rem; left: 0; width: 100%; height: 2px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
@@ -216,7 +210,6 @@
         /* Локация */
         .location { text-align: center; padding: 4rem 0; border-radius: 20px; margin: 0 1.5rem; }
         .location p { font-family: 'Forum', serif; color: #ffffff; font-size: clamp(0.9rem, 2vw, 1.1rem); }
-        .location-title { font-size: 2rem; color: #b8a07c; margin-bottom: 1rem; }
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Forum', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
 
@@ -269,10 +262,6 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             color: #ffffff;
         }
-
-        /* Финальное сообщение */
-        .final-message { text-align: center; }
-        .final-message p { max-width: 650px; margin: 0 auto; font-size: 1.25rem; line-height: 1.8; color: white; }
 
         /* Футер */
         footer { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; text-align: center; padding: 2rem; font-size: clamp(0.8rem, 2vw, 0.95rem); border-top: 1px solid var(--accent-light); font-family: 'Forum', serif; color: #ffffff; border-radius: 12px; margin: 0 1.5rem 1.5rem; position: relative; }
@@ -328,11 +317,6 @@
                 <span class="name-and">&</span>
                 <span class="name-kseniya">Ксения</span>
             </h1>
-
-            <div class="hero-info">
-                <div class="hero-date">05 сентября 2026</div>
-                <div class="hero-place">Клубный дом «Звёздное небо»</div>
-            </div>
 
             <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
         </div>
@@ -430,7 +414,6 @@
     <section class="location reveal">
         <div class="container">
             <h2>Локация</h2>
-            <div class="location-title">Клубный дом «Звёздное небо»</div>
             <p>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
             <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5" width="100%" height="350" frameborder="0" allowfullscreen="true" style="border-radius: 20px; display: block;"></iframe></div>
             <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" target="_blank" class="btn">Открыть в Яндекс.Картах →</a>
@@ -463,15 +446,6 @@
                 <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши теплые слова или вопросы"></textarea></div>
                 <button type="submit" class="btn">Отправить</button>
             </form>
-        </div>
-    </section>
-
-    <section class="final-message reveal">
-        <div class="container">
-            <h2>До встречи под звёздным небом</h2>
-            <p>
-                Мы будем счастливы разделить этот день вместе с вами.
-            </p>
         </div>
     </section>
 
