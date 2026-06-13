@@ -85,7 +85,7 @@
         .hero .small-note { font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); font-style: italic; color: #ffffff; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; margin-top: 1rem; margin-bottom: clamp(4rem, 10vh, 7rem); }
         .hero h1 { position: relative; width: 100%; height: clamp(170px, 35vw, 280px); margin: 1.5rem 0; }
         .name-nikita, .name-kseniya {
-            font-family: 'Myflora', 'CD Masvol', cursive;
+            font-family: 'Miama Nueva', cursive;   /* изменён шрифт */
             font-size: clamp(4rem, 12vw, 8rem);
             font-weight: normal;
             line-height: 1.2;
@@ -97,15 +97,8 @@
         }
         .name-nikita { top: 0; left: clamp(2rem, 10%, 6rem); }
         .name-kseniya { bottom: -1rem; right: clamp(2rem, 10%, 6rem); }
-        /* Белое пятно под именами */
-        .name-nikita::before, .name-kseniya::before {
-            content: ''; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180%; height: 180%;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0) 80%);
-            border-radius: 50%; filter: blur(24px);
-            z-index: -1; opacity: 1; pointer-events: none;
-        }
+        /* Белые пятна убраны – псевдоэлемент удалён */
+
         .hero .invite-line { font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(3rem, 7vh, 5rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; font-style: italic; letter-spacing: 0.5px; display: inline-block; position: relative; }
         .invite-line::after { content: ''; position: absolute; bottom: -0.6rem; left: 0; width: 100%; height: 2px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
         .invite-line::before { content: ''; position: absolute; bottom: calc(-0.6rem - 2px); left: 50%; transform: translateX(-50%) rotate(45deg); width: 6px; height: 6px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
@@ -118,8 +111,32 @@
         .calendar-mini table { border-collapse: collapse; margin: 0 auto; }
         .calendar-mini th { font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(0.7rem, 1.5vw, 0.8rem); color: #ccc; padding: 0.3rem 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
         .calendar-mini td { font-family: 'Shobhika', serif; font-size: clamp(0.8rem, 2vw, 1rem); text-align: center; color: #ffffff; width: 2rem; height: 2rem; line-height: 2rem; border-radius: 50%; transition: all 0.2s; }
-        .calendar-mini td.heart-day { background: var(--accent); color: #21283b; font-weight: 600; box-shadow: 0 0 0 4px rgba(184,160,124,0.3); }
-        .calendar-mini td.heart-day::after { content: ' ♡'; font-size: 0.7rem; }
+        .calendar-mini td.heart-day {
+            background: var(--accent);
+            color: #21283b;
+            font-weight: 600;
+            box-shadow: none;               /* убираем круглую обводку */
+            position: relative;
+            z-index: 0;
+            border-radius: 0;              /* убираем скругление, чтобы сердечко легло ровно */
+        }
+        .calendar-mini td.heart-day::before {
+            content: '♡';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.8rem;             /* крупное сердечко, выходящее за границы ячейки */
+            color: var(--accent);
+            opacity: 0.7;
+            z-index: -1;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .calendar-mini td.heart-day::after {
+            content: none;                 /* убираем маленькое ♡, которое было справа */
+        }
+
         .countdown { display: flex; justify-content: center; gap: clamp(0.8rem, 2vw, 1.5rem); margin: 2rem 0; flex-wrap: wrap; }
         .countdown-item { box-shadow: var(--shadow); padding: clamp(0.8rem, 2vw, 1.2rem); border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
         .countdown-item:hover { transform: translateY(-5px); }
@@ -179,14 +196,14 @@
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Shobhika', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
 
-        /* Пожелания – увеличенный текст */
+        /* Пожелания */
         .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 0.5rem; }
         .wish-card { border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
         .wish-card p { font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff; }
 
-        /* RSVP форма – уменьшенный заголовок */
+        /* RSVP форма – заголовок заменён на "Анкета" */
         .rsvp-form { max-width: 600px; margin: 0 auto; padding: clamp(2rem, 5vw, 3rem); border-radius: 12px; text-align: left; }
         .form-group { margin-bottom: 2rem; }
         label { display: block; font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff; margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
@@ -347,7 +364,7 @@
 
     <section class="rsvp">
         <div class="container">
-            <h2>Мы будем рады видеть вас рядом.<br>Пожалуйста, сообщите о своем решении.</h2>
+            <h2>Анкета</h2>
             <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
                 <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
                 <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
