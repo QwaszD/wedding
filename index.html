@@ -1,277 +1,474 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Свадьба Никиты и Ксении</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадьба Никиты и Ксении</title>
+    <style>
+        @font-face {
+            font-family: 'Forum';
+            src: url('Forum-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'AnastasiaScriptC';
+            src: url('anastasiascriptc.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        :root {
+            --bg: #21283b;
+            --text: #ffffff;
+            --accent: #b8a07c;
+            --accent-light: #e8e0d5;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.2);
+            --name-color: #b8a07c;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; }
+        body {
+            font-family: 'Forum', serif;
+            background: #21283b;
+            color: #ffffff;
+            line-height: 1.8;
+            position: relative;
+            text-align: justify;
+        }
+        /* Звёзды и метеоры */
+        .stars-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .star { position: absolute; background-color: #ffd700; border-radius: 50%; opacity: 0; animation: twinkle infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(1); } 100% { opacity: 0.9; transform: scale(1.1); } }
+        .shooting-stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .meteor { position: absolute; width: 60px; height: 1px; background: linear-gradient(90deg, rgba(255,215,0,0.7), rgba(255,215,0,0)); border-radius: 50%; filter: blur(0.5px); opacity: 0; }
+        @keyframes shootGold {
+            0%   { opacity: 0; } 10%  { opacity: 0.9; } 20%  { opacity: 0.6; } 40%  { opacity: 0; }
+            100% { transform: translate(600px, 600px); opacity: 0; }
+        }
+        .meteor:nth-child(1) { top: -5px; left: 5%;  transform: rotate(35deg); animation: shootGold 4s linear infinite; animation-delay: 0s; }
+        .meteor:nth-child(2) { top: -10px; left: 20%; transform: rotate(50deg); animation: shootGold 5s linear infinite; animation-delay: 1s; }
+        .meteor:nth-child(3) { top: -2px; left: 40%;  transform: rotate(42deg); animation: shootGold 3.5s linear infinite; animation-delay: 2s; }
+        .meteor:nth-child(4) { top: -15px; left: 60%; transform: rotate(38deg); animation: shootGold 4.5s linear infinite; animation-delay: 0.5s; }
+        .meteor:nth-child(5) { top: -8px; left: 75%;  transform: rotate(55deg); animation: shootGold 4.2s linear infinite; animation-delay: 3s; }
+        .meteor:nth-child(6) { top: -12px; left: 85%; transform: rotate(45deg); animation: shootGold 5.5s linear infinite; animation-delay: 1.5s; }
+        .meteor:nth-child(7) { top: -3px; left: 10%;  transform: rotate(48deg); animation: shootGold 3.8s linear infinite; animation-delay: 2.5s; }
+        .meteor:nth-child(8) { top: -6px; left: 50%;  transform: rotate(40deg); animation: shootGold 4.8s linear infinite; animation-delay: 0.8s; }
 
-<style>
-@font-face {
-    font-family: 'Forum';
-    src: url('Forum-Regular.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'AnastasiaScriptC';
-    src: url('anastasiascriptc.woff2') format('woff2');
-}
+        /* Общие стили */
+        .dress-code .col, .timeline-content, .wish-card, .rsvp-form, .location, footer, .calendar-mini, .countdown-item, .look-slider-frame {
+            background-color: rgba(33, 40, 59, 0.9); backdrop-filter: blur(2px);
+        }
+        h2, h3 { font-family: 'Forum', serif; font-weight: 600; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1.5rem; text-align: center; position: relative; color: #ffffff; }
+        h2::after, h3::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        section { padding: clamp(3rem, 8vh, 5rem) 0; position: relative; z-index: 2; }
 
-:root {
-    --bg:#21283b;
-    --accent:#b8a07c;
-    --text:#fff;
-}
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: clamp(5vh, 10vh, 10vh); text-align: center; background: none; }
+        .hero .container { background-color: rgba(33, 40, 59, 0.9); backdrop-filter: blur(2px); border-radius: 20px; padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 800px; width: 90%; position: relative; }
+        .hero .small-note { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); font-style: italic; color: #ffffff; opacity: 0; animation: fadeUp 1s ease 0.2s forwards; margin-top: 1rem; margin-bottom: clamp(4rem, 10vh, 7rem); }
+        .hero h1 { position: relative; width: 100%; height: clamp(200px, 40vw, 320px); margin: 1.5rem 0; }
+        .name-nikita, .name-kseniya {
+            font-family: 'AnastasiaScriptC', cursive;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--name-color);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .name-nikita { top: 0; left: clamp(4rem, 15%, 8rem); }
+        .name-kseniya { bottom: -1rem; right: clamp(4rem, 15%, 8rem); }
 
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-    font-family:'Forum',serif;
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
-    text-align:justify;
-}
+        /* Амперсанд – тот же шрифт, что и имена */
+        .name-and {
+            font-family: 'AnastasiaScriptC', cursive;
+            font-size: 3rem;
+            color: var(--accent);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
 
-/* SKY CANVAS */
-#sky{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-}
+        .hero .invite-line { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(5rem, 10vh, 7rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; letter-spacing: 0.5px; display: inline-block; position: relative; }
+        .invite-line::after { content: ''; position: absolute; bottom: -0.6rem; left: 0; width: 100%; height: 2px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
+        .invite-line::before { content: ''; position: absolute; bottom: calc(-0.6rem - 2px); left: 50%; transform: translateX(-50%) rotate(45deg); width: 6px; height: 6px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
 
-/* GLASS 2.0 */
-.glass{
-    background:rgba(33,40,59,.55);
-    backdrop-filter:blur(14px) saturate(140%);
-    border:1px solid rgba(184,160,124,.15);
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
-    border-radius:20px;
-}
+        /* Остальной контент */
+        .rest-content { margin-top: 0.5rem; }
+        .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
+        .calendar-mini { border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); padding: clamp(1rem, 3vw, 1.5rem); width: 100%; max-width: 360px; margin: 0 auto; }
+        .calendar-mini .month-year { font-family: 'Forum', serif; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; text-align: center; }
+        .calendar-mini table { border-collapse: collapse; margin: 0 auto; }
+        .calendar-mini th { font-family: 'Forum', serif; font-weight: 600; font-size: clamp(0.7rem, 1.5vw, 0.8rem); color: #ccc; padding: 0.3rem 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .calendar-mini td { font-family: 'Forum', serif; font-size: clamp(0.8rem, 2vw, 1rem); text-align: center; color: #ffffff; width: 2rem; height: 2rem; line-height: 2rem; border-radius: 50%; transition: all 0.2s; }
+        .calendar-mini td.heart-day {
+            background: var(--accent);
+            color: #21283b;
+            font-weight: 600;
+            position: relative;
+            z-index: 0;
+        }
+        .calendar-mini td.heart-day::after {
+            content: ' ♡';
+            font-size: 0.7rem;
+        }
 
-/* HERO */
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    padding-top:10vh;
-    position:relative;
-    z-index:2;
-}
+        .countdown { display: flex; justify-content: center; gap: clamp(0.8rem, 2vw, 1.5rem); margin: 2rem 0; flex-wrap: wrap; }
+        .countdown-item { box-shadow: var(--shadow); padding: clamp(0.8rem, 2vw, 1.2rem); border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
+        .countdown-item:hover { transform: translateY(-5px); }
+        .countdown-number { font-family: 'Forum', serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 600; color: var(--accent); line-height: 1; }
+        .countdown-label { font-family: 'Forum', serif; font-size: clamp(0.7rem, 1.5vw, 0.9rem); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.hero .container{
-    width:90%;
-    max-width:800px;
-    padding:2rem;
-}
+        /* Эффект перелистывания */
+        .reveal { opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; will-change: opacity, transform; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-.small-note{
-    text-align:center;
-    opacity:.9;
-    margin-bottom:3rem;
-}
+        /* Дресс-код */
+        .dress-code { text-align: center; }
+        .dress-code .col { max-width: 480px; margin: 0 auto; padding: 2rem; border-radius: 20px; }
+        .color-palette { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.8rem, 2vw, 1.5rem); justify-items: center; margin-bottom: 2rem; }
+        .color-item { text-align: center; width: 100%; }
+        .color-circle { width: clamp(60px, 15vw, 80px); height: clamp(60px, 15vw, 80px); border-radius: 50%; margin: 0 auto 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.2s; }
+        .color-circle:hover { transform: scale(1.05); }
+        .dress-code .col h3 { font-family: 'Forum', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
 
-h1{
-    position:relative;
-    height:260px;
-}
+        /* Слайдер */
+        .look-slider-wrapper { max-width: 400px; margin: 2rem auto 0; padding: 0 1rem; }
+        .look-slider-frame { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); position: relative; height: clamp(300px, 60vh, 500px); }
+        .slides { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+        .slides::-webkit-scrollbar { display: none; }
+        .slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; height: 100%; }
+        .slide img { width: 100%; height: 100%; object-fit: contain; display: block; background: transparent; border: none; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-size: 1.2rem; color: #ffd700; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .slider-btn:hover { background: #b8a07c; color: #fff; }
+        .slider-btn.prev { left: 0.8rem; }
+        .slider-btn.next { right: 0.8rem; }
+        .dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 5; }
+        .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: #b8a07c; }
 
-.name-nikita,.name-kseniya,.name-and{
-    font-family:'AnastasiaScriptC';
-    color:var(--accent);
-    position:absolute;
-    opacity:0;
-    animation:fadeIn 1.8s forwards;
-}
+        /* Программа дня */
+        .program .timeline-wrapper { position: relative; max-width: 800px; margin: 0 auto; padding: 2rem 0; }
+        .timeline { position: relative; z-index: 2; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #ffd700; transform: translateX(-50%); opacity: 0.8; }
+        .timeline-item { display: flex; align-items: center; margin-bottom: 2.5rem; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; position: relative; }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+        .timeline-item:nth-child(odd) { flex-direction: row; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-time { flex: 1; text-align: right; font-family: 'Forum', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); color: #ffd700; font-weight: 600; padding-right: 2rem; text-shadow: 0 0 4px rgba(0,0,0,0.5); }
+        .timeline-item:nth-child(even) .timeline-time { text-align: left; padding-left: 2rem; padding-right: 0; }
+        .timeline-dot { width: 14px; height: 14px; background: #ffd700; border-radius: 50%; z-index: 2; box-shadow: 0 0 0 4px rgba(255,215,0,0.4); transition: all 0.3s; }
+        .timeline-item.active .timeline-dot { background: #ffaa00; box-shadow: 0 0 0 10px rgba(255,215,0,0.7); transform: scale(1.3); }
+        .timeline-content { flex: 2; padding: 1.5rem; border-radius: 12px; margin-left: 2rem; transition: all 0.3s ease; border: 1px solid rgba(255,215,0,0); }
+        .timeline-item:nth-child(even) .timeline-content { margin-left: 0; margin-right: 2rem; }
+        .timeline-item.active .timeline-content { background-color: rgba(33,40,59,1); box-shadow: 0 0 20px rgba(255,215,0,0.5); border: 1px solid rgba(255,215,0,0.6); }
+        .timeline-content h3 { font-family: 'Forum', serif; font-size: clamp(1.4rem, 3.5vw, 2rem); margin-bottom: 0.3rem; font-weight: 600; color: #ffffff; text-align: center; }
+        .timeline-content p { font-family: 'Forum', serif; font-size: clamp(0.85rem, 2vw, 1rem); color: #f0f0f0; text-align: center; }
 
-.name-nikita{
-    top:0;left:10%;
-    font-size:5rem;
-}
+        /* Локация */
+        .location { text-align: center; padding: 4rem 0; border-radius: 20px; margin: 0 1.5rem; }
+        .location p { font-family: 'Forum', serif; color: #ffffff; font-size: clamp(0.9rem, 2vw, 1.1rem); }
+        .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Forum', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
 
-.name-kseniya{
-    bottom:0;right:10%;
-    font-size:5rem;
-    animation-delay:.3s;
-}
+        /* Пожелания */
+        .wishes .cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .wish-card { border-radius: 12px; padding: 2rem; text-align: center; flex: 1 1 250px; transition: transform 0.3s; }
+        .wish-card:hover { transform: translateY(-8px); }
+        .wish-card h3 { font-family: 'Forum', serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 0.8rem; font-weight: 600; color: #ffffff; }
+        .wish-card p { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff; }
 
-.name-and{
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    font-size:3rem;
-    animation-delay:.2s;
-}
+        /* RSVP форма */
+        .rsvp-form { max-width: 600px; margin: 0 auto; padding: clamp(2rem, 5vw, 3rem); border-radius: 12px; text-align: left; }
+        .form-group { margin-bottom: 2rem; }
+        label { display: block; font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff; margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
+        label span { color: var(--accent); font-size: clamp(0.8rem, 2vw, 1rem); font-family: 'Forum', serif; }
+        input[type="text"], textarea, select { width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--accent-light); border-radius: 6px; font-family: 'Forum', serif; font-weight: 400; font-size: clamp(0.9rem, 2vw, 1rem); background: rgba(255,255,255,0.15); color: #ffffff; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+        input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184,160,124,0.2); }
+        textarea { resize: vertical; }
+        .radio-group { display: flex; flex-direction: column; gap: 0.8rem; }
+        .radio-option { display: flex; align-items: center; cursor: pointer; font-family: 'Forum', serif; font-size: clamp(0.9rem, 2vw, 1rem); color: #ffffff; }
+        .radio-option input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%; margin-right: 10px; position: relative; cursor: pointer; }
+        .radio-option input[type="radio"]:checked { background: var(--accent); box-shadow: inset 0 0 0 4px #21283b; }
+        .btn { display: block; width: 100%; background: var(--accent); color: #21283b; border: none; padding: 1rem; border-radius: 30px; font-family: 'Forum', serif; font-weight: 500; letter-spacing: 1px; cursor: pointer; font-size: clamp(0.9rem, 2vw, 1.1rem); transition: all 0.3s; margin-top: 1rem; }
+        .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); color: #ffffff; }
 
-@keyframes fadeIn{
-    to{opacity:1;transform:translate(0)}
-}
+        /* Футер */
+        footer { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; text-align: center; padding: 2rem; font-size: clamp(0.8rem, 2vw, 0.95rem); border-top: 1px solid var(--accent-light); font-family: 'Forum', serif; color: #ffffff; border-radius: 12px; margin: 0 1.5rem 1.5rem; position: relative; }
 
-/* BUTTON / CARDS AURA */
-.gold-aura{
-    position:relative;
-}
-.gold-aura::after{
-    content:"";
-    position:absolute;
-    inset:-20px;
-    background:radial-gradient(circle,rgba(184,160,124,.25),transparent 70%);
-    opacity:0;
-    transition:.4s;
-    pointer-events:none;
-}
-.gold-aura:hover::after{
-    opacity:1;
-}
-
-/* TIMELINE */
-.timeline{
-    position:relative;
-}
-.timeline::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:0;
-    bottom:0;
-    width:2px;
-    background:var(--accent);
-}
-
-/* SVG DECOR */
-svg.decor{
-    position:absolute;
-    bottom:-60px;
-    left:50%;
-    transform:translateX(-50%);
-    width:600px;
-    opacity:.4;
-}
-
-/* LOCATION */
-.location,.wish-card,.rsvp-form,.calendar-mini,.timeline-content{
-    background:rgba(33,40,59,.55);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(184,160,124,.15);
-    border-radius:20px;
-    padding:1.5rem;
-}
-</style>
+        @media (max-width: 768px) {
+            .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
+            .timeline-time { text-align: left; padding-left: 2rem; margin-bottom: 0.5rem; }
+            .timeline-item:nth-child(even) .timeline-time { padding-left: 2rem; }
+            .timeline-dot { display: none; }
+            .timeline-content { margin-left: 1rem !important; margin-right: 0 !important; width: calc(100% - 2rem); }
+            .timeline::before { left: 20px; transform: translateX(0); }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="stars-container" id="starsContainer"></div>
+    <div class="shooting-stars">
+        <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
+        <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
+    </div>
 
-<canvas id="sky"></canvas>
+    <section class="hero">
+        <div class="container">
+            <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
+            <h1>
+                <span class="name-nikita">Никита</span>
+                <span class="name-and">&</span>
+                <span class="name-kseniya">Ксения</span>
+            </h1>
+            <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
+        </div>
+    </section>
 
-<section class="hero">
-<div class="container glass gold-aura">
+    <div class="rest-content">
+        <div class="container">
+            <div class="reveal">
+                <h2>Дорогой гость!</h2>
+                <p style="text-align:center; max-width:600px; margin: 1.5rem auto; font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.3rem); font-style: italic; line-height:1.6;">
+                    Мы рады сообщить вам, что 05.09.2026 состоится самое главное торжество в нашей жизни — день рождения нашей семьи!
+                </p>
+                <div class="calendar-wrapper">
+                    <div class="calendar-mini">
+                        <div class="month-year">Сентябрь 2026</div>
+                        <table>
+                            <thead><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr></thead>
+                            <tbody><tr><td>31</td><td>1</td><td>2</td><td>3</td><td>4</td><td class="heart-day">5</td><td>6</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown reveal" id="countdown">
+                <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-label">дней</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">минут</div></div>
+                <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">секунд</div></div>
+            </div>
+        </div>
+    </div>
 
-    <p class="small-note">
-        Кажется, некоторые встречи происходят не случайно
-    </p>
+    <section class="dress-code">
+        <div class="container">
+            <div class="col reveal">
+                <h3>Цвета вечера</h3>
+                <p style="opacity:1; margin-bottom:1.5rem; font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff;">Будем благодарны, если вы поддержите нашу палитру</p>
+                <div class="color-palette">
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c8e0c8, #b0d0a8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #b8d0e8, #a0c0dd);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #faf0d0, #f5e0b0);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #f5d0d0, #e8b8b8);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #d8c8e8, #c8b0dc);"></div></div>
+                    <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #946B54, #7F5A46);"></div></div>
+                </div>
+                <div class="look-slider-wrapper">
+                    <div class="look-slider-frame" id="look-slider">
+                        <div class="slides" id="slides-container">
+                            <div class="slide"><img src="obraz7.png" alt="Образ 1"></div>
+                            <div class="slide"><img src="obraz6.png" alt="Образ 2"></div>
+                            <div class="slide"><img src="obraz5.png" alt="Образ 3"></div>
+                            <div class="slide"><img src="obraz4.png" alt="Образ 4"></div>
+                            <div class="slide"><img src="obraz3.png" alt="Образ 5"></div>
+                            <div class="slide"><img src="obraz2.png" alt="Образ 6"></div>
+                            <div class="slide"><img src="obraz1.png" alt="Образ 7"></div>
+                        </div>
+                        <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+                        <button class="slider-btn next" onclick="nextSlide()">❯</button>
+                        <div class="dots" id="dots"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <h1>
-        <span class="name-nikita">Никита</span>
-        <span class="name-and">&</span>
-        <span class="name-kseniya">Ксения</span>
-    </h1>
+    <section class="program">
+        <div class="container">
+            <h2>Программа дня</h2>
+            <div class="timeline-wrapper reveal">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">15:00</div><div class="timeline-dot"></div>
+                        <div class="timeline-content"><h3>Сбор гостей</h3><p>Время пролетит незаметно за бокалом игристого.</p></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">16:00</div><div class="timeline-dot"></div>
+                        <div class="timeline-content"><h3>Церемония</h3><p>Вы станете свидетелями создания нашей семьи.</p></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">17:00</div><div class="timeline-dot"></div>
+                        <div class="timeline-content"><h3>Фотосессия с гостями</h3><p>Время для теплых слов и фотографий.</p></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">18:00</div><div class="timeline-dot"></div>
+                        <div class="timeline-content"><h3>Свадебный банкет</h3><p>Основная часть торжества.</p></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">23:00</div><div class="timeline-dot"></div>
+                        <div class="timeline-content"><h3>Завершение вечера</h3><p>Торт и дискотека.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <svg class="decor" viewBox="0 0 800 200">
-        <path d="M0,100 Q200,0 400,100 T800,100"
-              stroke="#b8a07c" fill="none"/>
-    </svg>
+    <section class="location reveal">
+        <div class="container">
+            <h2>Локация</h2>
+            <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
+            <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5" width="100%" height="350" frameborder="0" allowfullscreen="true" style="border-radius: 20px; display: block;"></iframe></div>
+            <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" target="_blank" class="btn">Открыть в Яндекс.Картах →</a>
+        </div>
+    </section>
 
-</div>
-</section>
+    <section class="wishes">
+        <div class="container">
+            <div class="cards">
+                <div class="wish-card reveal">
+                    <h3>Цветы</h3>
+                    <p>Вместо букета мы будем благодарны сертификату в цветочный магазин — это позволит нам наслаждаться цветами гораздо дольше.</p>
+                </div>
+                <div class="wish-card reveal">
+                    <h3>Дети</h3>
+                    <p>Формат нашего праздника предполагает присутствие только взрослых гостей, поэтому просим прийти без малышей. Благодарим за понимание.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="timeline">
-<div class="container glass gold-aura">
-    <h2 style="text-align:center">Программа дня</h2>
-</div>
-</section>
+    <section class="rsvp">
+        <div class="container">
+            <h2>Анкета</h2>
+            <p style="font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-bottom: 1.5rem; text-align: center;">Пожалуйста, сообщите о своем решении</p>
+            <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
+                <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
+                <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
+                <div class="form-group"><label>Нужен ли трансфер из Симферополя?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да</label></div></div>
+                <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши теплые слова или вопросы"></textarea></div>
+                <button type="submit" class="btn">Отправить</button>
+            </form>
+        </div>
+    </section>
 
-<script>
-/* =========================
-   CANVAS SKY + CONSTELLATIONS
-========================= */
+    <footer class="reveal">
+        <span>С любовью, Никита и Ксения ♡</span>
+        <span>05.09.2026</span>
+    </footer>
 
-const canvas=document.getElementById("sky");
-const ctx=canvas.getContext("2d");
+    <script>
+        const weddingDate = new Date(2026, 8, 5, 15, 0);
+        function updateCountdown() {
+            const now = new Date();
+            const diff = weddingDate - now;
+            if (diff <= 0) { document.getElementById('days').textContent = '00'; document.getElementById('hours').textContent = '00'; document.getElementById('minutes').textContent = '00'; document.getElementById('seconds').textContent = '00'; return; }
+            document.getElementById('days').textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById('hours').textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000); updateCountdown();
 
-let w,h;
-function resize(){
-    w=canvas.width=innerWidth;
-    h=canvas.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-const stars=Array.from({length:180},()=>({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    r:Math.random()*1.2,
-    v:Math.random()*0.2+0.05
-}));
+        function updateActiveOnScroll() {
+            const items = document.querySelectorAll('.timeline-item');
+            if (!items.length) return;
+            let activeIndex = -1, minDist = Infinity;
+            const viewportMid = window.scrollY + window.innerHeight / 2;
+            items.forEach((item, idx) => {
+                const rect = item.getBoundingClientRect();
+                const dist = Math.abs(viewportMid - (rect.top + window.scrollY + rect.height/2));
+                if (dist < minDist) { minDist = dist; activeIndex = idx; }
+            });
+            items.forEach((item, idx) => { item.classList.toggle('active', idx === activeIndex); });
+        }
+        window.addEventListener('scroll', updateActiveOnScroll);
+        window.addEventListener('resize', updateActiveOnScroll);
+        updateActiveOnScroll();
 
-const constellations=Array.from({length:5},()=>({
-    pts:Array.from({length:4},()=>({
-        x:Math.random()*w,
-        y:Math.random()*h
-    }))
-}));
+        function generateStars() {
+            const container = document.getElementById('starsContainer');
+            if (!container) return;
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 1.5 + 0.5;
+                star.style.width = size + 'px'; star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(star);
+            }
+        }
+        generateStars();
 
-let mouse={x:0,y:0};
+        const form = document.getElementById('rsvp-form');
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                try {
+                    await fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' });
+                    alert('✅ Спасибо! Ваш ответ отправлен. Ждём встречи!');
+                    form.reset();
+                } catch (error) {
+                    alert('⚠️ Ошибка отправки. Пожалуйста, напишите нам в Telegram.');
+                }
+            });
+        }
 
-addEventListener("mousemove",(e)=>{
-    mouse.x=(e.clientX-w/2)*0.02;
-    mouse.y=(e.clientY-h/2)*0.02;
-});
+        const slider = document.querySelector('#look-slider .slides');
+        const slides = document.querySelectorAll('#look-slider .slide');
+        const dotsContainer = document.getElementById('dots');
+        let currentIndex = 0;
+        function updateSlider() {
+            if (slider) slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
+            document.querySelectorAll('#look-slider .dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+        }
+        window.nextSlide = function() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); };
+        window.prevSlide = function() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); };
+        if (slides.length && dotsContainer) {
+            slides.forEach((_, i) => {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => { currentIndex = i; updateSlider(); });
+                dotsContainer.appendChild(dot);
+            });
+            if (slider) slider.addEventListener('scroll', () => {
+                const index = Math.round(slider.scrollLeft / slider.clientWidth);
+                if (index !== currentIndex) {
+                    currentIndex = index;
+                    document.querySelectorAll('#look-slider .dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+                }
+            });
+        }
 
-function draw(){
-    ctx.clearRect(0,0,w,h);
-
-    for(let s of stars){
-        s.y+=s.v;
-        if(s.y>h)s.y=0;
-
-        ctx.fillStyle="rgba(255,255,255,.8)";
-        ctx.beginPath();
-        ctx.arc(s.x+mouse.x,s.y+mouse.y,s.r,0,Math.PI*2);
-        ctx.fill();
-    }
-
-    ctx.strokeStyle="rgba(184,160,124,.25)";
-    for(let c of constellations){
-        ctx.beginPath();
-        c.pts.forEach((p,i)=>{
-            const x=p.x+mouse.x;
-            const y=p.y+mouse.y;
-            i?ctx.lineTo(x,y):ctx.moveTo(x,y);
-            ctx.fillRect(x,y,2,2);
-        });
-        ctx.stroke();
-    }
-
-    requestAnimationFrame(draw);
-}
-draw();
-
-/* =========================
-   GOLD AURA
-========================= */
-
-document.querySelectorAll('.gold-aura')
-.forEach(el=>el.classList.add('gold-aura'));
-
-/* =========================
-   PARALLAX HERO
-========================= */
-
-addEventListener("mousemove",(e)=>{
-    const x=(e.clientX/innerWidth-.5)*10;
-    const y=(e.clientY/innerHeight-.5)*10;
-    document.querySelector(".hero").style.transform=
-        `translate(${x}px,${y}px)`;
-});
-</script>
-
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
 </body>
 </html>
