@@ -57,6 +57,7 @@
             color: #ffffff;
             line-height: 1.8;
             position: relative;
+            font-size: clamp(1rem, 2.5vw, 1.2rem); /* лёгкое увеличение базового шрифта */
         }
 
         /* Звёзды и метеоры */
@@ -123,7 +124,7 @@
         h2, h3 {
             font-family: 'Forum', serif;
             font-weight: normal;
-            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-size: clamp(2.2rem, 5vw, 3rem); /* чуть крупнее на мобильных */
             margin-bottom: 1.5rem;
             text-align: center;
             position: relative;
@@ -145,7 +146,7 @@
             z-index: 2;
         }
 
-        /* HERO */
+        /* HERO — точь-в-точь на всех устройствах */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -165,7 +166,7 @@
         }
         .hero .small-note {
             font-family: 'Forum', serif;
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-size: clamp(1.2rem, 3vw, 1.5rem); /* увеличено */
             font-style: italic;
             color: #ffffff;
             opacity: 0;
@@ -177,12 +178,12 @@
         .hero h1 {
             position: relative;
             width: 100%;
-            height: clamp(200px, 40vw, 320px);
+            height: clamp(250px, 50vw, 350px); /* гибкая высота, чтобы имена не слипались */
             margin: 1.5rem 0;
         }
         .name-nikita, .name-kseniya {
             font-family: 'AnastasiaScriptC', 'Brush Script MT', cursive;
-            font-size: clamp(4rem, 12vw, 8rem);
+            font-size: clamp(3rem, 10vw, 8rem); /* стало лучше для узких экранов */
             font-weight: normal;
             line-height: 1.2;
             color: var(--name-color);
@@ -195,11 +196,11 @@
         }
         .name-nikita {
             top: 0;
-            left: clamp(4rem, 15%, 8rem); /* слева */
+            left: clamp(1rem, 12%, 8rem); /* адаптивный отступ слева */
         }
         .name-kseniya {
             bottom: -1rem;
-            right: clamp(4rem, 15%, 8rem); /* справа */
+            right: clamp(1rem, 12%, 8rem); /* адаптивный отступ справа */
         }
 
         .name-and {
@@ -215,7 +216,7 @@
 
         .hero .invite-line {
             font-family: 'Forum', serif;
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-size: clamp(1.2rem, 3vw, 1.5rem); /* увеличено */
             margin-top: clamp(5rem, 10vh, 7rem);
             opacity: 1;
             letter-spacing: 0.5px;
@@ -266,23 +267,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Адаптивность имён */
-        @media (max-width: 480px) {
-            .hero h1 {
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            .name-nikita, .name-kseniya {
-                position: static;
-                font-size: clamp(3rem, 15vw, 5rem);
-            }
-            .name-and {
-                position: static;
-                margin: 0.5rem 0;
-            }
-        }
+        /* Адаптивность имён больше не меняет позиционирование – hero везде одинаков */
 
         /* Остальной контент */
         .rest-content { margin-top: 0.5rem; }
@@ -295,21 +280,21 @@
             margin: 0 auto;
         }
         .calendar-mini .month-year {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-size: clamp(1.4rem, 3vw, 1.7rem);
             color: var(--accent);
             margin-bottom: 0.8rem;
             text-align: center;
         }
         .calendar-mini table { border-collapse: collapse; margin: 0 auto; }
         .calendar-mini th {
-            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+            font-size: clamp(0.9rem, 2vw, 1rem);
             color: #ccc;
             padding: 0.3rem 0.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .calendar-mini td {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             text-align: center;
             color: #ffffff;
             width: 2rem; height: 2rem; line-height: 2rem;
@@ -324,7 +309,7 @@
         }
         .calendar-mini td.heart-day::after {
             content: ' ♡';
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
 
         .countdown {
@@ -353,12 +338,12 @@
         }
         @keyframes timerGlow { to { left: 200%; } }
         .countdown-number {
-            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-size: clamp(2.4rem, 5vw, 3rem);
             color: var(--accent);
             line-height: 1;
         }
         .countdown-label {
-            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+            font-size: clamp(0.9rem, 2vw, 1rem);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-top: 0.3rem;
@@ -507,7 +492,7 @@
         .timeline-time {
             flex: 1;
             text-align: right;
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-size: clamp(1.8rem, 4vw, 2.4rem); /* увеличено */
             color: #ffd700;
             font-weight: normal;
             padding-right: 2rem;
@@ -550,14 +535,16 @@
             box-shadow: 0 0 20px rgba(255,215,0,0.5), 0 4px 15px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,215,0,0.6);
         }
+        /* Уменьшенный заголовок и увеличенное описание */
         .timeline-content h3 {
             font-weight: normal;
             margin-bottom: 0.3rem;
             color: #ffffff;
             text-align: center;
+            font-size: clamp(1.2rem, 3vw, 1.6rem); /* уменьшено */
         }
         .timeline-content p {
-            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem); /* увеличено */
             color: #f0f0f0;
             text-align: center;
         }
@@ -595,7 +582,7 @@
             max-width: 600px;
         }
         .location p {
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* увеличено */
             color: #ffffff;
         }
         .location .map-container {
@@ -623,7 +610,7 @@
             font-weight: normal;
             letter-spacing: 1px;
             transition: all 0.3s;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem); /* увеличено */
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         .location .btn:hover {
@@ -650,7 +637,7 @@
         }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { font-weight: normal; margin-bottom: 0.8rem; }
-        .wish-card p { font-size: clamp(1rem, 2.5vw, 1.4rem); }
+        .wish-card p { font-size: clamp(1.2rem, 2.5vw, 1.5rem); } /* увеличено */
 
         /* RSVP форма */
         .rsvp-form {
@@ -663,7 +650,7 @@
         .form-group { margin-bottom: 2rem; }
         label {
             display: block;
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem); /* увеличено */
             color: #ffffff;
             margin-bottom: 0.8rem;
             font-weight: normal;
@@ -671,7 +658,7 @@
         }
         label span {
             color: var(--accent);
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: clamp(0.9rem, 2vw, 1.1rem); /* увеличено */
         }
         input[type="text"],
         textarea,
@@ -681,7 +668,7 @@
             border: 1px solid var(--accent-light);
             border-radius: 6px;
             font-family: 'Forum', serif;
-            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem); /* увеличено */
             background: rgba(255,255,255,0.15);
             color: #ffffff;
             outline: none;
@@ -703,7 +690,7 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem); /* увеличено */
             color: #ffffff;
         }
         .radio-option input[type="radio"] {
@@ -729,7 +716,7 @@
             font-weight: normal;
             letter-spacing: 1px;
             cursor: pointer;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(1rem, 2.5vw, 1.2rem); /* увеличено */
             transition: all 0.3s;
             margin-top: 1rem;
             background: linear-gradient(135deg, #d8c39e, #b8a07c);
@@ -751,7 +738,7 @@
             gap: 0.3rem;
             text-align: center;
             padding: 2rem;
-            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            font-size: clamp(1rem, 2vw, 1.1rem); /* увеличено */
             border: none;
             border-radius: 0;
             margin: 0 1.5rem 1.5rem;
@@ -780,7 +767,7 @@
             margin-top: 1rem;
             color: white;
             letter-spacing: 4px;
-            font-size: 1.1rem;
+            font-size: 1.2rem; /* чуть увеличено */
         }
         @keyframes introFade {
             from { opacity: 0; transform: translateY(20px); }
@@ -830,7 +817,7 @@
         <div class="container">
             <div class="reveal">
                 <h2>Дорогой гость!</h2>
-                <p style="text-align:center; max-width:600px; margin:1.5rem auto; font-size:clamp(1rem,2.5vw,1.3rem); font-style:italic; line-height:1.6;">
+                <p style="text-align:center; max-width:600px; margin:1.5rem auto; font-size:clamp(1.1rem,2.5vw,1.4rem); font-style:italic; line-height:1.6;">
                     Мы рады сообщить вам, что 05.09.2026 состоится самое главное торжество в нашей жизни — день рождения нашей семьи!
                 </p>
                 <div class="calendar-wrapper">
@@ -857,7 +844,7 @@
         <div class="container">
             <div class="col reveal">
                 <h3>Цвета вечера</h3>
-                <p style="margin-bottom:1.5rem; font-size:clamp(1rem,2.5vw,1.4rem);">Будем благодарны, если вы поддержите нашу палитру</p>
+                <p style="margin-bottom:1.5rem; font-size:clamp(1.1rem,2.5vw,1.4rem);">Будем благодарны, если вы поддержите нашу палитру</p>
                 <div class="color-palette">
                     <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #c8e0c8, #b0d0a8);"></div></div>
                     <div class="color-item"><div class="color-circle" style="background: linear-gradient(135deg, #b8d0e8, #a0c0dd);"></div></div>
@@ -954,7 +941,7 @@
     <section class="rsvp">
         <div class="container">
             <h2>Анкета</h2>
-            <p style="font-size:clamp(1rem,2.5vw,1.4rem); margin-bottom:1.5rem; text-align:center;">Пожалуйста, сообщите о своем решении</p>
+            <p style="font-size:clamp(1.1rem,2.5vw,1.4rem); margin-bottom:1.5rem; text-align:center;">Пожалуйста, сообщите о своем решении</p>
             <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
                 <div class="form-group">
                     <label>ФИО <span>*</span></label>
