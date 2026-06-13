@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадьба Никиты и Ксении</title>
 
-    <!-- Предзагрузка шрифтов -->
     <link rel="preload" href="Forum-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="anastasiascriptc.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Свадьба Никиты и Ксении — 05.09.2026">
     <meta property="og:description" content="Приглашаем стать частью нашей истории">
     <meta property="og:image" content="https://ваш-сайт.ru/preview.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ваш-сайт.ru">
 
-    <!-- Favicon (сердечко) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M32 55.4L13.2 36.6C5.6 29 5.6 16.4 13.2 8.8s20.2-7.6 27.8 0L32 17.6l-9-8.8c-7.6-7.6-20.2-7.6-27.8 0s-7.6 20.2 0 27.8L32 55.4z' fill='%23b8a07c'/></svg>">
 
     <style>
@@ -48,7 +45,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { overflow-x: hidden; }
 
         body {
@@ -59,7 +55,6 @@
             position: relative;
         }
 
-        /* Звёзды и метеоры */
         .stars-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 0; overflow: hidden;
@@ -82,10 +77,7 @@
             border-radius: 50%; filter: blur(0.5px); opacity: 0;
         }
         @keyframes shootGold {
-            0%   { opacity: 0; }
-            10%  { opacity: 0.9; }
-            20%  { opacity: 0.6; }
-            40%  { opacity: 0; }
+            0%   { opacity: 0; } 10%  { opacity: 0.9; } 20%  { opacity: 0.6; } 40%  { opacity: 0; }
             100% { transform: translate(600px, 600px); opacity: 0; }
         }
         .meteor:nth-child(1) { top: -5px; left: 5%;  transform: rotate(35deg); animation: shootGold 4s linear infinite; animation-delay: 0s; }
@@ -97,23 +89,14 @@
         .meteor:nth-child(7) { top: -3px; left: 10%;  transform: rotate(48deg); animation: shootGold 3.8s linear infinite; animation-delay: 2.5s; }
         .meteor:nth-child(8) { top: -6px; left: 50%;  transform: rotate(40deg); animation: shootGold 4.8s linear infinite; animation-delay: 0.8s; }
 
-        /* Общие полупрозрачные блоки (без таймлайна) */
-        .calendar-mini,
-        .countdown-item,
-        .look-slider-frame,
-        .rsvp-form,
-        .wish-card {
+        .calendar-mini, .countdown-item, .look-slider-frame, .rsvp-form, .wish-card {
             background-color: var(--block-bg);
             backdrop-filter: blur(12px);
             border: var(--block-border);
             box-shadow: 0 0 30px rgba(184,160,124,.08), 0 15px 40px rgba(0,0,0,.25);
         }
 
-        /* Полностью прозрачные блоки (без фона) */
-        .hero .container,
-        .dress-code .col,
-        .location,
-        footer {
+        .dress-code .col, .location, footer {
             background: none;
             backdrop-filter: none;
             border: none;
@@ -134,152 +117,115 @@
             background: var(--accent); margin: 0.5rem auto 0;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 clamp(1rem, 4vw, 2rem);
-        }
-        section {
-            padding: clamp(3rem, 8vh, 5rem) 0;
-            position: relative;
-            z-index: 2;
-        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        section { padding: clamp(3rem, 8vh, 5rem) 0; position: relative; z-index: 2; }
 
-        /* HERO */
+        /* ========== VISION PRO HERO (чистый, без CTA и теней) ========== */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding-top: clamp(5vh, 10vh, 10vh);
-            text-align: center;
-            background: none;
-        }
-        .hero .container {
-            border-radius: 0;
-            padding: clamp(1.5rem, 4vw, 2.5rem);
-            max-width: 800px;
-            width: 90%;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
-            /* Виньетка убрана */
-        }
-        .hero .small-note {
-            font-family: 'Forum', serif;
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            font-style: italic;
-            color: #ffffff;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.2s forwards;
-            margin-top: 1rem;
-            margin-bottom: clamp(4rem, 10vh, 7rem);
-            text-align: center;
-        }
-        .hero h1 {
-            position: relative;
-            width: 100%;
-            height: clamp(200px, 40vw, 320px);
-            margin: 1.5rem 0;
-        }
-        .name-nikita, .name-kseniya {
-            font-family: 'AnastasiaScriptC', 'Brush Script MT', cursive;
-            font-size: clamp(4rem, 12vw, 8rem);
-            font-weight: normal;
-            line-height: 1.2;
-            color: var(--name-color);
-            position: absolute;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-shadow: 0 0 20px rgba(184, 160, 124, 0.5),
-                         0 0 40px rgba(184, 160, 124, 0.2);
+            perspective: 1200px;
+            background: #21283b;
         }
-        .name-nikita { top: 0; left: clamp(4rem, 15%, 8rem); }
-        .name-kseniya { bottom: -1rem; right: clamp(4rem, 15%, 8rem); }
 
-        .name-and {
-            font-family: 'AnastasiaScriptC', cursive;
-            font-size: 3rem;
-            color: var(--accent);
+        .vp-layer {
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-            z-index: 2;
+            inset: 0;
+            transform-style: preserve-3d;
         }
 
-        .hero .invite-line {
-            font-family: 'Forum', serif;
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            margin-top: clamp(5rem, 10vh, 7rem);
-            opacity: 1;
-            letter-spacing: 0.5px;
-            display: inline-block;
+        .vp-bg {
+            background:
+                radial-gradient(circle at 50% 40%, rgba(184,160,124,0.18), transparent 45%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06), transparent 50%),
+                linear-gradient(180deg, #1a2132, #21283b);
+            transform: translateZ(-300px) scale(1.4);
+        }
+
+        .vp-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(184,160,124,0.12), transparent 60%);
+            filter: blur(20px);
+            transform: translateZ(-150px);
+            animation: glowBreath 10s ease-in-out infinite;
+        }
+
+        .vp-noise {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            mix-blend-mode: overlay;
+            transform: translateZ(50px);
+        }
+
+        .vp-stage {
             position: relative;
-        }
-        .invite-line::after,
-        .invite-line::before {
-            display: none;
-        }
-
-        /* Анимация появления слов */
-        .invite-line .word {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: wordReveal 0.8s ease forwards;
-            will-change: transform, opacity, color, text-shadow;
-        }
-        .invite-line .word:nth-child(1) { animation-delay: 0.3s; }
-        .invite-line .word:nth-child(2) { animation-delay: 0.55s; }
-        .invite-line .word:nth-child(3) { animation-delay: 0.8s; }
-        .invite-line .word:nth-child(4) { animation-delay: 1.05s; }
-        .invite-line .word:nth-child(5) { animation-delay: 1.3s; }
-        .invite-line .word:nth-child(6) { animation-delay: 1.55s; }
-
-        @keyframes wordReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(15px);
-                color: #b8a07c;
-                text-shadow: 0 0 12px rgba(184,160,124,0.7);
-            }
-            60% {
-                color: #b8a07c;
-                text-shadow: 0 0 8px rgba(184,160,124,0.3);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                color: #ffffff;
-                text-shadow: none;
-            }
+            z-index: 10;
+            text-align: center;
+            transform-style: preserve-3d;
+            animation: stageFloat 8s ease-in-out infinite;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .vp-meta {
+            font-size: 0.85rem;
+            letter-spacing: 0.35em;
+            opacity: 0.6;
+            margin-bottom: 2.5rem;
+            transform: translateZ(80px);
         }
 
-        /* Адаптивность имён */
-        @media (max-width: 480px) {
-            .hero h1 {
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            .name-nikita, .name-kseniya {
-                position: static;
-                font-size: clamp(3rem, 15vw, 5rem);
-            }
-            .name-and {
-                position: static;
-                margin: 0.5rem 0;
-            }
+        .vp-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        /* Остальной контент */
+        .vp-name {
+            font-family: 'AnastasiaScriptC', cursive;
+            font-size: clamp(4rem, 10vw, 8rem);
+            background: linear-gradient(135deg, #f3e7c9, #b8a07c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* тени убраны */
+            transform: translateZ(120px);
+        }
+
+        .vp-connector {
+            width: 140px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(184,160,124,0.8), transparent);
+            transform: translateZ(90px);
+        }
+
+        .vp-subtitle {
+            max-width: 520px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+            opacity: 0.7;
+            line-height: 1.7;
+            transform: translateZ(70px);
+        }
+
+        /* CTA и hint удалены */
+
+        @keyframes glowBreath {
+            0%,100% { opacity: 0.6; transform: translateZ(-150px) scale(1); }
+            50% { opacity: 1; transform: translateZ(-150px) scale(1.08); }
+        }
+        @keyframes stageFloat {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .vp-name { font-size: clamp(3rem, 12vw, 5rem); }
+        }
+
+        /* ========== ОСТАЛЬНЫЕ СЕКЦИИ (без изменений) ========== */
         .rest-content { margin-top: 0.5rem; }
         .calendar-wrapper { display: flex; justify-content: center; margin-top: 1rem; }
         .calendar-mini {
@@ -359,7 +305,6 @@
             margin-top: 0.3rem;
         }
 
-        /* Эффект перелистывания */
         .reveal {
             opacity: 0;
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -367,7 +312,6 @@
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* Дресс-код */
         .dress-code { text-align: center; }
         .dress-code .col {
             max-width: 480px;
@@ -393,7 +337,6 @@
         }
         .color-circle:hover { transform: scale(1.05); }
 
-        /* Слайдер */
         .look-slider-wrapper {
             max-width: 400px;
             margin: 2rem auto 0;
@@ -467,7 +410,6 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня (статичная линия позади, блоки непрозрачные) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -545,43 +487,21 @@
             box-shadow: 0 0 20px rgba(255,215,0,0.5), 0 4px 15px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,215,0,0.6);
         }
-        .timeline-content h3 {
-            font-weight: normal;
-            margin-bottom: 0.3rem;
-            color: #ffffff;
-            text-align: center;
-        }
-        .timeline-content p {
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            color: #f0f0f0;
-            text-align: center;
-        }
+        .timeline-content h3 { font-weight: normal; margin-bottom: 0.3rem; color: #ffffff; text-align: center; }
+        .timeline-content p { font-size: clamp(0.85rem, 2vw, 1rem); color: #f0f0f0; text-align: center; }
 
         @media (max-width: 768px) {
-            .timeline-item,
-            .timeline-item:nth-child(even),
-            .timeline-item:nth-child(odd) {
+            .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .timeline-time {
-                text-align: left;
-                padding-left: 2rem;
-                margin-bottom: 0.5rem;
-            }
-            .timeline-item:nth-child(even) .timeline-time {
-                padding-left: 2rem;
-            }
+            .timeline-time { text-align: left; padding-left: 2rem; margin-bottom: 0.5rem; }
+            .timeline-item:nth-child(even) .timeline-time { padding-left: 2rem; }
             .timeline-dot { display: none; }
-            .timeline-content {
-                margin-left: 1rem !important;
-                margin-right: 0 !important;
-                width: calc(100% - 2rem);
-            }
+            .timeline-content { margin-left: 1rem !important; margin-right: 0 !important; width: calc(100% - 2rem); }
             .timeline::before { left: 20px; transform: translateX(0); }
         }
 
-        /* Локация (полностью прозрачная) */
         .location {
             text-align: center;
             padding: 2rem 0;
@@ -589,10 +509,7 @@
             margin: 0 auto 2rem;
             max-width: 600px;
         }
-        .location p {
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            color: #ffffff;
-        }
+        .location p { font-size: clamp(0.9rem, 2vw, 1.1rem); color: #ffffff; }
         .location .map-container {
             max-width: 100%;
             margin: 1.5rem auto;
@@ -628,7 +545,6 @@
             color: #ffffff;
         }
 
-        /* Пожелания (полупрозрачные) */
         .wishes .cards {
             display: flex;
             justify-content: center;
@@ -647,7 +563,6 @@
         .wish-card h3 { font-weight: normal; margin-bottom: 0.8rem; }
         .wish-card p { font-size: clamp(1rem, 2.5vw, 1.4rem); }
 
-        /* RSVP форма */
         .rsvp-form {
             max-width: 600px;
             margin: 0 auto;
@@ -664,13 +579,8 @@
             font-weight: normal;
             letter-spacing: 0.5px;
         }
-        label span {
-            color: var(--accent);
-            font-size: clamp(0.8rem, 2vw, 1rem);
-        }
-        input[type="text"],
-        textarea,
-        select {
+        label span { color: var(--accent); font-size: clamp(0.8rem, 2vw, 1rem); }
+        input[type="text"], textarea, select {
             width: 100%;
             padding: 0.9rem 1rem;
             border: 1px solid var(--accent-light);
@@ -682,18 +592,12 @@
             outline: none;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-        input[type="text"]:focus,
-        textarea:focus,
-        select:focus {
+        input[type="text"]:focus, textarea:focus, select:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(184,160,124,0.2);
         }
         textarea { resize: vertical; }
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
+        .radio-group { display: flex; flex-direction: column; gap: 0.8rem; }
         .radio-option {
             display: flex;
             align-items: center;
@@ -737,7 +641,6 @@
             color: #ffffff;
         }
 
-        /* Футер (полностью прозрачный) */
         footer {
             display: flex;
             flex-direction: column;
@@ -753,7 +656,6 @@
             position: relative;
         }
 
-        /* Заставка */
         #intro {
             position: fixed;
             inset: 0;
@@ -766,26 +668,13 @@
         }
         #intro.hide { opacity: 0; visibility: hidden; }
         .intro-content { text-align: center; animation: introFade 2s ease; }
-        .intro-names {
-            font-family: 'AnastasiaScriptC', cursive;
-            color: #b8a07c;
-            font-size: clamp(4rem,10vw,7rem);
-        }
-        .intro-date {
-            margin-top: 1rem;
-            color: white;
-            letter-spacing: 4px;
-            font-size: 1.1rem;
-        }
-        @keyframes introFade {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .intro-names { font-family: 'AnastasiaScriptC', cursive; color: #b8a07c; font-size: clamp(4rem,10vw,7rem); }
+        .intro-date { margin-top: 1rem; color: white; letter-spacing: 4px; font-size: 1.1rem; }
+        @keyframes introFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<!-- Заставка -->
 <div id="intro">
     <div class="intro-content">
         <div class="intro-names">Никита and Ксения</div>
@@ -801,23 +690,18 @@
 
 <main>
     <header class="hero">
-        <div class="container">
-            <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
-            
-            <h1>
-                <span class="name-nikita">Никита</span>
-                <span class="name-and">and</span>
-                <span class="name-kseniya">Ксения</span>
+        <div class="vp-layer vp-bg"></div>
+        <div class="vp-layer vp-glow"></div>
+        <div class="vp-layer vp-noise"></div>
+
+        <div class="vp-stage">
+            <div class="vp-meta">05 · 09 · 2026</div>
+            <h1 class="vp-title">
+                <span class="vp-name nikita">Никита</span>
+                <span class="vp-connector"></span>
+                <span class="vp-name ksenia">Ксения</span>
             </h1>
-            
-            <div class="invite-line">
-                <span class="word">Приглашаем</span>
-                <span class="word">вас</span>
-                <span class="word">стать</span>
-                <span class="word">частью</span>
-                <span class="word">нашей</span>
-                <span class="word">истории</span>
-            </div>
+            <p class="vp-subtitle">приглашаем вас разделить с нами начало новой истории</p>
         </div>
     </header>
 
@@ -891,28 +775,23 @@
             <div class="timeline-wrapper reveal">
                 <div class="timeline" id="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-time">15:00</div>
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">15:00</div><div class="timeline-dot"></div>
                         <div class="timeline-content"><h3>Сбор гостей</h3><p>Время пролетит незаметно за бокалом игристого.</p></div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-time">16:00</div>
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">16:00</div><div class="timeline-dot"></div>
                         <div class="timeline-content"><h3>Церемония</h3><p>Вы станете свидетелями создания нашей семьи.</p></div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-time">17:00</div>
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">17:00</div><div class="timeline-dot"></div>
                         <div class="timeline-content"><h3>Фотосессия с гостями</h3><p>Время для теплых слов и фотографий.</p></div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-time">18:00</div>
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">18:00</div><div class="timeline-dot"></div>
                         <div class="timeline-content"><h3>Свадебный банкет</h3><p>Основная часть торжества.</p></div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-time">23:00</div>
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">23:00</div><div class="timeline-dot"></div>
                         <div class="timeline-content"><h3>Завершение вечера</h3><p>Торт и дискотека.</p></div>
                     </div>
                 </div>
@@ -946,33 +825,15 @@
         </div>
     </section>
 
-    <section class="rsvp">
+    <section class="rsvp" id="rsvp">
         <div class="container">
             <h2>Анкета</h2>
             <p style="font-size:clamp(1rem,2.5vw,1.4rem); margin-bottom:1.5rem; text-align:center;">Пожалуйста, сообщите о своем решении</p>
             <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
-                <div class="form-group">
-                    <label>ФИО <span>*</span></label>
-                    <input type="text" name="name" placeholder="Напишите ваши ФИО" required>
-                </div>
-                <div class="form-group">
-                    <label>Сможете ли присутствовать?</label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label>
-                        <label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Нужен ли трансфер из Симферополя?</label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label>
-                        <label class="radio-option"><input type="radio" name="transfer" value="city"> Да</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Пару строк для нас (по желанию)</label>
-                    <textarea name="message" rows="3" placeholder="Ваши теплые слова или вопросы"></textarea>
-                </div>
+                <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
+                <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
+                <div class="form-group"><label>Нужен ли трансфер из Симферополя?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="transfer" value="" checked> Спасибо, доберусь сам(а)</label><label class="radio-option"><input type="radio" name="transfer" value="city"> Да</label></div></div>
+                <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши теплые слова или вопросы"></textarea></div>
                 <button type="submit" class="btn">Отправить</button>
             </form>
         </div>
@@ -985,32 +846,23 @@
 </footer>
 
 <script>
-    // Таймер обратного отсчёта
     const weddingDate = new Date(2026, 8, 5, 15, 0);
     function updateCountdown() {
         const now = new Date();
         const diff = weddingDate - now;
-        if (diff <= 0) {
-            ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
-            return;
-        }
+        if (diff <= 0) { ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00'); return; }
         document.getElementById('days').textContent = String(Math.floor(diff / (1000*60*60*24))).padStart(2,'0');
         document.getElementById('hours').textContent = String(Math.floor((diff % (1000*60*60*24)) / (1000*60*60))).padStart(2,'0');
         document.getElementById('minutes').textContent = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2,'0');
         document.getElementById('seconds').textContent = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2,'0');
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    setInterval(updateCountdown, 1000); updateCountdown();
 
-    // Появление элементов таймлайна при скролле
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.3 });
     document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-    // Подсветка активного элемента таймлайна
     function updateActiveOnScroll() {
         const items = document.querySelectorAll('.timeline-item');
         if (!items.length) return;
@@ -1028,7 +880,6 @@
     window.addEventListener('resize', updateActiveOnScroll);
     updateActiveOnScroll();
 
-    // Генерация звёзд
     function generateStars() {
         const container = document.getElementById('starsContainer');
         if (!container) return;
@@ -1036,10 +887,8 @@
             const star = document.createElement('div');
             star.classList.add('star');
             const size = Math.random() * 1.5 + 0.5;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
+            star.style.width = size + 'px'; star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%';
             star.style.animationDuration = (Math.random() * 3 + 1) + 's';
             star.style.animationDelay = Math.random() * 5 + 's';
             container.appendChild(star);
@@ -1047,15 +896,13 @@
     }
     generateStars();
 
-    // Отправка формы
     const form = document.getElementById('rsvp-form');
     if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = form.querySelector('button');
             const originalText = btn.textContent;
-            btn.textContent = 'Отправка...';
-            btn.disabled = true;
+            btn.textContent = 'Отправка...'; btn.disabled = true;
             try {
                 const formData = new FormData(form);
                 await fetch(form.action, { method: 'POST', body: formData, mode: 'no-cors' });
@@ -1071,26 +918,16 @@
         });
     }
 
-    // Слайдер образов
     const slider = document.querySelector('#look-slider .slides');
     const slides = document.querySelectorAll('#look-slider .slide');
     const dotsContainer = document.getElementById('dots');
     let currentIndex = 0;
-
     function updateSlider() {
         if (slider) slider.scrollTo({ left: slider.clientWidth * currentIndex, behavior: 'smooth' });
         document.querySelectorAll('#look-slider .dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
     }
-
-    window.nextSlide = function() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSlider();
-    };
-    window.prevSlide = function() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSlider();
-    };
-
+    window.nextSlide = function() { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); };
+    window.prevSlide = function() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); };
     if (slides.length && dotsContainer) {
         slides.forEach((_, i) => {
             const dot = document.createElement('span');
@@ -1098,34 +935,23 @@
             dot.addEventListener('click', () => { currentIndex = i; updateSlider(); });
             dotsContainer.appendChild(dot);
         });
-        if (slider) {
-            slider.addEventListener('scroll', () => {
-                const index = Math.round(slider.scrollLeft / slider.clientWidth);
-                if (index !== currentIndex) {
-                    currentIndex = index;
-                    document.querySelectorAll('#look-slider .dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-                }
-            });
-        }
-    }
-
-    // Эффекты reveal
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
+        if (slider) slider.addEventListener('scroll', () => {
+            const index = Math.round(slider.scrollLeft / slider.clientWidth);
+            if (index !== currentIndex) {
+                currentIndex = index;
+                document.querySelectorAll('#look-slider .dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
             }
         });
+    }
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
     }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Заставка
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.getElementById('intro').classList.add('hide');
-        }, 1800);
+        setTimeout(() => { document.getElementById('intro').classList.add('hide'); }, 1800);
     });
 </script>
 </body>
