@@ -97,21 +97,28 @@
         .meteor:nth-child(7) { top: -3px; left: 10%;  transform: rotate(48deg); animation: shootGold 3.8s linear infinite; animation-delay: 2.5s; }
         .meteor:nth-child(8) { top: -6px; left: 50%;  transform: rotate(40deg); animation: shootGold 4.8s linear infinite; animation-delay: 0.8s; }
 
-        /* Общие полупрозрачные блоки */
-        .hero .container,
+        /* Общие полупрозрачные блоки – теперь только для тех, где это нужно */
         .calendar-mini,
         .countdown-item,
-        .dress-code .col,
         .look-slider-frame,
         .timeline-content,
-        .wish-card,
-        .rsvp-form,
-        .location,
-        footer {
+        .rsvp-form {
             background-color: var(--block-bg);
             backdrop-filter: blur(12px);
             border: var(--block-border);
             box-shadow: 0 0 30px rgba(184,160,124,.08), 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        /* Полностью прозрачные блоки (без фона) */
+        .hero .container,
+        .dress-code .col,
+        .location,
+        .wish-card,
+        footer {
+            background: none;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
         }
 
         h2, h3 {
@@ -151,7 +158,7 @@
             background: none;
         }
         .hero .container {
-            border-radius: 20px;
+            border-radius: 0; /* не нужно, раз прозрачный */
             padding: clamp(1.5rem, 4vw, 2.5rem);
             max-width: 800px;
             width: 90%;
@@ -184,6 +191,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-shadow: 0 0 20px rgba(184, 160, 124, 0.5),
+                         0 0 40px rgba(184, 160, 124, 0.2);
         }
         .name-nikita { top: 0; left: clamp(4rem, 15%, 8rem); }
         .name-kseniya { bottom: -1rem; right: clamp(4rem, 15%, 8rem); }
@@ -196,6 +205,52 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             white-space: nowrap;
+            width: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid rgba(184, 160, 124, 0.6);
+            animation: ringPulse 3s infinite alternate;
+            z-index: 2;
+        }
+
+        @keyframes ringPulse {
+            0% { box-shadow: 0 0 8px rgba(184,160,124,0.3); }
+            100% { box-shadow: 0 0 20px rgba(184,160,124,0.6); }
+        }
+
+        /* Орнаментальные линии */
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+        }
+        .top-ornament {
+            animation-delay: 0.4s;
+            margin-bottom: -0.5rem;
+        }
+        .bottom-ornament {
+            animation-delay: 0.5s;
+            margin-top: -0.5rem;
+        }
+        .ornament .line {
+            display: block;
+            height: 1px;
+            width: clamp(60px, 10vw, 100px);
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        .ornament .diamond {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            transform: rotate(45deg);
+            box-shadow: 0 0 6px var(--accent);
         }
 
         .hero .invite-line {
@@ -248,7 +303,13 @@
             }
             .name-and {
                 position: static;
+                width: auto;
+                height: auto;
+                line-height: 1.2;
+                border: none;
                 margin: 0.5rem 0;
+                animation: none;
+                box-shadow: none;
             }
         }
 
@@ -340,13 +401,14 @@
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* Дресс-код */
+        /* Дресс-код (цвета вечера) – фон только у слайдера */
         .dress-code { text-align: center; }
         .dress-code .col {
             max-width: 480px;
             margin: 0 auto;
             padding: 2rem;
             border-radius: 20px;
+            /* фон убран */
         }
         .color-palette {
             display: grid;
@@ -440,7 +502,7 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня */
+        /* Программа дня (статичная линия позади) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -457,19 +519,9 @@
             background: #ffd700;
             transform: translateX(-50%);
             opacity: 0.8;
+            z-index: 0; /* позади блоков */
         }
-        .timeline::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 2px;
-            height: 0;
-            background: #ffd700;
-            transform: translateX(-50%);
-            z-index: 3;
-            transition: height 0.3s ease;
-        }
+        /* убираем ::after, который был для анимации */
         .timeline-item {
             display: flex;
             align-items: center;
@@ -478,6 +530,7 @@
             transform: translateY(20px);
             transition: all 0.6s ease;
             position: relative;
+            z-index: 1; /* поверх линии */
         }
         .timeline-item.visible { opacity: 1; transform: translateY(0); }
         .timeline-item:nth-child(odd) { flex-direction: row; }
@@ -558,10 +611,9 @@
                 width: calc(100% - 2rem);
             }
             .timeline::before { left: 20px; transform: translateX(0); }
-            .timeline::after { left: 20px; transform: translateX(0); }
         }
 
-        /* Локация (уменьшенная) */
+        /* Локация (полностью прозрачная) */
         .location {
             text-align: center;
             padding: 2rem 0;
@@ -608,7 +660,7 @@
             color: #ffffff;
         }
 
-        /* Пожелания */
+        /* Пожелания (ещё прозрачнее) */
         .wishes .cards {
             display: flex;
             justify-content: center;
@@ -622,6 +674,9 @@
             text-align: center;
             flex: 1 1 250px;
             transition: transform 0.3s;
+            /* прозрачность снижена сильнее */
+            background-color: rgba(33, 40, 59, 0.3);
+            backdrop-filter: blur(6px);
         }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { margin-bottom: 0.8rem; }
@@ -716,29 +771,8 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             color: #ffffff;
         }
-        /* Кнопка добавления в календарь (похожа на .btn, но ширина по контенту) */
-        .calendar-btn {
-            background: linear-gradient(135deg, #d8c39e, #b8a07c);
-            color: #21283b;
-            border: none;
-            padding: 0.9rem 2.2rem;
-            border-radius: 30px;
-            font-family: 'Forum', serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .calendar-btn:hover {
-            background: linear-gradient(135deg, #e5d0ad, #c5ad89);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            color: #ffffff;
-        }
 
-        /* Футер */
+        /* Футер (полностью прозрачный) */
         footer {
             display: flex;
             flex-direction: column;
@@ -748,8 +782,8 @@
             text-align: center;
             padding: 2rem;
             font-size: clamp(0.8rem, 2vw, 0.95rem);
-            border-top: 1px solid var(--accent-light);
-            border-radius: 12px;
+            border: none;
+            border-radius: 0;
             margin: 0 1.5rem 1.5rem;
             position: relative;
         }
@@ -804,11 +838,27 @@
     <header class="hero">
         <div class="container">
             <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
+            
+            <!-- Верхняя орнаментальная линия -->
+            <div class="ornament top-ornament">
+                <span class="line"></span>
+                <span class="diamond"></span>
+                <span class="line"></span>
+            </div>
+            
             <h1>
                 <span class="name-nikita">Никита</span>
                 <span class="name-and">&</span>
                 <span class="name-kseniya">Ксения</span>
             </h1>
+            
+            <!-- Нижняя орнаментальная линия -->
+            <div class="ornament bottom-ornament">
+                <span class="line"></span>
+                <span class="diamond"></span>
+                <span class="line"></span>
+            </div>
+            
             <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
         </div>
     </header>
@@ -836,11 +886,6 @@
                 <div class="countdown-item"><div class="countdown-number" id="hours">00</div><div class="countdown-label">часов</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">минут</div></div>
                 <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">секунд</div></div>
-            </div>
-
-            <!-- Универсальная кнопка добавления в календарь -->
-            <div style="text-align:center; margin-top:1.5rem;">
-                <button class="calendar-btn" onclick="downloadICS()" type="button">Добавить в календарь 📅</button>
             </div>
         </div>
     </div>
@@ -1007,43 +1052,6 @@
     }, { threshold: 0.3 });
     document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-    // Заполнение линии таймлайна при прокрутке
-    const timeline = document.getElementById('timeline');
-    function updateTimelineProgress() {
-        if (!timeline) return;
-        const items = timeline.querySelectorAll('.timeline-item');
-        if (!items.length) return;
-        const timelineRect = timeline.getBoundingClientRect();
-        const timelineTop = timelineRect.top + window.scrollY;
-        const viewportMid = window.scrollY + window.innerHeight / 2;
-        let activeIndex = -1;
-        let minDist = Infinity;
-        items.forEach((item, idx) => {
-            const rect = item.getBoundingClientRect();
-            const itemMid = rect.top + window.scrollY + rect.height/2;
-            const dist = Math.abs(viewportMid - itemMid);
-            if (dist < minDist) {
-                minDist = dist;
-                activeIndex = idx;
-            }
-        });
-        items.forEach((item, idx) => item.classList.toggle('active', idx === activeIndex));
-
-        if (activeIndex >= 0) {
-            const lastActiveItem = items[activeIndex];
-            const dot = lastActiveItem.querySelector('.timeline-dot');
-            if (dot) {
-                const dotRect = dot.getBoundingClientRect();
-                const dotMidY = dotRect.top + window.scrollY + dotRect.height/2;
-                const progress = dotMidY - timelineTop;
-                timeline.style.setProperty('--line-height', progress + 'px');
-            }
-        }
-    }
-    window.addEventListener('scroll', updateTimelineProgress);
-    window.addEventListener('resize', updateTimelineProgress);
-    updateTimelineProgress();
-
     // Генерация звёзд
     function generateStars() {
         const container = document.getElementById('starsContainer');
@@ -1137,33 +1145,6 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Функция скачивания .ics файла (добавление в любой календарь)
-    function downloadICS() {
-        const icsContent = [
-            'BEGIN:VCALENDAR',
-            'VERSION:2.0',
-            'PRODID:-//Wedding Site//RU',
-            'BEGIN:VEVENT',
-            'DTSTART:20260905T120000Z',
-            'DTEND:20260905T200000Z',
-            'SUMMARY:Свадьба Никиты и Ксении',
-            'DESCRIPTION:Приглашаем разделить радость в этот день',
-            'LOCATION:Крым, Бахчисарайский район, пгт. Научный, дом 18В',
-            'END:VEVENT',
-            'END:VCALENDAR'
-        ].join('\r\n');
-
-        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'wedding_invite.ics';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-
     // Заставка
     window.addEventListener('load', () => {
         setTimeout(() => {
@@ -1171,12 +1152,5 @@
         }, 1800);
     });
 </script>
-
-<!-- Динамическая линия прогресса таймлайна -->
-<style>
-    .timeline::after {
-        height: var(--line-height, 0px);
-    }
-</style>
 </body>
 </html>
