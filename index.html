@@ -122,7 +122,7 @@
 
         h2, h3 {
             font-family: 'Forum', serif;
-            font-weight: normal; /* убрали жирность */
+            font-weight: normal;
             font-size: clamp(2rem, 5vw, 2.8rem);
             margin-bottom: 1.5rem;
             text-align: center;
@@ -162,8 +162,7 @@
             max-width: 800px;
             width: 90%;
             position: relative;
-            /* Виньетка по краям */
-            box-shadow: inset 0 0 150px rgba(0,0,0,0.5);
+            /* Виньетка убрана */
         }
         .hero .small-note {
             font-family: 'Forum', serif;
@@ -213,12 +212,11 @@
             font-family: 'Forum', serif;
             font-size: clamp(1rem, 2.5vw, 1.4rem);
             margin-top: clamp(5rem, 10vh, 7rem);
-            opacity: 1; /* базовая непрозрачность, слова анимируются отдельно */
+            opacity: 1;
             letter-spacing: 0.5px;
             display: inline-block;
             position: relative;
         }
-        /* Убираем старые анимации underline */
         .invite-line::after,
         .invite-line::before {
             display: none;
@@ -232,12 +230,12 @@
             animation: wordReveal 0.8s ease forwards;
             will-change: transform, opacity, color, text-shadow;
         }
-        /* Задержки для каждого слова */
         .invite-line .word:nth-child(1) { animation-delay: 0.3s; }
         .invite-line .word:nth-child(2) { animation-delay: 0.55s; }
         .invite-line .word:nth-child(3) { animation-delay: 0.8s; }
         .invite-line .word:nth-child(4) { animation-delay: 1.05s; }
         .invite-line .word:nth-child(5) { animation-delay: 1.3s; }
+        .invite-line .word:nth-child(6) { animation-delay: 1.55s; }
 
         @keyframes wordReveal {
             0% {
@@ -533,7 +531,7 @@
             padding: 1.5rem;
             border-radius: 12px;
             margin-left: 2rem;
-            background-color: #21283b; /* непрозрачный */
+            background-color: #21283b;
             border: 1px solid rgba(184,160,124,.2);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
