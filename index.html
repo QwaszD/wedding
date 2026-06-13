@@ -162,7 +162,6 @@
             max-width: 800px;
             width: 90%;
             position: relative;
-            /* Виньетка убрана */
         }
         .hero .small-note {
             font-family: 'Forum', serif;
@@ -194,8 +193,14 @@
             text-shadow: 0 0 20px rgba(184, 160, 124, 0.5),
                          0 0 40px rgba(184, 160, 124, 0.2);
         }
-        .name-nikita { top: 0; left: clamp(4rem, 15%, 8rem); }
-        .name-kseniya { bottom: -1rem; right: clamp(4rem, 15%, 8rem); }
+        .name-nikita {
+            top: 0;
+            left: clamp(4rem, 15%, 8rem); /* слева */
+        }
+        .name-kseniya {
+            bottom: -1rem;
+            right: clamp(4rem, 15%, 8rem); /* справа */
+        }
 
         .name-and {
             font-family: 'AnastasiaScriptC', cursive;
