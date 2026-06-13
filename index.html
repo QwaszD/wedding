@@ -102,7 +102,8 @@
         .countdown-item,
         .look-slider-frame,
         .timeline-content,
-        .rsvp-form {
+        .rsvp-form,
+        .wish-card {
             background-color: var(--block-bg);
             backdrop-filter: blur(12px);
             border: var(--block-border);
@@ -113,7 +114,6 @@
         .hero .container,
         .dress-code .col,
         .location,
-        .wish-card,
         footer {
             background: none;
             backdrop-filter: none;
@@ -158,7 +158,7 @@
             background: none;
         }
         .hero .container {
-            border-radius: 0; /* не нужно, раз прозрачный */
+            border-radius: 0;
             padding: clamp(1.5rem, 4vw, 2.5rem);
             max-width: 800px;
             width: 90%;
@@ -408,7 +408,6 @@
             margin: 0 auto;
             padding: 2rem;
             border-radius: 20px;
-            /* фон убран */
         }
         .color-palette {
             display: grid;
@@ -502,7 +501,7 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня (статичная линия позади) */
+        /* Программа дня (статичная линия позади блоков) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -521,7 +520,6 @@
             opacity: 0.8;
             z-index: 0; /* позади блоков */
         }
-        /* убираем ::after, который был для анимации */
         .timeline-item {
             display: flex;
             align-items: center;
@@ -660,7 +658,7 @@
             color: #ffffff;
         }
 
-        /* Пожелания (ещё прозрачнее) */
+        /* Пожелания (полупрозрачные блоки) */
         .wishes .cards {
             display: flex;
             justify-content: center;
@@ -674,9 +672,6 @@
             text-align: center;
             flex: 1 1 250px;
             transition: transform 0.3s;
-            /* прозрачность снижена сильнее */
-            background-color: rgba(33, 40, 59, 0.3);
-            backdrop-filter: blur(6px);
         }
         .wish-card:hover { transform: translateY(-8px); }
         .wish-card h3 { margin-bottom: 0.8rem; }
@@ -839,7 +834,6 @@
         <div class="container">
             <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
             
-            <!-- Верхняя орнаментальная линия -->
             <div class="ornament top-ornament">
                 <span class="line"></span>
                 <span class="diamond"></span>
@@ -852,7 +846,6 @@
                 <span class="name-kseniya">Ксения</span>
             </h1>
             
-            <!-- Нижняя орнаментальная линия -->
             <div class="ornament bottom-ornament">
                 <span class="line"></span>
                 <span class="diamond"></span>
@@ -1052,6 +1045,24 @@
     }, { threshold: 0.3 });
     document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
+    // Подсветка активного элемента таймлайна при скролле (без линии прогресса)
+    function updateActiveOnScroll() {
+        const items = document.querySelectorAll('.timeline-item');
+        if (!items.length) return;
+        let activeIndex = -1, minDist = Infinity;
+        const viewportMid = window.scrollY + window.innerHeight / 2;
+        items.forEach((item, idx) => {
+            const rect = item.getBoundingClientRect();
+            const itemMid = rect.top + window.scrollY + rect.height/2;
+            const dist = Math.abs(viewportMid - itemMid);
+            if (dist < minDist) { minDist = dist; activeIndex = idx; }
+        });
+        items.forEach((item, idx) => { item.classList.toggle('active', idx === activeIndex); });
+    }
+    window.addEventListener('scroll', updateActiveOnScroll);
+    window.addEventListener('resize', updateActiveOnScroll);
+    updateActiveOnScroll();
+
     // Генерация звёзд
     function generateStars() {
         const container = document.getElementById('starsContainer');
@@ -1071,7 +1082,7 @@
     }
     generateStars();
 
-    // Отправка формы (надёжная)
+    // Отправка формы
     const form = document.getElementById('rsvp-form');
     if (form) {
         form.addEventListener('submit', async function(e) {
