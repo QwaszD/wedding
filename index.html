@@ -97,7 +97,7 @@
         .meteor:nth-child(7) { top: -3px; left: 10%;  transform: rotate(48deg); animation: shootGold 3.8s linear infinite; animation-delay: 2.5s; }
         .meteor:nth-child(8) { top: -6px; left: 50%;  transform: rotate(40deg); animation: shootGold 4.8s linear infinite; animation-delay: 0.8s; }
 
-        /* Общие полупрозрачные блоки – теперь только для тех, где это нужно */
+        /* Общие полупрозрачные блоки */
         .calendar-mini,
         .countdown-item,
         .look-slider-frame,
@@ -191,6 +191,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            /* только свечение */
             text-shadow: 0 0 20px rgba(184, 160, 124, 0.5),
                          0 0 40px rgba(184, 160, 124, 0.2);
         }
@@ -205,52 +206,8 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             white-space: nowrap;
-            width: 4rem;
-            height: 4rem;
-            line-height: 4rem;
-            text-align: center;
-            border-radius: 50%;
-            border: 1px solid rgba(184, 160, 124, 0.6);
-            animation: ringPulse 3s infinite alternate;
             z-index: 2;
-        }
-
-        @keyframes ringPulse {
-            0% { box-shadow: 0 0 8px rgba(184,160,124,0.3); }
-            100% { box-shadow: 0 0 20px rgba(184,160,124,0.6); }
-        }
-
-        /* Орнаментальные линии */
-        .ornament {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 0.5rem 0;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-        }
-        .top-ornament {
-            animation-delay: 0.4s;
-            margin-bottom: -0.5rem;
-        }
-        .bottom-ornament {
-            animation-delay: 0.5s;
-            margin-top: -0.5rem;
-        }
-        .ornament .line {
-            display: block;
-            height: 1px;
-            width: clamp(60px, 10vw, 100px);
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-        .ornament .diamond {
-            display: block;
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            transform: rotate(45deg);
-            box-shadow: 0 0 6px var(--accent);
+            /* без кольца и анимации */
         }
 
         .hero .invite-line {
@@ -303,13 +260,7 @@
             }
             .name-and {
                 position: static;
-                width: auto;
-                height: auto;
-                line-height: 1.2;
-                border: none;
                 margin: 0.5rem 0;
-                animation: none;
-                box-shadow: none;
             }
         }
 
@@ -401,7 +352,7 @@
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* Дресс-код (цвета вечера) – фон только у слайдера */
+        /* Дресс-код */
         .dress-code { text-align: center; }
         .dress-code .col {
             max-width: 480px;
@@ -501,7 +452,7 @@
         }
         .dot.active { background: #b8a07c; }
 
-        /* Программа дня (статичная линия позади блоков) */
+        /* Программа дня (статичная линия позади) */
         .program .timeline-wrapper {
             position: relative;
             max-width: 800px;
@@ -518,7 +469,7 @@
             background: #ffd700;
             transform: translateX(-50%);
             opacity: 0.8;
-            z-index: 0; /* позади блоков */
+            z-index: 0;
         }
         .timeline-item {
             display: flex;
@@ -528,7 +479,7 @@
             transform: translateY(20px);
             transition: all 0.6s ease;
             position: relative;
-            z-index: 1; /* поверх линии */
+            z-index: 1;
         }
         .timeline-item.visible { opacity: 1; transform: translateY(0); }
         .timeline-item:nth-child(odd) { flex-direction: row; }
@@ -658,7 +609,7 @@
             color: #ffffff;
         }
 
-        /* Пожелания (полупрозрачные блоки) */
+        /* Пожелания (полупрозрачные) */
         .wishes .cards {
             display: flex;
             justify-content: center;
@@ -818,7 +769,7 @@
 <!-- Заставка -->
 <div id="intro">
     <div class="intro-content">
-        <div class="intro-names">Никита & Ксения</div>
+        <div class="intro-names">Никита and Ксения</div>
         <div class="intro-date">05.09.2026</div>
     </div>
 </div>
@@ -834,23 +785,11 @@
         <div class="container">
             <p class="small-note">Кажется, некоторые встречи происходят не&nbsp;случайно.<br>Будто задолго до нас кто-то уже соединил эти&nbsp;линии.</p>
             
-            <div class="ornament top-ornament">
-                <span class="line"></span>
-                <span class="diamond"></span>
-                <span class="line"></span>
-            </div>
-            
             <h1>
                 <span class="name-nikita">Никита</span>
-                <span class="name-and">&</span>
+                <span class="name-and">and</span>
                 <span class="name-kseniya">Ксения</span>
             </h1>
-            
-            <div class="ornament bottom-ornament">
-                <span class="line"></span>
-                <span class="diamond"></span>
-                <span class="line"></span>
-            </div>
             
             <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
         </div>
@@ -1045,7 +984,7 @@
     }, { threshold: 0.3 });
     document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
 
-    // Подсветка активного элемента таймлайна при скролле (без линии прогресса)
+    // Подсветка активного элемента таймлайна
     function updateActiveOnScroll() {
         const items = document.querySelectorAll('.timeline-item');
         if (!items.length) return;
