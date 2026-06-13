@@ -35,7 +35,7 @@
             color: #ffffff;
             line-height: 1.8;
             position: relative;
-            text-align: justify; /* Выравнивание по ширине для всего текста */
+            text-align: justify;
         }
         /* Звёзды и метеоры */
         .stars-container {
@@ -348,7 +348,8 @@
 
     <section class="rsvp">
         <div class="container">
-            <h2>Анкета<br>Пожалуйста, сообщите о своем решении</h2>
+            <h2>Анкета</h2>
+            <p style="font-family: 'Shobhika', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-bottom: 1.5rem; text-align: center;">Пожалуйста, сообщите о своем решении</p>
             <form id="rsvp-form" class="rsvp-form reveal" action="https://script.google.com/macros/s/AKfycbwyZ5y77vYU-rfQwxfP6FONRPSudcNLq49T6jOWM8NnUTQb0XswARmNs3Zp1zOWSIID/exec" method="POST">
                 <div class="form-group"><label>ФИО <span>*</span></label><input type="text" name="name" placeholder="Напишите ваши ФИО" required></div>
                 <div class="form-group"><label>Сможете ли присутствовать?</label><div class="radio-group"><label class="radio-option"><input type="radio" name="attendance" value="yes" checked> Я с удовольствием приду</label><label class="radio-option"><input type="radio" name="attendance" value="no"> К сожалению, не смогу</label></div></div>
