@@ -60,9 +60,21 @@
 
         /* Общие стили */
         .dress-code .col, .timeline-content, .wish-card, .rsvp-form, .location, footer, .calendar-mini, .countdown-item, .look-slider-frame {
-            background-color: rgba(33, 40, 59, 0.9); backdrop-filter: blur(2px);
+            background-color: rgba(33, 40, 59, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(184,160,124,.15);
+            box-shadow: 0 0 30px rgba(184,160,124,.08), 0 15px 40px rgba(0,0,0,.25);
         }
-        h2, h3 { font-family: 'Forum', serif; font-weight: 600; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1.5rem; text-align: center; position: relative; color: #ffffff; }
+        h2, h3 {
+            font-family: 'Forum', serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(184,160,124,.15);
+        }
         h2::after, h3::after { content: ''; display: block; width: 60px; height: 2px; background: var(--accent); margin: 0.5rem auto 0; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
         section { padding: clamp(3rem, 8vh, 5rem) 0; position: relative; z-index: 2; }
@@ -86,7 +98,7 @@
         .name-nikita { top: 0; left: clamp(4rem, 15%, 8rem); }
         .name-kseniya { bottom: -1rem; right: clamp(4rem, 15%, 8rem); }
 
-        /* Амперсанд – тот же шрифт, что и имена */
+        /* Амперсанд */
         .name-and {
             font-family: 'AnastasiaScriptC', cursive;
             font-size: 3rem;
@@ -97,6 +109,11 @@
             transform: translate(-50%, -50%);
             white-space: nowrap;
         }
+
+        /* Дата и место */
+        .hero-info { margin-top: 1rem; }
+        .hero-date { color: white; font-size: 1.4rem; letter-spacing: 3px; }
+        .hero-place { color: #b8a07c; margin-top: .6rem; font-size: 1.05rem; }
 
         .hero .invite-line { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); margin-top: clamp(5rem, 10vh, 7rem); opacity: 0; animation: fadeUp 1s ease 0.3s forwards; letter-spacing: 0.5px; display: inline-block; position: relative; }
         .invite-line::after { content: ''; position: absolute; bottom: -0.6rem; left: 0; width: 100%; height: 2px; background: var(--accent); opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
@@ -123,8 +140,29 @@
         }
 
         .countdown { display: flex; justify-content: center; gap: clamp(0.8rem, 2vw, 1.5rem); margin: 2rem 0; flex-wrap: wrap; }
-        .countdown-item { box-shadow: var(--shadow); padding: clamp(0.8rem, 2vw, 1.2rem); border-radius: 12px; text-align: center; min-width: 70px; transition: transform 0.3s; flex: 0 1 auto; }
+        .countdown-item {
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            padding: clamp(0.8rem, 2vw, 1.2rem);
+            border-radius: 12px;
+            text-align: center;
+            min-width: 70px;
+            transition: transform 0.3s;
+            flex: 0 1 auto;
+        }
         .countdown-item:hover { transform: translateY(-5px); }
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+            animation: timerGlow 6s infinite;
+        }
+        @keyframes timerGlow { to { left: 200%; } }
         .countdown-number { font-family: 'Forum', serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 600; color: var(--accent); line-height: 1; }
         .countdown-label { font-family: 'Forum', serif; font-size: clamp(0.7rem, 1.5vw, 0.9rem); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; color: #ffffff; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -178,6 +216,7 @@
         /* Локация */
         .location { text-align: center; padding: 4rem 0; border-radius: 20px; margin: 0 1.5rem; }
         .location p { font-family: 'Forum', serif; color: #ffffff; font-size: clamp(0.9rem, 2vw, 1.1rem); }
+        .location-title { font-size: 2rem; color: #b8a07c; margin-bottom: 1rem; }
         .location .btn { display: inline-block; margin-top: 1.5rem; background: var(--accent); color: #21283b; padding: 0.9rem 2.2rem; border-radius: 30px; text-decoration: none; font-weight: 500; letter-spacing: 1px; transition: all 0.3s; font-family: 'Forum', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .location .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: #ffffff; }
 
@@ -189,7 +228,15 @@
         .wish-card p { font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff; }
 
         /* RSVP форма */
-        .rsvp-form { max-width: 600px; margin: 0 auto; padding: clamp(2rem, 5vw, 3rem); border-radius: 12px; text-align: left; }
+        .rsvp-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3rem);
+            border-radius: 12px;
+            text-align: left;
+            border: 1px solid rgba(184,160,124,.25);
+            box-shadow: 0 0 40px rgba(184,160,124,.12), 0 20px 50px rgba(0,0,0,.3);
+        }
         .form-group { margin-bottom: 2rem; }
         label { display: block; font-family: 'Forum', serif; font-size: clamp(1rem, 2.5vw, 1.4rem); color: #ffffff; margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
         label span { color: var(--accent); font-size: clamp(0.8rem, 2vw, 1rem); font-family: 'Forum', serif; }
@@ -200,11 +247,52 @@
         .radio-option { display: flex; align-items: center; cursor: pointer; font-family: 'Forum', serif; font-size: clamp(0.9rem, 2vw, 1rem); color: #ffffff; }
         .radio-option input[type="radio"] { appearance: none; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%; margin-right: 10px; position: relative; cursor: pointer; }
         .radio-option input[type="radio"]:checked { background: var(--accent); box-shadow: inset 0 0 0 4px #21283b; }
-        .btn { display: block; width: 100%; background: var(--accent); color: #21283b; border: none; padding: 1rem; border-radius: 30px; font-family: 'Forum', serif; font-weight: 500; letter-spacing: 1px; cursor: pointer; font-size: clamp(0.9rem, 2vw, 1.1rem); transition: all 0.3s; margin-top: 1rem; }
-        .btn:hover { background: #9e8a6b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); color: #ffffff; }
+        .btn {
+            display: block;
+            width: 100%;
+            border: none;
+            padding: 1rem;
+            border-radius: 30px;
+            font-family: 'Forum', serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            transition: all 0.3s;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #d8c39e, #b8a07c);
+            color: #21283b;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #e5d0ad, #c5ad89);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            color: #ffffff;
+        }
+
+        /* Финальное сообщение */
+        .final-message { text-align: center; }
+        .final-message p { max-width: 650px; margin: 0 auto; font-size: 1.25rem; line-height: 1.8; color: white; }
 
         /* Футер */
         footer { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; text-align: center; padding: 2rem; font-size: clamp(0.8rem, 2vw, 0.95rem); border-top: 1px solid var(--accent-light); font-family: 'Forum', serif; color: #ffffff; border-radius: 12px; margin: 0 1.5rem 1.5rem; position: relative; }
+
+        /* Заставка */
+        #intro {
+            position: fixed;
+            inset: 0;
+            background: #21283b;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.4s ease, visibility 1.4s ease;
+        }
+        #intro.hide { opacity: 0; visibility: hidden; }
+        .intro-content { text-align: center; animation: introFade 2s ease; }
+        .intro-names { font-family: 'AnastasiaScriptC', cursive; color: #b8a07c; font-size: clamp(4rem,10vw,7rem); }
+        .intro-date { margin-top: 1rem; color: white; letter-spacing: 4px; font-size: 1.1rem; }
+        @keyframes introFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
             .timeline-item, .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { flex-direction: column; align-items: flex-start; }
@@ -217,6 +305,15 @@
     </style>
 </head>
 <body>
+
+    <!-- Заставка -->
+    <div id="intro">
+        <div class="intro-content">
+            <div class="intro-names">Никита & Ксения</div>
+            <div class="intro-date">05.09.2026</div>
+        </div>
+    </div>
+
     <div class="stars-container" id="starsContainer"></div>
     <div class="shooting-stars">
         <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
@@ -231,6 +328,12 @@
                 <span class="name-and">&</span>
                 <span class="name-kseniya">Ксения</span>
             </h1>
+
+            <div class="hero-info">
+                <div class="hero-date">05 сентября 2026</div>
+                <div class="hero-place">Клубный дом «Звёздное небо»</div>
+            </div>
+
             <div class="invite-line">Приглашаем вас стать частью нашей истории</div>
         </div>
     </section>
@@ -327,7 +430,8 @@
     <section class="location reveal">
         <div class="container">
             <h2>Локация</h2>
-            <p>Звёздное небо | Клубный дом<br>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
+            <div class="location-title">Клубный дом «Звёздное небо»</div>
+            <p>Республика Крым, Бахчисарайский район, пгт. Научный, дом 18В</p>
             <div style="max-width: 100%; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1);"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.008047%2C44.722221&mode=search&oid=178567249445&ol=biz&z=17.5" width="100%" height="350" frameborder="0" allowfullscreen="true" style="border-radius: 20px; display: block;"></iframe></div>
             <a href="https://yandex.ru/maps/org/klubny_dom_zvyozdnoye_nebo/178567249445/?ll=34.008047%2C44.722221&z=18.66" target="_blank" class="btn">Открыть в Яндекс.Картах →</a>
         </div>
@@ -359,6 +463,15 @@
                 <div class="form-group"><label>Пару строк для нас (по желанию)</label><textarea name="message" rows="3" placeholder="Ваши теплые слова или вопросы"></textarea></div>
                 <button type="submit" class="btn">Отправить</button>
             </form>
+        </div>
+    </section>
+
+    <section class="final-message reveal">
+        <div class="container">
+            <h2>До встречи под звёздным небом</h2>
+            <p>
+                Мы будем счастливы разделить этот день вместе с вами.
+            </p>
         </div>
     </section>
 
@@ -469,6 +582,13 @@
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // Заставка
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('intro').classList.add('hide');
+            }, 1800);
+        });
     </script>
 </body>
 </html>
